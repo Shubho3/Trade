@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:padding="@dimen/_7sdp"
+        android:text="@string/value_in_us_dollor"
+        android:textColor="@color/texts"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="@dimen/_13sdp"
+                    android:text=" Trading "
+                    android:textAlignment="center"
+                    android:textColor="@color/color_primary"
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/menu"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/app_name"
+                    android:padding="12dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/baseline_segment" />
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/center_logo"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/app_name"
+                    android:padding="12dp"
+                    app:srcCompat="@drawable/ic_launcher_foreground" />
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_toEndOf="@+id/menu"
+                    android:contentDescription="@string/app_name"
+                    android:padding="12dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/baseline_arrow_back"
+                    app:tint="@color/texts" />
+
+
+            </RelativeLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:visibility="gone"
+                         android:id="@+id/get_a_quote_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_2sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/image_quote"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:background="@color/color_primary"
+                                android:contentDescription="@string/app_name"
+                                android:padding="12dp"
+                                app:srcCompat="@drawable/get_a_quate" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_toRightOf="@id/image_quote"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Get A Quote"
+                                    android:textColor="@color/texts"
+                                    android:textSize="@dimen/_14sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Search your commodity and get a estimate"
+                                    android:textColor="@color/texts"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_12sdp" />
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <com.github.mikephil.charting.charts.CandleStickChart
+                        android:id="@+id/candle_stick_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_200sdp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginEnd="4dp"
+                        />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/order_entry_card1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_15sdp"
+                        app:cardBackgroundColor="@color/color_primary"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:padding="@dimen/_13sdp"
+                                android:textAlignment="center"
+                                android:text="Send Money to our QR"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_14sdp"
+                                android:textStyle="bold" />
+                            <ImageView
+                                android:id="@+id/image_quote31"
+                                android:layout_width="@dimen/_170sdp"
+                                android:layout_height="@dimen/_180sdp"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:background="@color/color_primary"
+                                android:contentDescription="@string/app_name"
+                                app:srcCompat="@drawable/qr" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/image_quote31"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_8sdp"
+                                    android:text=" Account No. "
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_14sdp"
+                                    android:textStyle="normal" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:textAlignment="center"
+                                    android:padding="@dimen/_8sdp"
+                                    android:text="234567897867"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/white"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_12sdp" />
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/image_quote31"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_8sdp"
+                                    android:text=" IFSC Code. "
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_14sdp"
+                                    android:textStyle="normal" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:textAlignment="center"
+                                    android:padding="@dimen/_8sdp"
+                                    android:text="SFNFJ3567"
+                                    android:textStyle="bold"
+
+                                    android:textColor="@color/white"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_12sdp" />
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:layout_toRightOf="@id/image_quote31"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/add_btn"
+                                    android:background="@drawable/background_edit"
+                                    android:layout_gravity="center"
+                                    android:textAlignment="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/cardview_compat_inset_shadow"
+                                    android:contentDescription="@string/app_name"
+                                    android:text="   Add Funds "
+                                    android:maxLines="1"
+                                    android:textColor="@color/color_primary"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/_16sdp"
+                                    android:padding="15dp"
+                                    android:drawablePadding="@dimen/_10sdp"
+                                    android:drawableTint="@color/color_primary"
+                                    android:drawableEnd="@drawable/baseline_add_circle_outline" />
+
+
+                            </LinearLayout>
+
+
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:visibility="gone"
+                        android:id="@+id/tracking_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_2sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/image_quote4"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:background="@color/color_primary"
+                                android:contentDescription="@string/app_name"
+                                android:padding="12dp"
+                                app:srcCompat="@drawable/tracking_home" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/image_quote4"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Tracking"
+                                    android:textColor="@color/texts"
+                                    android:textSize="@dimen/_14sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Track Order from collection to delivery"
+                                    android:textColor="@color/texts"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_12sdp" />
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:visibility="gone"
+                        android:id="@+id/invoices_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_2sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/image_quote5"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:background="@color/color_primary"
+                                android:contentDescription="@string/app_name"
+                                android:padding="12dp"
+                                app:srcCompat="@drawable/invoices_home" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/image_quote5"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Invoices"
+                                    android:textColor="@color/texts"
+                                    android:textSize="@dimen/_14sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="View invoices posted to your account"
+                                    android:textColor="@color/texts"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_12sdp" />
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:visibility="gone"
+                        android:id="@+id/edit_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_2sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/image_quote6"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:background="@color/color_primary"
+                                android:contentDescription="@string/app_name"
+                                android:padding="12dp"
+                                app:srcCompat="@drawable/edit_profile_home" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/image_quote6"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Edit Profile"
+                                    android:textColor="@color/texts"
+                                    android:textSize="@dimen/_14sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Edit contact information associated with your account"
+                                    android:textColor="@color/texts"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_12sdp" />
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

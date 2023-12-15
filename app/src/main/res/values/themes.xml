@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.NRsales" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+      <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorOnBackground">@color/white</item>
+          <item name="colorPrimaryVariant">@color/color_primary_varient</item>
+        <item name="colorPrimaryDark">@color/color_primary</item>
+<!--
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:navigationBarColor">@color/semi_transprant</item>
+-->
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="Theme.NRsales" parent="Base.Theme.NRsales" />
+    <style name="Widget.App.CircularProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CircularProgressIndicator</item>
+        <item name="trackThickness">5dp</item>
+    </style>
+
+    <style name="ThemeOverlay.App.CircularProgressIndicator" parent="">
+        <item name="colorPrimary">@color/color_primary</item>
+    </style>
+    <style name="NavDrawerTextStyle" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textColor">@color/texts</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>
