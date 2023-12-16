@@ -3,31 +3,32 @@ package com.nr.nrsales.ui.fragments.home
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.Paint
-import android.util.Log
-import androidx.core.view.get
+import android.os.Bundle
+import android.view.MenuItem
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation.findNavController
 import com.github.mikephil.charting.data.CandleData
 import com.github.mikephil.charting.data.CandleDataSet
 import com.github.mikephil.charting.data.CandleEntry
+import com.google.android.material.navigation.NavigationView
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.FragmentHomeBinding
-import com.nr.nrsales.utils.BaseActivity.Companion.TAG
 import com.nr.nrsales.utils.BaseFragment
 import com.nr.nrsales.utils.GlobalUtility
 import com.nr.nrsales.utils.SharedPrf
 import com.nr.nrsales.viewmodel.LoginViewModel
 
 
-class HomeFragment : BaseFragment(R.layout.fragment_home) {
+class HomeFragment : BaseFragment(R.layout.fragment_home), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var mBinding: FragmentHomeBinding
     private val viewmodel by viewModels<LoginViewModel>()
 
     override fun onBindTo(binding: ViewDataBinding?) {
         mBinding = binding as FragmentHomeBinding
+        mBinding.navView.setNavigationItemSelectedListener(this);
 
-        val candleStickChart=mBinding.mailLayout.candleStickChart
+        val candleStickChart = mBinding.mailLayout.candleStickChart
         candleStickChart.isHighlightPerDragEnabled = true
 
         candleStickChart.setDrawBorders(true)
@@ -54,18 +55,21 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         val l = candleStickChart.legend
         l.isEnabled = false
         val yValsCandleStick = ArrayList<CandleEntry>()
-        yValsCandleStick.add(CandleEntry(0f, 225.0.toFloat(), 219.84.toFloat(), 224.94.toFloat(),  221.07.toFloat()))
+        yValsCandleStick.add(CandleEntry(0f, 225.0.toFloat(), 219.84.toFloat(), 224.94.toFloat(), 221.07.toFloat()))
         yValsCandleStick.add(CandleEntry(1f, 228.35.toFloat(), 222.57.toFloat(), 223.52.toFloat(), 226.41.toFloat()))
         yValsCandleStick.add(CandleEntry(2f, 226.84.toFloat(), 222.52.toFloat(), 225.75.toFloat(), 223.84.toFloat()))
         yValsCandleStick.add(CandleEntry(3f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
         yValsCandleStick.add(CandleEntry(4f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(5f, 232.95.toFloat(), 217.27.toFloat(), 322.15.toFloat(),317.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(6f, 232.95.toFloat(), 217.27.toFloat(), 322.15.toFloat(),317.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(7f, 232.95.toFloat(), 217.27.toFloat(), 322.15.toFloat(),317.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(8f, 232.95.toFloat(), 217.27.toFloat(), 322.15.toFloat(),317.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(10f,232.95.toFloat(), 217.27.toFloat(), 322.15.toFloat(),317.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(10f,232.95.toFloat(), 217.27.toFloat(), 322.15.toFloat(),317.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(10f,232.95.toFloat(), 217.27.toFloat(), 322.15.toFloat(),317.88.toFloat()))
+        yValsCandleStick.add(CandleEntry(0f, 225.0.toFloat(), 219.84.toFloat(), 224.94.toFloat(), 221.07.toFloat()))
+        yValsCandleStick.add(CandleEntry(1f, 228.35.toFloat(), 222.57.toFloat(), 223.52.toFloat(), 226.41.toFloat()))
+        yValsCandleStick.add(CandleEntry(2f, 226.84.toFloat(), 222.52.toFloat(), 225.75.toFloat(), 223.84.toFloat()))
+        yValsCandleStick.add(CandleEntry(3f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
+        yValsCandleStick.add(CandleEntry(4f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
+        yValsCandleStick.add(CandleEntry(0f, 225.0.toFloat(), 219.84.toFloat(), 224.94.toFloat(), 221.07.toFloat()))
+        yValsCandleStick.add(CandleEntry(1f, 228.35.toFloat(), 222.57.toFloat(), 223.52.toFloat(), 226.41.toFloat()))
+        yValsCandleStick.add(CandleEntry(2f, 226.84.toFloat(), 222.52.toFloat(), 225.75.toFloat(), 223.84.toFloat()))
+        yValsCandleStick.add(CandleEntry(3f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
+        yValsCandleStick.add(CandleEntry(4f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
         val set1 = CandleDataSet(yValsCandleStick, "DataSet 1")
         set1.color = Color.rgb(80, 80, 80)
         set1.shadowColor = resources.getColor(R.color.color_primary)
@@ -97,72 +101,56 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun init() {
-        mBinding.navView.menu[0].setOnMenuItemClickListener { item ->
-            if (item.itemId == com.nr.nrsales.R.id.logout) {
-                mBinding.drawerLayout.close()
-                val alertDialogBuilder = AlertDialog.Builder(context)
-                alertDialogBuilder.setMessage("are sure you want to logout").setCancelable(false).setPositiveButton(
-                    "yes"
-                ) { dialog, _ ->
-                    dialog.cancel()
-                    GlobalUtility.showToast("Logout Successfully", getBaseContext())
-                    getSharedPrfData().setStoredTag(SharedPrf.LOGIN, "false")
-                    findNavController(mBinding.root).navigate(R.id.action_homeFragment_to_splashFragment)
 
-                }.setNegativeButton("no") { dialog, _ ->
-                    dialog.cancel()
-                }
-                val alertDialog = alertDialogBuilder.create()
-                alertDialog.show()
-            }else if (item.itemId==R.id.profile){
-                findNavController(mBinding.root).navigate(R.id.action_homeFragment_to_editProfileFragment)
-
-            }
-            true
-        }
         mBinding.mailLayout.menu.setOnClickListener {
-            mBinding.drawerLayout.open()/*if (mBinding.drawerLayout.isDrawerOpen(it)){
-
-            }else{
-
-            }*/
+            mBinding.drawerLayout.open()
         }
-        mBinding.mailLayout.getAQuoteCard.setOnClickListener {
-            Log.e(TAG, "init: " + getSharedPrfData().getStoredTag(SharedPrf.USER_ID))
-            Log.e(TAG, "init: " + getBaseContext().getString(R.string.email_id))
+        mBinding.mailLayout.addBtn.setOnClickListener {
             findNavController(it).navigate(R.id.action_homeFragment_to_getAQuoteFragment)
-
         }
 
+    }
 
-//        mBinding.mailLayout.orderEntryCard.setOnClickListener {
-//            Log.e(TAG, "init: " + getSharedPrfData().getStoredTag(SharedPrf.USER_ID))
-//            Log.e(TAG, "init: " + getBaseContext().getString(R.string.email_id))
-//            findNavController(it).navigate(R.id.action_homeFragment_to_orderEntryFragment)
-//
-//        }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
+        if (item.itemId == R.id.profile) {
+            findNavController(mBinding.root).navigate(R.id.action_homeFragment_to_editProfileFragment)
 
-        mBinding.mailLayout.editCard.setOnClickListener {
-            findNavController(it).navigate(R.id.action_homeFragment_to_editProfileFragment)
+        } else if (item.itemId == R.id.add_fund) {
+            findNavController(mBinding.root).navigate(R.id.action_homeFragment_to_getAQuoteFragment)
 
+        } else if (item.itemId == R.id.withdrawal_fund) {
+            findNavController(mBinding.root).navigate(R.id.action_homeFragment_to_invoiceFragment)
+
+        } else if (item.itemId == R.id.live_market) {
+            val ban =Bundle()
+            ban.putString("url","1")
+            findNavController(mBinding.root).navigate(R.id.action_homeFragment_to_orderListFragment,ban)
+
+        }  else if (item.itemId == R.id.live_position) {
+            var ban =Bundle()
+            ban.putString("url","https://www.moneycontrol.com//us-markets/index/chart?symbol=INDU")
+            findNavController(mBinding.root).navigate(R.id.action_homeFragment_to_orderListFragment,ban)
+
+        } else if (item.itemId == R.id.logout) {
+            mBinding.drawerLayout.close()
+            val alertDialogBuilder = AlertDialog.Builder(context)
+            alertDialogBuilder.setMessage("are sure you want to logout").setCancelable(false).setPositiveButton(
+                "yes"
+            ) { dialog, _ ->
+                dialog.cancel()
+                GlobalUtility.showToast("Logout Successfully", getBaseContext())
+                getSharedPrfData().setStoredTag(SharedPrf.LOGIN, "false")
+                findNavController(mBinding.root).navigate(R.id.action_homeFragment_to_splashFragment)
+
+            }.setNegativeButton("no") { dialog, _ ->
+                dialog.cancel()
+            }
+            val alertDialog = alertDialogBuilder.create()
+            alertDialog.show()
         }
 
-
-        mBinding.mailLayout.trackingCard.setOnClickListener {
-            findNavController(it).navigate(R.id.action_homeFragment_to_orderListFragment)
-
-        }
-
-
-
-
-        mBinding.mailLayout.invoicesCard.setOnClickListener {
-            findNavController(it).navigate(R.id.action_homeFragment_to_invoiceFragment)
-
-        }
-
-
+        return true
     }
 
 }

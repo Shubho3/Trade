@@ -2,10 +2,36 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group
         >
+
         <item
             android:id="@+id/profile"
             android:title="profile"
             android:icon="@drawable/edit_profile_home"
+            android:iconTint="@color/color_primary"
+        />
+        <item
+            android:id="@+id/live_market"
+            android:title="Live Market"
+            android:icon="@drawable/baseline_trending_up"
+            android:iconTint="@color/color_primary"
+            />
+        <item
+            android:id="@+id/live_position"
+            android:title="Position"
+            android:icon="@drawable/baseline_settings_input_composite"
+            android:iconTint="@color/color_primary"
+            />
+        <item
+            android:id="@+id/add_fund"
+            android:title="Add Fund"
+            android:icon="@drawable/add_fund"
+            android:iconTint="@color/color_primary"
+        />
+
+        <item
+            android:id="@+id/withdrawal_fund"
+            android:title="Withdrawal Fund"
+            android:icon="@drawable/baseline_monetization_on_24"
             android:iconTint="@color/color_primary"
         />
         <item

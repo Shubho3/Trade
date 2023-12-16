@@ -13,14 +13,128 @@
             android:layout_alignParentTop="true" />
 
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvInvoice"
-            android:layout_below="@+id/header_lay"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:layout_below="@id/header_lay"
+            >
+            <LinearLayout
+                android:padding="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/edit_gray_bg"
+                android:layout_margin="@dimen/_6sdp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="@dimen/_3sdp"
+                    android:text=" Note :-  Add Withdrawal Request Details to pull Out Funds"
+                    android:textColor="@color/texts"
+                    android:textAlignment="center"
+                    android:textColorHint="@color/color_edit_hint"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_marginTop="@dimen/_20sdp"/>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_1sdp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:padding="@dimen/_7sdp"
+                        android:text="Amount "
+                        android:textColor="@color/texts"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        />
+
+
+                    <EditText
+                        android:id="@+id/xx"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_gray_bg"
+                        android:hint="@string/enter_here"
+                        android:inputType="text"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_edit_hint"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_8sdp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:padding="@dimen/_7sdp"
+                        android:text="Account Pass"
+                        android:textColor="@color/texts"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        />
+
+
+                    <EditText
+                        android:id="@+id/edtValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_gray_bg"
+                        android:hint="@string/enter_here"
+                        android:inputType="text"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_edit_hint"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:backgroundTint="@color/color_primary"
+                    app:cornerRadius="@dimen/_7sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:elevation="@dimen/_3sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Submit Request"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+        </ScrollView>
 
     </RelativeLayout>
 </layout>

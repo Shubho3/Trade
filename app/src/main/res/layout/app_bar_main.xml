@@ -17,16 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:padding="@dimen/_13sdp"
-                    android:text=" Trading "
-                    android:textAlignment="center"
-                    android:textColor="@color/color_primary"
-                    android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold" />
+
                 <ImageView
                     android:id="@+id/menu"
                     android:layout_width="@dimen/_50sdp"
@@ -38,14 +29,14 @@
                     app:srcCompat="@drawable/baseline_segment" />
 
                 <ImageView
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/center_logo"
-                    android:layout_width="@dimen/_100sdp"
+                    android:layout_width="@dimen/_150sdp"
                     android:layout_height="@dimen/_60sdp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/app_name"
-                    android:padding="12dp"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
+                    android:padding="15dp"
+                    app:srcCompat="@drawable/logo_blue" />
 
                 <ImageView
                     android:id="@+id/ivBack"
@@ -134,11 +125,270 @@
                     </androidx.cardview.widget.CardView>
                     <com.github.mikephil.charting.charts.CandleStickChart
                         android:id="@+id/candle_stick_chart"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_200sdp"
                         android:layout_marginRight="4dp"
                         android:layout_marginEnd="4dp"
                         />
+                    <androidx.cardview.widget.CardView
+                        android:visibility="visible"
+                        android:id="@+id/tracking_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_2sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/image_quote4"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:background="@color/color_primary"
+                                android:contentDescription="@string/app_name"
+                                android:padding="12dp"
+                                app:srcCompat="@drawable/baseline_monetization_on_24" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/image_quote4"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text=" $ 700"
+                                    android:fontFamily="sans-serif-condensed-medium"
+                                    android:textColor="@color/color_primary"
+                                    android:textSize="@dimen/_16sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:fontFamily="sans-serif-condensed-medium"
+                                    android:text="Total Earnings"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/texts"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_14sdp" />
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:visibility="visible"
+                        android:id="@+id/tracking_card1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_2sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/image_quote41"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:background="@color/color_primary"
+                                android:contentDescription="@string/app_name"
+                                android:padding="12dp"
+                                app:srcCompat="@drawable/baseline_monetization_on_24" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/image_quote41"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text=" $ 100"
+                                    android:fontFamily="sans-serif-condensed-medium"
+                                    android:textColor="@color/color_primary"
+                                    android:textSize="@dimen/_16sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:fontFamily="sans-serif-condensed-medium"
+                                    android:text="Total Deposit"
+                                    android:textColor="@color/texts"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_14sdp" />
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:visibility="visible"
+                        android:id="@+id/tracking_card12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_2sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/image_quote412"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:background="@color/color_primary"
+                                android:contentDescription="@string/app_name"
+                                android:padding="12dp"
+                                app:srcCompat="@drawable/baseline_monetization_on_24" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/image_quote412"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text=" $ 700"
+                                    android:fontFamily="sans-serif-condensed-medium"
+                                    android:textColor="@color/color_primary"
+                                    android:textSize="@dimen/_16sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:fontFamily="sans-serif-condensed-medium"
+                                    android:text="Wallet Balance"
+                                    android:textColor="@color/texts"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_14sdp" />
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:visibility="visible"
+                        android:id="@+id/tracking_card123"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_2sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/image_quote4123"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:background="@color/color_primary"
+                                android:contentDescription="@string/app_name"
+                                android:padding="12dp"
+                                app:srcCompat="@drawable/baseline_monetization_on_24" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/image_quote4123"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text=" $ 700"
+                                    android:fontFamily="sans-serif-condensed-medium"
+                                    android:textColor="@color/color_primary"
+                                    android:textSize="@dimen/_16sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:padding="@dimen/_3sdp"
+                                    android:fontFamily="sans-serif-condensed-medium"
+                                    android:text="Total Withdrawals"
+                                    android:textColor="@color/texts"
+                                    android:textColorHint="@color/color_edit_hint"
+                                    android:textSize="@dimen/_14sdp" />
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/order_entry_card1"
                         android:layout_width="match_parent"
@@ -287,68 +537,6 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:visibility="gone"
-                        android:id="@+id/tracking_card"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_2sdp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/_10sdp"
-                        app:cardElevation="@dimen/_2sdp"
-                        app:cardUseCompatPadding="true">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:id="@+id/image_quote4"
-                                android:layout_width="@dimen/_70sdp"
-                                android:layout_height="@dimen/_80sdp"
-                                android:layout_marginEnd="@dimen/_2sdp"
-                                android:background="@color/color_primary"
-                                android:contentDescription="@string/app_name"
-                                android:padding="12dp"
-                                app:srcCompat="@drawable/tracking_home" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:layout_marginEnd="@dimen/_8sdp"
-                                android:layout_toRightOf="@id/image_quote4"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@null"
-                                    android:padding="@dimen/_3sdp"
-                                    android:text="Tracking"
-                                    android:textColor="@color/texts"
-                                    android:textSize="@dimen/_14sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@null"
-                                    android:padding="@dimen/_3sdp"
-                                    android:text="Track Order from collection to delivery"
-                                    android:textColor="@color/texts"
-                                    android:textColorHint="@color/color_edit_hint"
-                                    android:textSize="@dimen/_12sdp" />
-
-
-                            </LinearLayout>
-
-                        </RelativeLayout>
-
-                    </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:visibility="gone"

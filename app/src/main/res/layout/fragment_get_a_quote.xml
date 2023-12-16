@@ -18,10 +18,12 @@
        android:layout_below="@id/header_lay"
        >
        <LinearLayout
+           android:padding="@dimen/_5sdp"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:orientation="vertical"
-           android:layout_margin="@dimen/_10sdp"
+           android:background="@drawable/edit_gray_bg"
+       android:layout_margin="@dimen/_6sdp"
            >
 
            <TextView
@@ -29,11 +31,11 @@
                android:layout_height="wrap_content"
                android:background="@null"
                android:padding="@dimen/_3sdp"
-               android:text="@string/type_in_select_your_commodity"
+               android:text=" Note :-  Add Transaction Related Details To pull Add Funds"
                android:textColor="@color/texts"
+               android:textAlignment="center"
                android:textColorHint="@color/color_edit_hint"
                android:textSize="@dimen/_14sdp"
-               android:textStyle="bold"
                android:layout_marginTop="@dimen/_20sdp"/>
 
           <!-- <EditText
@@ -49,18 +51,7 @@
                android:textSize="@dimen/_12sdp" />-->
 
 
-           <AutoCompleteTextView
-               android:id="@+id/autoSearch"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:background="@drawable/edit_background"
-               android:hint="@string/type_here"
-               android:inputType="text"
-               android:padding="@dimen/_10sdp"
-               android:textColor="@color/black"
-               android:textColorHint="@color/color_edit_hint"
-               android:textSize="@dimen/_12sdp"
-               />
+
 
 
 
@@ -68,21 +59,20 @@
               <LinearLayout
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:weightSum="1"
-                  android:layout_marginTop="@dimen/_10sdp">
+                  android:orientation="vertical"
+                  android:padding="@dimen/_5sdp"
+                  android:layout_marginTop="@dimen/_8sdp">
 
 
                   <TextView
-                      android:layout_width="0dp"
+                      android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:background="@null"
-                      android:padding="@dimen/_3sdp"
-                      android:text="@string/value_in_us_dollor"
+                      android:padding="@dimen/_7sdp"
+                      android:text="Transaction ID"
                       android:textColor="@color/texts"
                       android:textSize="@dimen/_12sdp"
                       android:textStyle="bold"
-                      android:layout_weight=".4"
                       android:gravity="center_vertical"
                       android:layout_gravity="center_vertical"
                     />
@@ -90,58 +80,92 @@
 
                   <EditText
                       android:id="@+id/edtValue"
-                      android:layout_width="0dp"
-                      android:layout_weight=".6"
+                      android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:background="@drawable/edit_gray_bg"
                       android:hint="@string/enter_here"
-                      android:inputType="textEmailAddress"
-                      android:padding="@dimen/_8sdp"
+                      android:inputType="text"
+                      android:padding="@dimen/_10sdp"
+                      android:layout_margin="@dimen/_5sdp"
                       android:textColor="@color/black"
                       android:textColorHint="@color/color_edit_hint"
                       android:textSize="@dimen/_12sdp" />
 
 
               </LinearLayout>
-
               <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:weightSum="1"
-               android:layout_marginTop="@dimen/_10sdp">
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="@dimen/_5sdp"
+                  android:layout_marginTop="@dimen/_1sdp">
 
 
-               <TextView
-                   android:layout_width="0dp"
-                   android:layout_height="match_parent"
-                   android:background="@null"
-                   android:padding="@dimen/_3sdp"
-                   android:text="@string/actual_weight"
-                   android:textColor="@color/texts"
-                   android:textColorHint="@color/color_edit_hint"
-                   android:textSize="@dimen/_13sdp"
-                   android:textStyle="bold"
-                   android:layout_weight=".4"
-                   android:gravity="center_vertical"
-                   android:layout_gravity="center_vertical"
-                   />
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:background="@null"
+                      android:padding="@dimen/_7sdp"
+                      android:text="Amount ID"
+                      android:textColor="@color/texts"
+                      android:textSize="@dimen/_12sdp"
+                      android:textStyle="bold"
+                      android:gravity="center_vertical"
+                      android:layout_gravity="center_vertical"
+                    />
 
 
                   <EditText
-                      android:id="@+id/edtWeight"
-                      android:layout_width="0dp"
-                      android:layout_weight=".6"
+                      android:id="@+id/xx"
+                      android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:background="@drawable/edit_gray_bg"
                       android:hint="@string/enter_here"
-                      android:inputType="textEmailAddress"
-                      android:padding="@dimen/_8sdp"
+                      android:inputType="text"
+                      android:padding="@dimen/_10sdp"
+                      android:layout_margin="@dimen/_5sdp"
                       android:textColor="@color/black"
                       android:textColorHint="@color/color_edit_hint"
                       android:textSize="@dimen/_12sdp" />
 
-           </LinearLayout>
+
+              </LinearLayout>
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="@dimen/_5sdp"
+                  android:layout_marginTop="@dimen/_1sdp">
+
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:background="@null"
+                      android:padding="@dimen/_7sdp"
+                      android:text="Upload Payment Receipt"
+                      android:textColor="@color/texts"
+                      android:textSize="@dimen/_12sdp"
+                      android:textStyle="bold"
+                      android:gravity="center_vertical"
+                      android:layout_gravity="center_vertical"
+                    />
+
+                  <ImageView
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/_100sdp"
+                      android:background="@drawable/edit_background"
+                      android:inputType="textPassword"
+                      android:padding="@dimen/_8sdp"
+                      android:layout_margin="@dimen/_5sdp"
+                      android:src="@drawable/baseline_add_a_photo"
+                      android:textColor="@color/color_edit_hint"
+                      android:textColorHint="@color/color_edit_hint"
+                      android:textSize="@dimen/_12sdp" />
+
+
+              </LinearLayout>
+
 
            <Button
                android:id="@+id/btnSubmit"
@@ -157,519 +181,6 @@
                android:textColor="@color/white"
                android:textSize="@dimen/_12sdp"
                android:textStyle="bold" />
-
-           <Button
-               android:id="@+id/btnReset"
-               android:backgroundTint="@color/color_red"
-               app:cornerRadius="@dimen/_7sdp"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="@dimen/_7sdp"
-               android:elevation="@dimen/_3sdp"
-               android:padding="@dimen/_10sdp"
-               android:text="@string/reset"
-               android:textAllCaps="false"
-               android:textColor="@color/white"
-               android:textSize="@dimen/_12sdp"
-               android:textStyle="bold" />
-
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="vertical"
-           android:layout_marginTop="@dimen/_10sdp"
-           android:background="@drawable/edit_gray_bg">
-
-
-
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@null"
-               android:padding="@dimen/_3sdp"
-               android:text="@string/nr_charges"
-               android:textColor="@color/color_primary"
-               android:textSize="@dimen/_13sdp"
-               android:textStyle="bold"
-               android:layout_margin="@dimen/_10sdp"/>
-
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:weightSum="1"
-               android:layout_marginStart="@dimen/_10sdp"
-               android:layout_marginEnd="@dimen/_10sdp">
-
-
-               <TextView
-                   android:layout_width="0dp"
-                   android:layout_height="match_parent"
-                   android:background="@null"
-                   android:padding="@dimen/_3sdp"
-                   android:text="@string/shipping_charge"
-                   android:textColor="@color/texts"
-                   android:textSize="@dimen/_12sdp"
-                   android:textStyle="bold"
-                   android:layout_weight=".4"
-                   android:gravity="center_vertical"
-                   android:layout_gravity="center_vertical"
-                   />
-
-
-               <TextView
-                   android:id="@+id/edtShippingCharge"
-                   android:layout_width="0dp"
-                   android:layout_weight=".6"
-                   android:layout_height="match_parent"
-                   android:background="@drawable/edit_gray_bg"
-                   android:hint="..."
-                   android:inputType="textEmailAddress"
-                   android:padding="@dimen/_8sdp"
-                   android:textColor="@color/black"
-                   android:textColorHint="@color/color_edit_hint"
-                   android:textSize="@dimen/_12sdp" />
-
-
-           </LinearLayout>
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:weightSum="1"
-               android:layout_marginTop="@dimen/_7sdp"
-               android:layout_marginStart="@dimen/_10sdp"
-               android:layout_marginEnd="@dimen/_10sdp">
-
-
-               <TextView
-                   android:layout_width="0dp"
-                   android:layout_height="match_parent"
-                   android:background="@null"
-                   android:padding="@dimen/_3sdp"
-                   android:text="@string/insurance"
-                   android:textColor="@color/texts"
-                   android:textSize="@dimen/_12sdp"
-                   android:textStyle="bold"
-                   android:layout_weight=".4"
-                   android:gravity="center_vertical"
-                   android:layout_gravity="center_vertical"
-                   />
-
-
-               <TextView
-                   android:id="@+id/edtInsurance"
-                   android:layout_width="0dp"
-                   android:layout_weight=".6"
-                   android:layout_height="match_parent"
-                   android:background="@drawable/edit_gray_bg"
-                   android:hint="..."
-                   android:inputType="textEmailAddress"
-                   android:padding="@dimen/_8sdp"
-                   android:textColor="@color/black"
-                   android:textColorHint="@color/color_edit_hint"
-                   android:textSize="@dimen/_12sdp" />
-
-
-           </LinearLayout>
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:weightSum="1"
-               android:layout_marginTop="@dimen/_7sdp"
-               android:layout_marginStart="@dimen/_10sdp"
-               android:layout_marginEnd="@dimen/_10sdp"
-               android:layout_marginBottom="@dimen/_10sdp">
-
-
-               <TextView
-                   android:layout_width="0dp"
-                   android:layout_height="match_parent"
-                   android:background="@null"
-                   android:padding="@dimen/_3sdp"
-                   android:text="@string/total_nr"
-                   android:textColor="@color/texts"
-                   android:textSize="@dimen/_12sdp"
-                   android:textStyle="bold"
-                   android:layout_weight=".4"
-                   android:gravity="center_vertical"
-                   android:layout_gravity="center_vertical"
-                   />
-
-
-               <TextView
-                   android:id="@+id/edtTotalNr"
-                   android:layout_width="0dp"
-                   android:layout_weight=".6"
-                   android:layout_height="match_parent"
-                   android:background="@drawable/edit_gray_bg"
-                   android:hint="..."
-                   android:inputType="textEmailAddress"
-                   android:padding="@dimen/_8sdp"
-                   android:textColor="@color/black"
-                   android:textColorHint="@color/color_edit_hint"
-                   android:textSize="@dimen/_12sdp" />
-
-
-           </LinearLayout>
-
-
-       </LinearLayout>
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical"
-               android:layout_marginTop="@dimen/_15sdp"
-               android:background="@drawable/edit_gray_bg">
-
-
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:background="@null"
-                   android:padding="@dimen/_3sdp"
-                   android:text="@string/customs_charges"
-                   android:textColor="@color/color_primary"
-                   android:textSize="@dimen/_13sdp"
-                   android:textStyle="bold"
-                   android:layout_margin="@dimen/_10sdp"/>
-
-
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:weightSum="1"
-                   android:layout_marginStart="@dimen/_10sdp"
-                   android:layout_marginEnd="@dimen/_10sdp">
-
-
-                   <TextView
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:background="@null"
-                       android:padding="@dimen/_3sdp"
-                       android:text="@string/customs_duty"
-                       android:textColor="@color/texts"
-                       android:textSize="@dimen/_12sdp"
-                       android:textStyle="bold"
-                       android:layout_weight=".4"
-                       android:gravity="center_vertical"
-                       android:layout_gravity="center_vertical"
-                       />
-
-
-                   <TextView
-                       android:id="@+id/edtCustomsDuty"
-                       android:layout_width="0dp"
-                       android:layout_weight=".6"
-                       android:layout_height="match_parent"
-                       android:background="@drawable/edit_gray_bg"
-                       android:hint="..."
-                       android:inputType="textEmailAddress"
-                       android:padding="@dimen/_8sdp"
-                       android:textColor="@color/black"
-                       android:textColorHint="@color/color_edit_hint"
-                       android:textSize="@dimen/_12sdp" />
-
-
-               </LinearLayout>
-
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_gravity="end"
-                   android:layout_marginTop="@dimen/_8sdp"
-                   android:layout_marginBottom="@dimen/_8sdp"
-                   android:layout_marginStart="@dimen/_10sdp"
-                   android:layout_marginEnd="@dimen/_10sdp">
-
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:background="@null"
-                       android:padding="@dimen/_3sdp"
-                       android:text="@string/rate"
-                       android:textColor="@color/texts"
-                       android:textSize="@dimen/_12sdp"
-                       android:textStyle="bold"
-                       android:layout_weight=".4"
-                       android:gravity="center_vertical"
-                       android:layout_gravity="center_vertical"
-                       />
-
-
-               <TextView
-                   android:id="@+id/edtCustomsDuteRate"
-                   android:layout_width="@dimen/_80sdp"
-                   android:layout_height="wrap_content"
-                   android:background="@drawable/edit_gray_bg"
-                   android:hint="..."
-                   android:inputType="textEmailAddress"
-                   android:padding="@dimen/_5sdp"
-                   android:layout_marginStart="@dimen/_7sdp"
-                   android:textColor="@color/black"
-                   android:textColorHint="@color/color_edit_hint"
-                   android:textSize="@dimen/_12sdp" />
-
-               </LinearLayout>
-
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:weightSum="1"
-                   android:layout_marginTop="@dimen/_7sdp"
-                   android:layout_marginStart="@dimen/_10sdp"
-                   android:layout_marginEnd="@dimen/_10sdp">
-
-
-                   <TextView
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:background="@null"
-                       android:padding="@dimen/_3sdp"
-                       android:text="@string/service_charge"
-                       android:textColor="@color/texts"
-                       android:textSize="@dimen/_12sdp"
-                       android:textStyle="bold"
-                       android:layout_weight=".4"
-                       android:gravity="center_vertical"
-                       android:layout_gravity="center_vertical"
-                       />
-
-
-                   <TextView
-                       android:id="@+id/edtServiceCharge"
-                       android:layout_width="0dp"
-                       android:layout_weight=".6"
-                       android:layout_height="match_parent"
-                       android:background="@drawable/edit_gray_bg"
-                       android:hint="..."
-                       android:inputType="textEmailAddress"
-                       android:padding="@dimen/_8sdp"
-                       android:textColor="@color/black"
-                       android:textColorHint="@color/color_edit_hint"
-                       android:textSize="@dimen/_12sdp" />
-
-
-               </LinearLayout>
-
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_gravity="end"
-                   android:layout_marginTop="@dimen/_8sdp"
-                   android:layout_marginBottom="@dimen/_8sdp"
-                   android:layout_marginStart="@dimen/_10sdp"
-                   android:layout_marginEnd="@dimen/_10sdp">
-
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:background="@null"
-                       android:padding="@dimen/_3sdp"
-                       android:text="@string/rate"
-                       android:textColor="@color/texts"
-                       android:textSize="@dimen/_12sdp"
-                       android:textStyle="bold"
-                       android:layout_weight=".4"
-                       android:gravity="center_vertical"
-                       android:layout_gravity="center_vertical"
-                       />
-
-
-                   <TextView
-                       android:id="@+id/edtServiceChargeRate"
-                       android:layout_width="@dimen/_80sdp"
-                       android:layout_height="wrap_content"
-                       android:background="@drawable/edit_gray_bg"
-                       android:hint="..."
-                       android:inputType="textEmailAddress"
-                       android:padding="@dimen/_5sdp"
-                       android:layout_marginStart="@dimen/_7sdp"
-                       android:textColor="@color/black"
-                       android:textColorHint="@color/color_edit_hint"
-                       android:textSize="@dimen/_12sdp" />
-
-               </LinearLayout>
-
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:weightSum="1"
-                   android:layout_marginTop="@dimen/_7sdp"
-                   android:layout_marginStart="@dimen/_10sdp"
-                   android:layout_marginEnd="@dimen/_10sdp">
-
-
-                   <TextView
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:background="@null"
-                       android:padding="@dimen/_3sdp"
-                       android:text="@string/value_added_tax"
-                       android:textColor="@color/texts"
-                       android:textSize="@dimen/_12sdp"
-                       android:textStyle="bold"
-                       android:layout_weight=".4"
-                       android:gravity="center_vertical"
-                       android:layout_gravity="center_vertical"
-                       />
-
-
-                   <TextView
-                       android:id="@+id/edtValueTax"
-                       android:layout_width="0dp"
-                       android:layout_weight=".6"
-                       android:layout_height="match_parent"
-                       android:background="@drawable/edit_gray_bg"
-                       android:hint="..."
-                       android:inputType="textEmailAddress"
-                       android:padding="@dimen/_8sdp"
-                       android:textColor="@color/black"
-                       android:textColorHint="@color/color_edit_hint"
-                       android:textSize="@dimen/_12sdp" />
-
-
-               </LinearLayout>
-
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_gravity="end"
-                   android:layout_marginTop="@dimen/_8sdp"
-                   android:layout_marginBottom="@dimen/_8sdp"
-                   android:layout_marginStart="@dimen/_10sdp"
-                   android:layout_marginEnd="@dimen/_10sdp">
-
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:background="@null"
-                       android:padding="@dimen/_3sdp"
-                       android:text="@string/rate"
-                       android:textColor="@color/texts"
-                       android:textSize="@dimen/_12sdp"
-                       android:textStyle="bold"
-                       android:layout_weight=".4"
-                       android:gravity="center_vertical"
-                       android:layout_gravity="center_vertical"
-                       />
-
-
-                   <TextView
-                       android:id="@+id/edtValueTaxRate"
-                       android:layout_width="@dimen/_80sdp"
-                       android:layout_height="wrap_content"
-                       android:background="@drawable/edit_gray_bg"
-                       android:hint="..."
-                       android:inputType="textEmailAddress"
-                       android:padding="@dimen/_5sdp"
-                       android:layout_marginStart="@dimen/_7sdp"
-                       android:textColor="@color/black"
-                       android:textColorHint="@color/color_edit_hint"
-                       android:textSize="@dimen/_12sdp" />
-
-               </LinearLayout>
-
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:weightSum="1"
-                   android:layout_marginTop="@dimen/_7sdp"
-                   android:layout_marginStart="@dimen/_10sdp"
-                   android:layout_marginEnd="@dimen/_10sdp"
-                   android:layout_marginBottom="@dimen/_20sdp">
-
-
-                   <TextView
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:background="@null"
-                       android:padding="@dimen/_3sdp"
-                       android:text="@string/total_customs"
-                       android:textColor="@color/texts"
-                       android:textSize="@dimen/_12sdp"
-                       android:textStyle="bold"
-                       android:layout_weight=".4"
-                       android:gravity="center_vertical"
-                       android:layout_gravity="center_vertical"
-                       />
-
-
-                   <TextView
-                       android:id="@+id/edtTotalCustoms"
-                       android:layout_width="0dp"
-                       android:layout_weight=".6"
-                       android:layout_height="match_parent"
-                       android:background="@drawable/edit_gray_bg"
-                       android:hint="..."
-                       android:inputType="textEmailAddress"
-                       android:padding="@dimen/_8sdp"
-                       android:textColor="@color/black"
-                       android:textColorHint="@color/color_edit_hint"
-                       android:textSize="@dimen/_12sdp" />
-
-
-               </LinearLayout>
-
-           </LinearLayout>
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:weightSum="1"
-               android:layout_marginTop="@dimen/_10sdp"
-               android:layout_marginStart="@dimen/_10sdp"
-               android:layout_marginEnd="@dimen/_10sdp"
-               android:layout_marginBottom="@dimen/_20sdp">
-
-
-               <TextView
-                   android:layout_width="0dp"
-                   android:layout_height="match_parent"
-                   android:background="@null"
-                   android:padding="@dimen/_3sdp"
-                   android:text="@string/total_estimate"
-                   android:textColor="@color/texts"
-                   android:textSize="@dimen/_12sdp"
-                   android:textStyle="bold"
-                   android:layout_weight=".4"
-                   android:gravity="center_vertical"
-                   android:layout_gravity="center_vertical"
-                   />
-
-
-               <TextView
-                   android:id="@+id/edtTotalEstimate"
-                   android:layout_width="0dp"
-                   android:layout_weight=".6"
-                   android:layout_height="match_parent"
-                   android:background="@drawable/edit_gray_bg"
-                   android:hint="..."
-                   android:inputType="textEmailAddress"
-                   android:padding="@dimen/_8sdp"
-                   android:textColor="@color/black"
-                   android:textColorHint="@color/color_edit_hint"
-                   android:textSize="@dimen/_12sdp" />
-
-
-           </LinearLayout>
-
-
 
 
        </LinearLayout>

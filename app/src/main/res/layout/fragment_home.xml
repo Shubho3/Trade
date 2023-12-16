@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:fitsSystemWindows="false"
-        tools:openDrawer="end">
+        tools:openDrawer="start">
         <include
              android:id="@+id/mail_layout"
             layout="@layout/app_bar_main"
@@ -26,6 +26,8 @@
             android:textAlignment="textStart"
             app:headerLayout="@layout/nav_header_main"
             app:itemTextAppearance="@style/NavDrawerTextStyle"
+            app:itemIconPadding="@dimen/_8sdp"
+            app:itemIconTint="@color/color_primary"
             app:itemTextColor="@drawable/drawable_nav_view_color_state_list"
             app:menu="@menu/activity_main_drawer"
              app:drawerLayoutCornerSize="10dp"/>

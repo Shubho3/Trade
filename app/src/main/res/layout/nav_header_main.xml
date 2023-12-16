@@ -16,16 +16,17 @@
 
         <ImageView
             android:id="@+id/picture"
-            android:layout_width="@dimen/_65sdp"
-            android:layout_height="@dimen/_65sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:contentDescription="nav_header_desc"
-            android:padding="@dimen/_5sdp"
-            android:src="@drawable/ic_launcher_foreground"
+            android:padding="@dimen/_15sdp"
+            android:src="@drawable/logo_white"
             android:transitionName="picture"
             tools:ignore="UnusedAttribute" />
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
