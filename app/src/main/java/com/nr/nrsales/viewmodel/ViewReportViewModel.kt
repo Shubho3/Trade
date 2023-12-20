@@ -28,37 +28,5 @@ class ViewReportViewModel @Inject constructor
     private val _downloadResponse: MutableLiveData<Boolean> = MutableLiveData()
     val downloadResponse = _downloadResponse
 
-    fun fetchDogResponse() = viewModelScope.launch {
-        /* repository.getDog().collect { values ->
-             _response.value = values
-         }*/
-    }
-
-
-    fun downloadpdfFiles( dir: File, fileName: String) {
-
-        viewModelScope.launch {
-            repository.downloadPdf( dir, fileName).collect { value ->
-                _downloadResponse.value = value
-            }
-        }
-    }
-
-
-    private fun hasInternetConnection(): Boolean {
-        val connectivityManager = getApplication<Application>().getSystemService(
-            Context.CONNECTIVITY_SERVICE
-        ) as ConnectivityManager
-
-        val activeNetwork = connectivityManager.activeNetwork ?: return false
-        val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-
-        return when {
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-            else -> false
-        }
-    }
 
 }

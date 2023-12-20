@@ -27,4 +27,12 @@
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
+
+    <style name="DialogSlideAnim" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+    </style>
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/trans_left_in</item>
+        <item name="android:windowExitAnimation">@anim/trans_left_out</item>
+    </style>
 </resources>

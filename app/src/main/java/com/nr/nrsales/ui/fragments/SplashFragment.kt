@@ -35,18 +35,9 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
 
             }
             if (sharedPref.getStoredTag(SharedPrf.LOGIN) == "true") {
-               // Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_orderListFragment)
-
                 Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_homeFragment)
             } else {
                  Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_LoginFragment)
-
-             //   Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_invoiceFragment)
-
-             //  Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_orderListFragment)
-
-
-
 
             }
         }, 3000)

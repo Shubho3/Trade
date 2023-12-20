@@ -19,6 +19,7 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         mInstance = this
+        appContext= applicationContext
         hasInternetConnection(this)
         super.onCreate()
     }
@@ -28,6 +29,7 @@ class MainApplication : Application() {
     }
 
     companion object {
+        lateinit  var appContext: Context
 
          fun hasInternetConnection(context: Context): Boolean {
             val connectivityManager = context.getSystemService(

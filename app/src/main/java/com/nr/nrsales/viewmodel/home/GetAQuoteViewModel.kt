@@ -22,8 +22,4 @@ class GetAQuoteViewModel
     private val _response: MutableLiveData<NetworkResult<CsvResModel>> = MutableLiveData()
     val response: LiveData<NetworkResult<CsvResModel>> = _response
 
-   fun fetchAllTypeResponse() = viewModelScope.launch {
-        repository.getAllTypes().collect { values ->
-            _response.value = values } }
-
 }

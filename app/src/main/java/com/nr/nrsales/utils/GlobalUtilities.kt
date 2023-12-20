@@ -1,14 +1,20 @@
 package com.nr.nrsales.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.ContextWrapper
+import android.database.Cursor
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.TransitionDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
+import android.provider.MediaStore
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -26,7 +32,15 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.snackbar.Snackbar
+import com.nr.nrsales.MainApplication
 import com.nr.nrsales.R
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
+import java.nio.file.Files
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Random
 
 
@@ -39,6 +53,89 @@ class GlobalUtility {
 
         private var mDialog: Dialog? = null
         private var isProgressDialogRunning = false
+        fun persistImage(bitmap: Bitmap, cOntext: Context): File {
+            val filesDir = cOntext.cacheDir
+            @SuppressLint("SimpleDateFormat") val imageFile = File(filesDir, SimpleDateFormat("yyyyMMdd_HHmmss").format(Date()) + ".jpg")
+            var os: OutputStream? = null
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    os = Files.newOutputStream(imageFile.toPath())
+                }
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, os!!)
+                os.flush()
+                os.close()
+            } catch (e: java.lang.Exception) {
+                Log.e("TAG", "persistImage: " + e.message)
+            }
+            return imageFile
+        }
+
+        @SuppressLint("Range")
+        fun getPath(uri: Uri?, activity: Activity): String {
+            var path: String? = null
+            val projection = arrayOf(MediaStore.Images.Media.DATA)
+            var cursor: Cursor? = uri?.let { activity.contentResolver.query(it, null, null, null, null) }
+            cursor?.moveToFirst()
+            var document_id = cursor?.getString(0)
+            document_id = document_id?.substring(document_id.lastIndexOf(":") + 1)
+            cursor?.close()
+            cursor = activity.contentResolver.query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ",
+                arrayOf(document_id), null
+            )
+            if (cursor?.moveToFirst() == true) {
+                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
+            }
+            cursor?.close()
+            return "" + path
+        }
+
+        fun saveToInternalStorage(bitmapImage: Bitmap, activity: Activity): String? {
+            val today = Date()
+            val format = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a")
+            val dateToStr = format.format(today)
+            val cw = ContextWrapper(activity)
+            val directory = cw.getDir("imageDir", Context.MODE_PRIVATE)
+            val mypath = File(directory, "profile_$dateToStr.JPEG")
+            var fos: FileOutputStream? = null
+            try {
+                fos = FileOutputStream(mypath)
+                bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            } finally {
+                try {
+                    fos!!.close()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+            return mypath.absolutePath
+        }
+
+        fun saveToInternalStorageFile(bitmapImage: Bitmap, activity: Activity): File {
+            val today = Date()
+            val format = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a")
+            val dateToStr = format.format(today)
+            val cw = ContextWrapper(activity)
+            val directory = cw.getDir("imageDir", Context.MODE_PRIVATE)
+            val mypath = File(directory, "profile_$dateToStr.JPEG")
+            var fos: FileOutputStream? = null
+            try {
+                fos = FileOutputStream(mypath)
+                bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            } finally {
+                try {
+                    fos!!.close()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+            return mypath
+        }
 
         fun showProgressMessage(dialogActivity: Activity?, msg: String?) {
             try {
@@ -131,6 +228,8 @@ class GlobalUtility {
 
         fun showToast(message: String, context: Context) {
             Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        } fun showToast(message: String) {
+            Toast.makeText(MainApplication.appContext, message, Toast.LENGTH_LONG).show()
         }
 
         fun initSnackBar(context: Activity, networkConnected: Boolean) {

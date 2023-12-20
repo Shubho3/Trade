@@ -38,10 +38,9 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 .navigate(R.id.action_LoginFragment_to_signupFragment)
         }
         mBinding.btnSubmit.setOnClickListener {
-            findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment)
-
+            //
             // onClick(mBinding.btnSubmit)
-          /*  val email = mBinding.edtEmail.text.toString()
+            val email = mBinding.edtEmail.text.toString()
             val pass =  mBinding.edtPass.text.toString()
             if (email.isEmpty()) {
                 mBinding.edtEmail.text = (null)
@@ -53,7 +52,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             } else if (pass.isEmpty()) {
                 mBinding.edtEmail.requestFocus()
                 GlobalUtility.showToast(getString(R.string.invalid_password), context)
-            } else if (pass.length <= 5) {
+            } else if (pass.length <= 3) {
                 mBinding.edtEmail.requestFocus()
                 GlobalUtility.showToast(getString(R.string.invalid_password_length), context)
             } else {
@@ -62,35 +61,45 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 } else {
                     GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
                     fetchLoginResponse(email, pass)
-                }
+                    viewmodel.response.observe(viewLifecycleOwner) { response ->
+                        when (response) {
+                            is NetworkResult.Success -> {
+                                GlobalUtility.hideProgressMessage()
+                                response.data?.let {
+                                    if (it.status=="1"){
+                                    Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT).show()
+                                    sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
+                                    sharedPrf.setStoredTag(SharedPrf.USER_ID, it.result.id)
+                                    sharedPrf.setUser(it.result)
+                                    Log.e(TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
+                                    findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment)
+                                }else{
+                                        Toast.makeText(
+                                            context,
+                                            it.message.toString(),
+                                            Toast.LENGTH_LONG
+                                        ).show()
 
-            }*/
-        }
-        viewmodel.response.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    GlobalUtility.hideProgressMessage()
-                    response.data?.let {
-                        Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT).show()
-                        sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
-                        sharedPrf.setStoredTag(SharedPrf.USER_ID, it)
-                        Log.e(TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
-                        findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment)
+                                }}
+                            }
+                            is NetworkResult.Error -> {
+                                GlobalUtility.hideProgressMessage()
+                                Log.e(TAG, "fetchLoginResponse: " + response.message)
+                                Toast.makeText(
+                                    context,
+                                    "User Not Found",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                            is NetworkResult.Loading -> {
+                                GlobalUtility.hideProgressMessage()
+                            }
+                        }
                     }
-                }
-                is NetworkResult.Error -> {
-                    GlobalUtility.hideProgressMessage()
-                    Log.e(TAG, "fetchLoginResponse: " + response.message)
-                    Toast.makeText(
-                        context,
-                        "User Not Found",
-                        Toast.LENGTH_LONG
-                    ).show()
+
                 }
 
-                is NetworkResult.Loading -> {
-                    GlobalUtility.hideProgressMessage()
-                }
             }
         }
     }

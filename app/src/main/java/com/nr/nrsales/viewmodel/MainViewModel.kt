@@ -42,9 +42,7 @@ class MainViewModel @Inject constructor(
 
     fun downloadImage(fileName: HashMap<String ,Any>) {
         viewModelScope.launch {
-            repository.downloadFile(fileName).collect { values ->
-                _response1.value = values
-            }
+
 
          /*   repository.saveImage(bitmap, dir, fileName).collect { value ->
                 _downloadResponse.value = value

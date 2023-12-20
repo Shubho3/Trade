@@ -9,6 +9,7 @@ import com.nr.nrsales.repository.Repository
 import com.nr.nrsales.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 
@@ -20,8 +21,8 @@ class RegisterViewModel @Inject constructor
 ) : AndroidViewModel(application) {
     val _response: MutableLiveData<NetworkResult<RegisterResModel>> = MutableLiveData()
 
-    fun fetchRegisterResponse(params: HashMap<String, Any>) = viewModelScope.launch {
-        repository.getRegistered(params).collect { values ->
+    fun fetchRegisterResponse(body: RequestBody) = viewModelScope.launch {
+        repository.getRegistered(body).collect { values ->
             _response.value = values
         }
     }

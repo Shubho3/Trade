@@ -2,7 +2,11 @@ package com.nr.nrsales.apis
 
 import com.nr.nrsales.model.CsvResModel
 import com.nr.nrsales.model.RegisterResModel
+import com.nr.nrsales.model.UserRes
 import com.nr.nrsales.utils.Constants
+import com.nr.nrsales.utils.NetworkResult
+import kotlinx.coroutines.flow.Flow
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -17,11 +21,11 @@ import java.util.Objects
 interface ApiService {
 
     @GET(Constants.LOGIN_URL)
-    suspend fun loginUser(@Header("Authorization") auth: String, @QueryMap map: HashMap<String, Any>): Response<String>
+    suspend fun loginUser(@QueryMap map: HashMap<String, Any>): Response<UserRes>
 
-    @POST(Constants.REGISTER_URL)
-    suspend fun registerUser(@Header("Authorization") auth: String, @Body map: HashMap<String, Any>): Response<RegisterResModel>
-
+   @POST(Constants.REGISTER_URL)
+    suspend fun registerUser(@Body requestBody: RequestBody):
+            Response<RegisterResModel>
    @GET("https://technorizen.com/_API/get_csv.php")
     suspend fun getCsvList(@Url auth: String): Response<CsvResModel>
 

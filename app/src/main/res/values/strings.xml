@@ -22,7 +22,7 @@
     <string name="invalid_mobile">Please enter mobile</string>
     <string name="invalid_confirm_password">Please enter confirm password</string>
     <string name="password_should_be_same">Password should be same</string>
-    <string name="invalid_password_length">Password length must be between 6–15 characters.</string>
+    <string name="invalid_password_length">Password length must be between 4–15 characters.</string>
     <string name="invalid_device_token">Invalid device token</string>
     <string name="invalid_device_id">Invalid device id</string>
     <!-- TODO: Remove or change this placeholder text -->

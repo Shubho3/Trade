@@ -22,14 +22,14 @@ class SharedPrf @Inject constructor(@ApplicationContext context: Context) {
         prefs.edit().putString(str, query).apply()
     }
 
-    fun getUser(): User {
+    fun getUser(): User? {
         return try {
             val gson = Gson()
             val json: String? = prefs.getString(USER, "")
             val obj: User = gson.fromJson(json, User::class.java)
             obj
         } catch (e: Exception) {
-            User("", "")
+           return null
         }
     }
 
