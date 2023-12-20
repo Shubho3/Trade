@@ -148,7 +148,7 @@ class GlobalUtility {
                 mDialog!!.setContentView(R.layout.dialog_loading)
                 mDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 val lp = mDialog!!.window!!.attributes
-                lp.dimAmount = 0.5f
+                lp.dimAmount = 0.01f
                 mDialog!!.window!!.attributes = lp
                 mDialog!!.window!!.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
                 mDialog!!.setCancelable(true)

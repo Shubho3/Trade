@@ -34,9 +34,11 @@ import com.nr.nrsales.utils.ManagePermissions
 import com.nr.nrsales.utils.NetworkResult
 import com.nr.nrsales.utils.SharedPrf
 import com.nr.nrsales.utils.Validation
+import com.nr.nrsales.viewmodel.ProfileViewModel
 import com.nr.nrsales.viewmodel.RegisterViewModel
 import com.yayatotaxi.retrofit.ApiClient
 import com.yayatotaxi.retrofit.NRApiService
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -50,6 +52,7 @@ import java.io.File
 import java.io.IOException
 
 
+@AndroidEntryPoint
 class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
     lateinit var mBinding: FragmentEditProfileBinding
     private lateinit var context: Context
@@ -61,7 +64,40 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
     private val REQUEST_CODE = 123
     private lateinit var managePermissions: ManagePermissions
     private lateinit var list: List<String>
-    private val viewmodel by viewModels<RegisterViewModel>()
+    private val viewmodel by viewModels<ProfileViewModel>()
+    private fun getProfile() {
+        GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
+        val map: HashMap<String, Any> = HashMap()
+        map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
+        viewmodel.fetchGetUserResponse(map)
+        viewmodel.getUser.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    GlobalUtility.hideProgressMessage()
+                    response.data?.let {
+                        if (it.status=="1"){
+                        }else{
+                            Toast.makeText(
+                                context,
+                                it.message.toString(),
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                        }}
+                }
+                is NetworkResult.Error -> {
+                    GlobalUtility.hideProgressMessage()
+                    Log.e(LoginFragment.TAG, "fetchLoginResponse: " + response.message)
+
+                }
+
+                is NetworkResult.Loading -> {
+                    GlobalUtility.hideProgressMessage()
+                }
+            }
+        }
+
+    }
 
     override fun onBindTo(binding: ViewDataBinding?) {
         mBinding = binding as FragmentEditProfileBinding
@@ -84,6 +120,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
             requireActivity(), list, REQUEST_CODE
         )
         managePermissions.checkPermissions()
+        getProfile()
 
     }
     private var cameraResultLauncher2 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -568,7 +605,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                     .build()
                 viewmodel.fetchupdateUserResponse(bodyx.build())
             }
-            viewmodel._response.observe(this) { response ->
+            viewmodel.updateUser.observe(this) { response ->
                 when (response) {
                     is NetworkResult.Success -> {
                         GlobalUtility.hideProgressMessage()
