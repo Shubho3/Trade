@@ -11,8 +11,6 @@ import retrofit2.http.*
 interface NRApiService {
 
 
-    @GET(Constants.CSV_URL)
-    fun getCsvList(): Call<ResponseBody>
 
     @GET(Constants.GET_CUSTOMER_PROFILE_URL+"{id}")
     fun getUserProfile(@Header("Authorization") auth: String,@Path("id") appId: String): Call<ResponseBody>

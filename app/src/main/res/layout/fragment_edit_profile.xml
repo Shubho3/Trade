@@ -218,6 +218,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
@@ -272,12 +273,14 @@
                                 android:textStyle="bold" />
 
                             <ImageView
+                                android:id="@+id/aadhar_front"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
                                 android:background="@drawable/edit_background"
                                 android:inputType="textPassword"
-                                android:padding="@dimen/_8sdp"
+                                android:padding="@dimen/_5sdp"
                                 android:layout_margin="@dimen/_5sdp"
+                                android:scaleType="fitXY"
                                 android:src="@drawable/baseline_add_a_photo"
                                 android:textColor="@color/color_edit_hint"
                                 android:textColorHint="@color/color_edit_hint"
@@ -304,11 +307,13 @@
                                 android:textStyle="bold" />
 
                             <ImageView
+                                android:id="@+id/aadhar_back"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
                                 android:background="@drawable/edit_background"
                                 android:inputType="textPassword"
                                 android:padding="@dimen/_8sdp"
+                                android:scaleType="fitXY"
                                 android:layout_margin="@dimen/_5sdp"
                                 android:src="@drawable/baseline_add_a_photo"
                                 android:textColor="@color/color_edit_hint"
@@ -343,11 +348,13 @@
                                 android:textStyle="bold" />
 
                             <ImageView
+                                android:id="@+id/pan_front"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
                                 android:background="@drawable/edit_background"
                                 android:inputType="textPassword"
                                 android:padding="@dimen/_8sdp"
+                                android:scaleType="fitXY"
                                 android:layout_margin="@dimen/_5sdp"
                                 android:src="@drawable/baseline_add_a_photo"
                                 android:textColor="@color/color_edit_hint"
@@ -380,6 +387,8 @@
                                 android:background="@drawable/edit_background"
                                 android:inputType="textPassword"
                                 android:padding="@dimen/_8sdp"
+                                android:id="@+id/pan_back"
+                                android:scaleType="fitXY"
                                 android:layout_margin="@dimen/_5sdp"
                                 android:src="@drawable/baseline_add_a_photo"
                                 android:textColor="@color/color_edit_hint"

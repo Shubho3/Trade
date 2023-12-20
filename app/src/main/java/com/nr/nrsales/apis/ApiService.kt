@@ -26,8 +26,11 @@ interface ApiService {
    @POST(Constants.REGISTER_URL)
     suspend fun registerUser(@Body requestBody: RequestBody):
             Response<RegisterResModel>
-   @GET("https://technorizen.com/_API/get_csv.php")
-    suspend fun getCsvList(@Url auth: String): Response<CsvResModel>
+    @POST(Constants.update_profile)
+    suspend fun updateUser(@Body requestBody: RequestBody):
+            Response<RegisterResModel>
+   @GET(Constants.get_profile)
+    suspend fun get_profile(@QueryMap map: HashMap<String, Any>): Response<RegisterResModel>
 
 /*    @GET(Constants.CSV_URL)
     suspend fun getCsvList(): Response<CsvResModel>*/

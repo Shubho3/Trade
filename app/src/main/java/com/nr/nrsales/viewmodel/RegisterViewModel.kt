@@ -20,10 +20,21 @@ class RegisterViewModel @Inject constructor
     application: Application
 ) : AndroidViewModel(application) {
     val _response: MutableLiveData<NetworkResult<RegisterResModel>> = MutableLiveData()
+    val updateUser: MutableLiveData<NetworkResult<RegisterResModel>> = MutableLiveData()
+    val getUser: MutableLiveData<NetworkResult<RegisterResModel>> = MutableLiveData()
 
     fun fetchRegisterResponse(body: RequestBody) = viewModelScope.launch {
         repository.getRegistered(body).collect { values ->
             _response.value = values
+        }
+    }
+    fun fetchupdateUserResponse(body: RequestBody) = viewModelScope.launch {
+        repository.getRegistered(body).collect { values ->
+            updateUser.value = values
+        }
+    }fun fetchGetUserResponse(params: HashMap<String, Any>) = viewModelScope.launch {
+        repository.get_profile(params).collect { values ->
+            getUser.value = values
         }
     }
 }

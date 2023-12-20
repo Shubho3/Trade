@@ -40,6 +40,17 @@ class Repository @Inject constructor(
         return flow {
             emit(safeApiCall { remoteDataSource.registerUser(body) })
         }.flowOn(Dispatchers.IO)
+    }  suspend fun updateUser(body: RequestBody):
+            Flow<NetworkResult<RegisterResModel>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.updateUser(body) })
+        }.flowOn(Dispatchers.IO)
+    }
+    suspend fun get_profile(Map: HashMap<String, Any>):
+            Flow<NetworkResult<RegisterResModel>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.get_profile(Map) })
+        }.flowOn(Dispatchers.IO)
     }
 }
 
