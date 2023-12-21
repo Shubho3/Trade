@@ -5,6 +5,7 @@
       <item name="colorPrimary">@color/color_primary</item>
         <item name="colorOnBackground">@color/white</item>
           <item name="colorPrimaryVariant">@color/color_primary_varient</item>
+        <item name="colorOnPrimaryContainer">@color/black</item>
         <item name="colorPrimaryDark">@color/color_primary</item>
 <!--
         <item name="android:windowTranslucentStatus">false</item>
@@ -34,5 +35,11 @@
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/trans_left_in</item>
         <item name="android:windowExitAnimation">@anim/trans_left_out</item>
+    </style>
+    <style name="MyTextView" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
     </style>
 </resources>

@@ -28,13 +28,4 @@ class RegisterViewModel @Inject constructor
             _response.value = values
         }
     }
-    fun fetchupdateUserResponse(body: RequestBody) = viewModelScope.launch {
-        repository.getRegistered(body).collect { values ->
-            updateUser.value = values
-        }
-    }fun fetchGetUserResponse(params: HashMap<String, Any>) = viewModelScope.launch {
-        repository.get_profile(params).collect { values ->
-            getUser.value = values
-        }
-    }
 }

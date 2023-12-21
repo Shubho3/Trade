@@ -1,5 +1,10 @@
 package com.nr.nrsales.model
 
+data class BasicRes(
+    val message: String,
+    val result: String,
+    val status: String
+)
 data class UserRes(
     val message: String,
     val result: User,
@@ -18,7 +23,7 @@ data class User(
     val gender: String,
     val id: String,
     val image: String,
-    val ios_register_id: Any,
+    val ios_register_id: String,
     val last_name: String,
     val lat: String,
     val lon: String,
@@ -32,6 +37,13 @@ data class User(
     val services_name: String,
     val social_id: String,
     val status: String,
+    val total_deposit: String,
+    val total_earns: String,
     val type: String,
-    val user_name: String
+    val user_name: String,
+    val wallet_balance: String,
+    val withdrawals: String
 )
+
+
+    

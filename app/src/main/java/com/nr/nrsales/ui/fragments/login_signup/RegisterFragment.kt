@@ -10,11 +10,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.view.Window
@@ -83,6 +81,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
 
         init()
     }
+
     private var cameraResultLauncher2 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
@@ -128,7 +127,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                         }
                     }
                 } catch (e: IOException) {
-                    e.localizedMessage?.let { GlobalUtility.showToast(it,requireActivity()) }
+                    e.localizedMessage?.let { GlobalUtility.showToast(it, requireActivity()) }
                 }
             } else {
                 val selectedImage = data!!.data
@@ -185,7 +184,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
             mBinding.aadharBack.setImageBitmap(bitmap)
         }
     }
-    private var galleryResultLauncher3= registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var galleryResultLauncher3 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             if (Build.VERSION.SDK_INT >= 33) {
@@ -202,7 +201,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                         }
                     }
                 } catch (e: IOException) {
-                    e.localizedMessage?.let { GlobalUtility.showToast(it,requireActivity()) }
+                    e.localizedMessage?.let { GlobalUtility.showToast(it, requireActivity()) }
                 }
             } else {
                 val selectedImage = data!!.data
@@ -260,7 +259,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
             mBinding.panFront.setImageBitmap(bitmap)
         }
     }
-    private var galleryResultLauncher4= registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var galleryResultLauncher4 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             if (Build.VERSION.SDK_INT >= 33) {
@@ -277,7 +276,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                         }
                     }
                 } catch (e: IOException) {
-                    e.localizedMessage?.let { GlobalUtility.showToast(it,requireActivity()) }
+                    e.localizedMessage?.let { GlobalUtility.showToast(it, requireActivity()) }
                 }
             } else {
                 val selectedImage = data!!.data
@@ -300,13 +299,13 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                 val o2 = BitmapFactory.Options()
                 o2.inSampleSize = scale
                 val bitmap = BitmapFactory.decodeFile(ImagePath, o2)
-                pan_front= "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
+                pan_front = "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
                 Log.e("ImagePath", "onActivityResult: $pan_front")
                 mBinding.panFront.setImageBitmap(bitmap)
             }
         }
     }
-  private var cameraResultLauncher45 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var cameraResultLauncher45 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             val photo = data!!.extras!!["data"] as Bitmap?
@@ -334,7 +333,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
             mBinding.panBack.setImageBitmap(bitmap)
         }
     }
-    private var galleryResultLauncher45= registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var galleryResultLauncher45 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             if (Build.VERSION.SDK_INT >= 33) {
@@ -351,7 +350,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                         }
                     }
                 } catch (e: IOException) {
-                    e.localizedMessage?.let { GlobalUtility.showToast(it,requireActivity()) }
+                    e.localizedMessage?.let { GlobalUtility.showToast(it, requireActivity()) }
                 }
             } else {
                 val selectedImage = data!!.data
@@ -374,13 +373,12 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                 val o2 = BitmapFactory.Options()
                 o2.inSampleSize = scale
                 val bitmap = BitmapFactory.decodeFile(ImagePath, o2)
-                pan_back= "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
+                pan_back = "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
                 Log.e("ImagePath", "onActivityResult: $pan_back")
                 mBinding.panBack.setImageBitmap(bitmap)
             }
         }
     }
-
 
 
     private fun hasStoragePermission(context: Context): Boolean {
@@ -396,143 +394,148 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
             storagePermission
         ) == PackageManager.PERMISSION_GRANTED
     }
+
     private fun init() {
-  mBinding.aadharFront.setOnClickListener {
-      val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
-      dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-      dialog.setCancelable(false)
-      dialog.setContentView(R.layout.select_img_lay)
-      dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-      val camera = dialog.findViewById<View>(R.id.camera) as Button
-      val gallary = dialog.findViewById<View>(R.id.gallary) as Button
-      val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
-      gallary.setOnClickListener {
-          dialog.dismiss()
-          val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-          if (hasStoragePermission(requireActivity())) {
-              galleryResultLauncher2.launch(i)
-          } else {
-              managePermissions.checkPermissions()
-          }
-      }
-      camera.setOnClickListener {
-          dialog.dismiss()
-          val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-          if (ContextCompat.checkSelfPermission(
-                  requireActivity(),
-                  Manifest.permission.CAMERA
-              ) == PackageManager.PERMISSION_GRANTED
-          ) {
-          cameraResultLauncher2.launch(cameraIntent)}else{
-              managePermissions.checkPermissions()
+        mBinding.aadharFront.setOnClickListener {
+            val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.select_img_lay)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val camera = dialog.findViewById<View>(R.id.camera) as Button
+            val gallary = dialog.findViewById<View>(R.id.gallary) as Button
+            val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
+            gallary.setOnClickListener {
+                dialog.dismiss()
+                val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                if (hasStoragePermission(requireActivity())) {
+                    galleryResultLauncher2.launch(i)
+                } else {
+                    managePermissions.checkPermissions()
+                }
+            }
+            camera.setOnClickListener {
+                dialog.dismiss()
+                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (ContextCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.CAMERA
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    cameraResultLauncher2.launch(cameraIntent)
+                } else {
+                    managePermissions.checkPermissions()
 
-          }
-      }
-      cont_find.setOnClickListener { dialog.dismiss() }
-      dialog.show()
-  }
-  mBinding.aadharBack.setOnClickListener {
-      val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
-      dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-      dialog.setCancelable(false)
-      dialog.setContentView(R.layout.select_img_lay)
-      dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-      val camera = dialog.findViewById<View>(R.id.camera) as Button
-      val gallary = dialog.findViewById<View>(R.id.gallary) as Button
-      val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
-      gallary.setOnClickListener {
-          dialog.dismiss()
-          val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-          if (hasStoragePermission(requireActivity())) {
-              galleryResultLauncher3.launch(i)
-          } else {
-              managePermissions.checkPermissions()
-          }
-      }
-      camera.setOnClickListener {
-          dialog.dismiss()
-          val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-          if (ContextCompat.checkSelfPermission(
-                  requireActivity(),
-                  Manifest.permission.CAMERA
-              ) == PackageManager.PERMISSION_GRANTED
-          ) {
-          cameraResultLauncher3.launch(cameraIntent)}else{
-              managePermissions.checkPermissions()
+                }
+            }
+            cont_find.setOnClickListener { dialog.dismiss() }
+            dialog.show()
+        }
+        mBinding.aadharBack.setOnClickListener {
+            val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.select_img_lay)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val camera = dialog.findViewById<View>(R.id.camera) as Button
+            val gallary = dialog.findViewById<View>(R.id.gallary) as Button
+            val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
+            gallary.setOnClickListener {
+                dialog.dismiss()
+                val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                if (hasStoragePermission(requireActivity())) {
+                    galleryResultLauncher3.launch(i)
+                } else {
+                    managePermissions.checkPermissions()
+                }
+            }
+            camera.setOnClickListener {
+                dialog.dismiss()
+                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (ContextCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.CAMERA
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    cameraResultLauncher3.launch(cameraIntent)
+                } else {
+                    managePermissions.checkPermissions()
 
-          }
-      }
-      cont_find.setOnClickListener { dialog.dismiss() }
-      dialog.show()
-  }
-  mBinding.panBack.setOnClickListener {
-      val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
-      dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-      dialog.setCancelable(false)
-      dialog.setContentView(R.layout.select_img_lay)
-      dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-      val camera = dialog.findViewById<View>(R.id.camera) as Button
-      val gallary = dialog.findViewById<View>(R.id.gallary) as Button
-      val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
-      gallary.setOnClickListener {
-          dialog.dismiss()
-          val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-          if (hasStoragePermission(requireActivity())) {
-              galleryResultLauncher45.launch(i)
-          } else {
-              managePermissions.checkPermissions()
-          }
-      }
-      camera.setOnClickListener {
-          dialog.dismiss()
-          val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-          if (ContextCompat.checkSelfPermission(
-                  requireActivity(),
-                  Manifest.permission.CAMERA
-              ) == PackageManager.PERMISSION_GRANTED
-          ) {
-          cameraResultLauncher45.launch(cameraIntent)}else{
-              managePermissions.checkPermissions()
+                }
+            }
+            cont_find.setOnClickListener { dialog.dismiss() }
+            dialog.show()
+        }
+        mBinding.panBack.setOnClickListener {
+            val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.select_img_lay)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val camera = dialog.findViewById<View>(R.id.camera) as Button
+            val gallary = dialog.findViewById<View>(R.id.gallary) as Button
+            val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
+            gallary.setOnClickListener {
+                dialog.dismiss()
+                val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                if (hasStoragePermission(requireActivity())) {
+                    galleryResultLauncher45.launch(i)
+                } else {
+                    managePermissions.checkPermissions()
+                }
+            }
+            camera.setOnClickListener {
+                dialog.dismiss()
+                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (ContextCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.CAMERA
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    cameraResultLauncher45.launch(cameraIntent)
+                } else {
+                    managePermissions.checkPermissions()
 
-          }
-      }
-      cont_find.setOnClickListener { dialog.dismiss() }
-      dialog.show()
-  }
-  mBinding.panFront.setOnClickListener {
-      val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
-      dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-      dialog.setCancelable(false)
-      dialog.setContentView(R.layout.select_img_lay)
-      dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-      val camera = dialog.findViewById<View>(R.id.camera) as Button
-      val gallary = dialog.findViewById<View>(R.id.gallary) as Button
-      val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
-      gallary.setOnClickListener {
-          dialog.dismiss()
-          val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-          if (hasStoragePermission(requireActivity())) {
-              galleryResultLauncher4.launch(i)
-          } else {
-              managePermissions.checkPermissions()
-          }
-      }
-      camera.setOnClickListener {
-          dialog.dismiss()
-          val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-          if (ContextCompat.checkSelfPermission(
-                  requireActivity(),
-                  Manifest.permission.CAMERA
-              ) == PackageManager.PERMISSION_GRANTED
-          ) {
-          cameraResultLauncher4.launch(cameraIntent)}else{
-              managePermissions.checkPermissions()
+                }
+            }
+            cont_find.setOnClickListener { dialog.dismiss() }
+            dialog.show()
+        }
+        mBinding.panFront.setOnClickListener {
+            val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.select_img_lay)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val camera = dialog.findViewById<View>(R.id.camera) as Button
+            val gallary = dialog.findViewById<View>(R.id.gallary) as Button
+            val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
+            gallary.setOnClickListener {
+                dialog.dismiss()
+                val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                if (hasStoragePermission(requireActivity())) {
+                    galleryResultLauncher4.launch(i)
+                } else {
+                    managePermissions.checkPermissions()
+                }
+            }
+            camera.setOnClickListener {
+                dialog.dismiss()
+                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (ContextCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.CAMERA
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    cameraResultLauncher4.launch(cameraIntent)
+                } else {
+                    managePermissions.checkPermissions()
 
-          }
-      }
-      cont_find.setOnClickListener { dialog.dismiss() }
-      dialog.show()
-  }
+                }
+            }
+            cont_find.setOnClickListener { dialog.dismiss() }
+            dialog.show()
+        }
         mBinding.signUpBtn.setOnClickListener {
             onClick(it)
             onBackPressed()
@@ -556,11 +559,11 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                 return@setOnClickListener
             } else if (!Validation.getNormalValidCheck(mBinding.edtPass2)) {
                 return@setOnClickListener
-            } else  if (!Validation.getStringEmptyCheck(aadhar_front, "Please Pick Aadhar Front Picture")) {
+            } else if (!Validation.getStringEmptyCheck(aadhar_front, "Please Pick Aadhar Front Picture")) {
                 return@setOnClickListener
             } else if (!Validation.getStringEmptyCheck(aadhar_back, "Please Pick Aadhar Back Picture")) {
                 return@setOnClickListener
-            } else  if (!Validation.getStringEmptyCheck(pan_front, "Please Pick PAN Front Picture")) {
+            } else if (!Validation.getStringEmptyCheck(pan_front, "Please Pick PAN Front Picture")) {
                 return@setOnClickListener
             } else if (!Validation.getStringEmptyCheck(pan_back, "Please Pick PAN Back Picture")) {
                 return@setOnClickListener
@@ -568,11 +571,11 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                 GlobalUtility.showProgressMessage(requireActivity(), "Uploading Data...")
                 val bodyx: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
                 bodyx.addFormDataPart("user_name", mBinding.edtName.text.toString())
-                    .addPart(MultipartBody.Part.createFormData("aadhar_front", "aadhar_front", RequestBody.create("image/*".toMediaTypeOrNull(), File(aadhar_front))))
-                    .addPart(MultipartBody.Part.createFormData("aadhar_back", "aadhar_back", RequestBody.create("image/*".toMediaTypeOrNull(), File(aadhar_back))))
-                  .addPart(MultipartBody.Part.createFormData("pan_front", "pan_front", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_front))))
-                    .addPart(MultipartBody.Part.createFormData("pan_back", "pan_back", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_back))))
-                    .addFormDataPart("mobile",  mBinding.edtPhone.text.toString())
+                    .addPart(MultipartBody.Part.createFormData("aadhar_front", "aadhar_front.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(aadhar_front))))
+                    .addPart(MultipartBody.Part.createFormData("aadhar_back", "aadhar_back.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(aadhar_back))))
+                    .addPart(MultipartBody.Part.createFormData("pan_front", "pan_front.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_front))))
+                    .addPart(MultipartBody.Part.createFormData("pan_back", "pan_back.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_back))))
+                    .addFormDataPart("mobile", mBinding.edtPhone.text.toString())
                     .addFormDataPart("email", mBinding.edtEmail.text.toString())
                     .addFormDataPart("password", mBinding.edtPass.text.toString())
                     .build()

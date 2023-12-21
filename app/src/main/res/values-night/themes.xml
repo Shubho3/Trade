@@ -6,6 +6,8 @@
         <item name="colorOnBackground">@color/white</item>
         <item name="colorPrimaryVariant">@color/color_primary_varient</item>
         <item name="colorPrimaryDark">@color/color_primary</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+
         <!--
                 <item name="android:windowTranslucentStatus">false</item>
                 <item name="android:navigationBarColor">@color/semi_transprant</item>
@@ -26,5 +28,11 @@
         <item name="android:textColor">@color/color_primary</item>
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+    <style name="MyTextView" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
     </style>
 </resources>

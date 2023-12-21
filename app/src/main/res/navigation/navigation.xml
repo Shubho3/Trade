@@ -102,9 +102,9 @@
     </fragment>
     <fragment
         android:id="@+id/getAQuoteFragment"
-        android:name="com.nr.nrsales.ui.fragments.home.GetAQuoteFragment"
-        android:label="GetAQuoteFragment"
-        tools:layout="@layout/fragment_get_a_quote"/>
+        android:name="com.nr.nrsales.ui.fragments.home.AddFundFragment"
+        android:label="AddFundFragment"
+        tools:layout="@layout/fragment_add_fund"/>
 
 
 
@@ -163,9 +163,9 @@
 
     <fragment
         android:id="@+id/invoiceFragment"
-        android:name="com.nr.nrsales.ui.fragments.home.InvoiceFragment"
+        android:name="com.nr.nrsales.ui.fragments.home.WithdrawalFragment"
         android:label="InvoiceFragment"
-        tools:layout="@layout/fragment_invoice">
+        tools:layout="@layout/fragment_withdrawal">
 
 
 
@@ -192,7 +192,7 @@
         android:id="@+id/orderListFragment"
         android:name="com.nr.nrsales.ui.fragments.home.OrderListFragment"
         android:label="OrderListFragment"
-        tools:layout="@layout/fragment_invoice">
+        tools:layout="@layout/fragment_withdrawal">
 
 
 

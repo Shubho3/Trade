@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="data"
+            type="com.nr.nrsales.model.AddFundRes.Result" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:visibility="visible"
+        android:id="@+id/tracking_card"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_margin="@dimen/_2sdp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_quote4"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:background="@color/green"
+                android:contentDescription="@string/app_name"
+                android:padding="12dp"
+                app:srcCompat="@drawable/baseline_add_shopping_cart" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_toRightOf="@id/image_quote4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:padding="@dimen/_1sdp"
+                    android:text='@{" ₹ "+data.amount_id}'
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:padding="@dimen/_3sdp"
+                    android:text='@{"ID :-  "+data.transation_id}'
+                    android:textColor="@color/color_primary"
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

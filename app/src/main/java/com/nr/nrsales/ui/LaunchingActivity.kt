@@ -7,7 +7,9 @@ import androidx.navigation.fragment.NavHostFragment
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.ActivityLaunchingBinding
 import com.nr.nrsales.utils.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LaunchingActivity : BaseActivity(R.layout.activity_launching) {
     private lateinit var mBinding: ActivityLaunchingBinding
     private lateinit var navController: NavController

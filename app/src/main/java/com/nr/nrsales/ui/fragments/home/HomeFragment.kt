@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
@@ -14,15 +15,58 @@ import com.github.mikephil.charting.data.CandleEntry
 import com.google.android.material.navigation.NavigationView
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.FragmentHomeBinding
+import com.nr.nrsales.ui.fragments.login_signup.LoginFragment
 import com.nr.nrsales.utils.BaseFragment
 import com.nr.nrsales.utils.GlobalUtility
+import com.nr.nrsales.utils.NetworkResult
 import com.nr.nrsales.utils.SharedPrf
 import com.nr.nrsales.viewmodel.LoginViewModel
+import com.nr.nrsales.viewmodel.ProfileViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment(R.layout.fragment_home), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var mBinding: FragmentHomeBinding
-    private val viewmodel by viewModels<LoginViewModel>()
+    private val viewmodel by viewModels<ProfileViewModel>()
+    private val sharedPrf: SharedPrf  by lazy { SharedPrf(requireActivity()) }
+
+    private fun getProfile() {
+        GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
+        val map: HashMap<String, Any> = HashMap()
+        map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
+        viewmodel.fetchUserDashboard(map)
+        viewmodel.userDashboardModel.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    GlobalUtility.hideProgressMessage()
+                    response.data?.let {
+                        if (it.status == "1") {
+                           mBinding.mailLayout.data = it.result[0]
+                            //   mBinding.aadharFront.load(it.result.aadhar_front) { crossfade(true) }
+                            //   mBinding.aadharBack.load(it.result.aadhar_back) { crossfade(true) }
+                            //    mBinding.panFront.load(it.result.pan_front) { crossfade(true) }
+                            //    mBinding.panBack.load(it.result.pan_back) { crossfade(true) }
+                        } else {
+
+
+                        }
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    GlobalUtility.hideProgressMessage()
+                    Log.e(LoginFragment.TAG, "fetchLoginResponse: " + response.message)
+
+                }
+
+                is NetworkResult.Loading -> {
+                    GlobalUtility.hideProgressMessage()
+                }
+            }
+        }
+
+    }
 
     override fun onBindTo(binding: ViewDataBinding?) {
         mBinding = binding as FragmentHomeBinding
@@ -98,6 +142,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), NavigationView.OnNavi
         candleStickChart.invalidate()
 
         init()
+        getProfile()
+
     }
 
     private fun init() {
@@ -142,7 +188,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), NavigationView.OnNavi
                 GlobalUtility.showToast("Logout Successfully", getBaseContext())
                 getSharedPrfData().setStoredTag(SharedPrf.LOGIN, "false")
                 findNavController(mBinding.root).navigate(R.id.action_homeFragment_to_splashFragment)
-
             }.setNegativeButton("no") { dialog, _ ->
                 dialog.cancel()
             }

@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.color.MaterialColors.getColor
 import com.nr.nrsales.R
-import com.nr.nrsales.databinding.FragmentInvoiceBinding
 import com.nr.nrsales.databinding.FragmentInvoiceDetailBinding
 import com.nr.nrsales.model.InvoiceModel
 import com.nr.nrsales.utils.BaseFragment
@@ -58,25 +57,6 @@ class InvoiceDetailsFragment : BaseFragment(R.layout.fragment_invoice_detail){
 
         }
     }
-
-
-
-
-
-
-
-
-
-    companion object {
-        val TAG = InvoiceFragment::class.qualifiedName
-        fun getInstance(bundle: Bundle): InvoiceFragment {
-            val fragment = InvoiceFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
-    }
-
-
 
 
 

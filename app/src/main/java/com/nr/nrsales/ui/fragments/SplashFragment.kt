@@ -30,15 +30,23 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         Handler(Looper.getMainLooper()).postDelayed({
             val window = requireActivity().window
             if (window != null) {
-                window.statusBarColor = requireActivity().getColor(R.color.color_primary)
+                window.statusBarColor = requireActivity().getColor(R.color.white)
                 WindowCompat.setDecorFitsSystemWindows(window, true)
-
             }
             if (sharedPref.getStoredTag(SharedPrf.LOGIN) == "true") {
                 Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_homeFragment)
+                val window = requireActivity().window
+                if (window != null) {
+                    window.statusBarColor = requireActivity().getColor(R.color.color_primary)
+                    WindowCompat.setDecorFitsSystemWindows(window, true)
+                }
             } else {
                  Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_LoginFragment)
-
+                val window = requireActivity().window
+                if (window != null) {
+                    window.statusBarColor = requireActivity().getColor(R.color.color_primary)
+                    WindowCompat.setDecorFitsSystemWindows(window, true)
+                }
             }
         }, 3000)
         super.onResume()

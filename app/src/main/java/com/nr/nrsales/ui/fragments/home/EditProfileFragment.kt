@@ -22,8 +22,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
-import com.google.gson.JsonObject
+import coil.load
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.FragmentEditProfileBinding
 import com.nr.nrsales.ui.LaunchingActivity
@@ -35,19 +34,10 @@ import com.nr.nrsales.utils.NetworkResult
 import com.nr.nrsales.utils.SharedPrf
 import com.nr.nrsales.utils.Validation
 import com.nr.nrsales.viewmodel.ProfileViewModel
-import com.nr.nrsales.viewmodel.RegisterViewModel
-import com.yayatotaxi.retrofit.ApiClient
-import com.yayatotaxi.retrofit.NRApiService
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.ResponseBody
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 import java.io.IOException
 
@@ -75,16 +65,19 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                 is NetworkResult.Success -> {
                     GlobalUtility.hideProgressMessage()
                     response.data?.let {
-                        if (it.status=="1"){
-                        }else{
-                            Toast.makeText(
-                                context,
-                                it.message.toString(),
-                                Toast.LENGTH_LONG
-                            ).show()
+                        if (it.status == "1") {
+                            mBinding.user = it.result
+                            //   mBinding.aadharFront.load(it.result.aadhar_front) { crossfade(true) }
+                            //   mBinding.aadharBack.load(it.result.aadhar_back) { crossfade(true) }
+                            //    mBinding.panFront.load(it.result.pan_front) { crossfade(true) }
+                            //    mBinding.panBack.load(it.result.pan_back) { crossfade(true) }
+                        } else {
 
-                        }}
+
+                        }
+                    }
                 }
+
                 is NetworkResult.Error -> {
                     GlobalUtility.hideProgressMessage()
                     Log.e(LoginFragment.TAG, "fetchLoginResponse: " + response.message)
@@ -98,7 +91,6 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
         }
 
     }
-
     override fun onBindTo(binding: ViewDataBinding?) {
         mBinding = binding as FragmentEditProfileBinding
         context = requireActivity()
@@ -106,8 +98,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
         init()
         if (Build.VERSION.SDK_INT >= 33) {
             list = listOf(
-                Manifest.permission.CAMERA,
-                Manifest.permission.READ_MEDIA_IMAGES
+                Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES
             )
         } else {
             list = listOf(
@@ -148,7 +139,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
             val bitmap = BitmapFactory.decodeFile(cameraPath, o2)
             aadhar_front = "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
             Log.e("ImagePath", "onActivityResult: $aadhar_front")
-            mBinding.aadharFront.setImageBitmap(bitmap)
+            mBinding.aadharFront.load(bitmap) { crossfade(true) }
         }
     }
     private var galleryResultLauncher2 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -168,7 +159,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                         }
                     }
                 } catch (e: IOException) {
-                    e.localizedMessage?.let { GlobalUtility.showToast(it,requireActivity()) }
+                    e.localizedMessage?.let { GlobalUtility.showToast(it, requireActivity()) }
                 }
             } else {
                 val selectedImage = data!!.data
@@ -225,7 +216,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
             mBinding.aadharBack.setImageBitmap(bitmap)
         }
     }
-    private var galleryResultLauncher3= registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var galleryResultLauncher3 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             if (Build.VERSION.SDK_INT >= 33) {
@@ -242,7 +233,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                         }
                     }
                 } catch (e: IOException) {
-                    e.localizedMessage?.let { GlobalUtility.showToast(it,requireActivity()) }
+                    e.localizedMessage?.let { GlobalUtility.showToast(it, requireActivity()) }
                 }
             } else {
                 val selectedImage = data!!.data
@@ -271,7 +262,6 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
             }
         }
     }
-
     private var cameraResultLauncher4 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
@@ -300,7 +290,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
             mBinding.panFront.setImageBitmap(bitmap)
         }
     }
-    private var galleryResultLauncher4= registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var galleryResultLauncher4 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             if (Build.VERSION.SDK_INT >= 33) {
@@ -317,7 +307,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                         }
                     }
                 } catch (e: IOException) {
-                    e.localizedMessage?.let { GlobalUtility.showToast(it,requireActivity()) }
+                    e.localizedMessage?.let { GlobalUtility.showToast(it, requireActivity()) }
                 }
             } else {
                 val selectedImage = data!!.data
@@ -340,7 +330,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                 val o2 = BitmapFactory.Options()
                 o2.inSampleSize = scale
                 val bitmap = BitmapFactory.decodeFile(ImagePath, o2)
-                pan_front= "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
+                pan_front = "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
                 Log.e("ImagePath", "onActivityResult: $pan_front")
                 mBinding.panFront.setImageBitmap(bitmap)
             }
@@ -374,7 +364,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
             mBinding.panBack.setImageBitmap(bitmap)
         }
     }
-    private var galleryResultLauncher45= registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var galleryResultLauncher45 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             if (Build.VERSION.SDK_INT >= 33) {
@@ -391,7 +381,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                         }
                     }
                 } catch (e: IOException) {
-                    e.localizedMessage?.let { GlobalUtility.showToast(it,requireActivity()) }
+                    e.localizedMessage?.let { GlobalUtility.showToast(it, requireActivity()) }
                 }
             } else {
                 val selectedImage = data!!.data
@@ -414,31 +404,27 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                 val o2 = BitmapFactory.Options()
                 o2.inSampleSize = scale
                 val bitmap = BitmapFactory.decodeFile(ImagePath, o2)
-                pan_back= "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
+                pan_back = "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
                 Log.e("ImagePath", "onActivityResult: $pan_back")
                 mBinding.panBack.setImageBitmap(bitmap)
             }
         }
     }
-
     private fun hasStoragePermission(context: Context): Boolean {
-        val storagePermission =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                Manifest.permission.READ_MEDIA_IMAGES
-            } else {
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            }
+        val storagePermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Manifest.permission.READ_MEDIA_IMAGES
+        } else {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        }
 
         return ContextCompat.checkSelfPermission(
-            context,
-            storagePermission
+            context, storagePermission
         ) == PackageManager.PERMISSION_GRANTED
     }
     private fun init() {
         mBinding.headerLay.tvLogo.text = "Profile"
         mBinding.headerLay.imgHeader.setOnClickListener { onBackPressed() }
-        mBinding.btnUpdate.setOnClickListener {
-        }
+        mBinding.btnUpdate.setOnClickListener {}
         mBinding.aadharFront.setOnClickListener {
             val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -461,11 +447,11 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                 dialog.dismiss()
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 if (ContextCompat.checkSelfPermission(
-                        requireActivity(),
-                        Manifest.permission.CAMERA
+                        requireActivity(), Manifest.permission.CAMERA
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    cameraResultLauncher2.launch(cameraIntent)}else{
+                    cameraResultLauncher2.launch(cameraIntent)
+                } else {
                     managePermissions.checkPermissions()
 
                 }
@@ -495,11 +481,11 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                 dialog.dismiss()
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 if (ContextCompat.checkSelfPermission(
-                        requireActivity(),
-                        Manifest.permission.CAMERA
+                        requireActivity(), Manifest.permission.CAMERA
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    cameraResultLauncher3.launch(cameraIntent)}else{
+                    cameraResultLauncher3.launch(cameraIntent)
+                } else {
                     managePermissions.checkPermissions()
 
                 }
@@ -529,11 +515,11 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                 dialog.dismiss()
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 if (ContextCompat.checkSelfPermission(
-                        requireActivity(),
-                        Manifest.permission.CAMERA
+                        requireActivity(), Manifest.permission.CAMERA
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    cameraResultLauncher45.launch(cameraIntent)}else{
+                    cameraResultLauncher45.launch(cameraIntent)
+                } else {
                     managePermissions.checkPermissions()
 
                 }
@@ -563,11 +549,11 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                 dialog.dismiss()
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 if (ContextCompat.checkSelfPermission(
-                        requireActivity(),
-                        Manifest.permission.CAMERA
+                        requireActivity(), Manifest.permission.CAMERA
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    cameraResultLauncher4.launch(cameraIntent)}else{
+                    cameraResultLauncher4.launch(cameraIntent)
+                } else {
                     managePermissions.checkPermissions()
 
                 }
@@ -581,6 +567,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
             requireActivity().finish()
         }
         mBinding.btnUpdate.setOnClickListener {
+            Log.e("TAG", "setOnClickListener: " + mBinding.edtName.text.toString())
             if (!Validation.getNormalValidCheck(mBinding.edtName)) {
                 return@setOnClickListener
             } else if (!Validation.getNormalValidCheck(mBinding.edtPhone)) {
@@ -589,20 +576,16 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                 return@setOnClickListener
             } else if (!Validation.getNormalValidCheck(mBinding.edtPass)) {
                 return@setOnClickListener
-            } else if (!Validation.getNormalValidCheck(mBinding.edtPass2)) {
-                return@setOnClickListener
             } else {
                 GlobalUtility.showProgressMessage(requireActivity(), "Uploading Data...")
                 val bodyx: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
-                bodyx.addFormDataPart("user_name", mBinding.edtName.text.toString())
-                    .addPart(MultipartBody.Part.createFormData("aadhar_front", "aadhar_front", RequestBody.create("image/*".toMediaTypeOrNull(), File(aadhar_front))))
-                    .addPart(MultipartBody.Part.createFormData("aadhar_back", "aadhar_back", RequestBody.create("image/*".toMediaTypeOrNull(), File(aadhar_back))))
-                    .addPart(MultipartBody.Part.createFormData("pan_front", "pan_front", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_front))))
-                    .addPart(MultipartBody.Part.createFormData("pan_back", "pan_back", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_back))))
-                    .addFormDataPart("mobile",  mBinding.edtPhone.text.toString())
-                    .addFormDataPart("email", mBinding.edtEmail.text.toString())
-                    .addFormDataPart("password", mBinding.edtPass.text.toString())
-                    .build()
+                bodyx.addFormDataPart("user_name", mBinding.edtName.text.toString()).addFormDataPart("user_id", sharedPrf.getStoredTag(SharedPrf.USER_ID))
+                    .addFormDataPart("mobile", mBinding.edtPhone.text.toString())
+                    .addFormDataPart("email", mBinding.edtEmail.text.toString()).addFormDataPart("password", mBinding.edtPass.text.toString()).build()
+                if (aadhar_front != "") bodyx.addPart(MultipartBody.Part.createFormData("aadhar_front", "aadhar_front.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(aadhar_front))))
+                if (aadhar_back != "") bodyx.addPart(MultipartBody.Part.createFormData("aadhar_back", "aadhar_back.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(aadhar_back))))
+                if (pan_front != "") bodyx.addPart(MultipartBody.Part.createFormData("pan_front", "pan_front.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_front))))
+                if (pan_back != "") bodyx.addPart(MultipartBody.Part.createFormData("pan_back", "pan_back.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_back))))
                 viewmodel.fetchupdateUserResponse(bodyx.build())
             }
             viewmodel.updateUser.observe(this) { response ->
@@ -611,23 +594,15 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
                         GlobalUtility.hideProgressMessage()
                         response.data?.let {
                             Toast.makeText(context, "User Updated Successfully", Toast.LENGTH_SHORT).show()
-                            sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
-                            sharedPrf.setStoredTag(SharedPrf.USER_ID, it.result.id)
-                            sharedPrf.setUser(it.result)
-                            Log.e(LoginFragment.TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
-                            // GlobalUtility.showSuccessMessage(requireActivity(),sharedPrf.getStoredTag(SharedPrf.USER_ID).toString(),"msgggg")
-                            //Navigation.findNavController(mBinding.root).navigate(R.id.action_registerFragment_to_homeFragment)
+                            getProfile()
                         }
                     }
 
                     is NetworkResult.Error -> {
                         GlobalUtility.hideProgressMessage()
                         Log.e(LoginFragment.TAG, "fetchLoginResponse: " + response.message)
-                        Toast.makeText(
-                            context,
-                            "User Not Found",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        getProfile()
+
                     }
 
                     is NetworkResult.Loading -> {
@@ -643,7 +618,5 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
         }
 
 
-
     }
-
 }

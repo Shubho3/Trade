@@ -4,11 +4,15 @@ class Constants {
 
     companion object {
         const val BASE_URL = "https://hippoejen.com/unlock/Webservice/"
-        const val BASE_URL2 = "https://hippoejen.com/unlock/Webservice/"
         const val LOGIN_URL = "login"
         const val REGISTER_URL = "signup"
         const val get_profile = "get_profile"
         const val update_profile = "update_profile"
+        const val add_funds = "add_funds"
+        const val add_funds_list = "add_funds_list"
+        const val out_funds = "out_funds"
+        const val out_funds_list = "out_funds_list"
+        const val user_dashboard = "user_dashboard"
         const val GET_CUSTOMER_PROFILE_URL = "api/customers/"
         const val UPDATE_CUSTOMER_PROFILE_URL = "api/customer/post"
         const val GET_INVOICES_LIST_URL = "api/invoices/"

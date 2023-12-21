@@ -30,52 +30,9 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         context = requireActivity()
         sharedPrf = SharedPrf(requireContext())
         init()
-        getProfile()
-    }
-
-    private fun getProfile() {
-        GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
-        val map: HashMap<String, Any> = HashMap()
-        map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
-        viewmodel.fetchLoginResponse(map)
-        viewmodel.response.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    GlobalUtility.hideProgressMessage()
-                    response.data?.let {
-                        if (it.status=="1"){
-                            Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT).show()
-                            sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
-                            sharedPrf.setStoredTag(SharedPrf.USER_ID, it.result.id)
-                            sharedPrf.setUser(it.result)
-                            Log.e(TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
-                            findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment)
-                        }else{
-                            Toast.makeText(
-                                context,
-                                it.message.toString(),
-                                Toast.LENGTH_LONG
-                            ).show()
-
-                        }}
-                }
-                is NetworkResult.Error -> {
-                    GlobalUtility.hideProgressMessage()
-                    Log.e(TAG, "fetchLoginResponse: " + response.message)
-                    Toast.makeText(
-                        context,
-                        "User Not Found",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
-                is NetworkResult.Loading -> {
-                    GlobalUtility.hideProgressMessage()
-                }
-            }
-        }
 
     }
+
 
     private fun init() {
         mBinding.signUpBtn.setOnClickListener {
@@ -118,6 +75,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                                     sharedPrf.setUser(it.result)
                                     Log.e(TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
                                     findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment)
+                                        viewmodel.response.removeObservers(viewLifecycleOwner)
                                 }else{
                                         Toast.makeText(
                                             context,
@@ -132,9 +90,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                                 Log.e(TAG, "fetchLoginResponse: " + response.message)
                                 Toast.makeText(
                                     context,
-                                    "User Not Found",
+                                    "Your have entered wrong email & password",
                                     Toast.LENGTH_LONG
                                 ).show()
+                                viewmodel.response.removeObservers(viewLifecycleOwner)
+
                             }
 
                             is NetworkResult.Loading -> {
