@@ -111,7 +111,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private fun fetchLoginResponse(email: String, pass: String) {
         val map: HashMap<String, Any> = HashMap()
-        map["username"] = email
+        map["email"] = email
         map["password"] = pass
         viewmodel.fetchLoginResponse(map)
     }
