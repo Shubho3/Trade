@@ -46,6 +46,7 @@ class SharedPrf @Inject constructor(@ApplicationContext context: Context) {
     companion object {
         const val LOGIN: String = "login"
         const val USER_ID: String = "user_id"
+        const val USER_TYPE: String = "user_type"
     }
 
 }

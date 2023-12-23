@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             //
             // onClick(mBinding.btnSubmit)
             val email = mBinding.edtEmail.text.toString()
-            val pass =  mBinding.edtPass.text.toString()
+            val pass = mBinding.edtPass.text.toString()
             if (email.isEmpty()) {
                 mBinding.edtEmail.text = (null)
                 GlobalUtility.showToast(getString(R.string.invalid_email), context)
@@ -68,23 +68,32 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                             is NetworkResult.Success -> {
                                 GlobalUtility.hideProgressMessage()
                                 response.data?.let {
-                                    if (it.status=="1"){
-                                    Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT).show()
-                                    sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
-                                    sharedPrf.setStoredTag(SharedPrf.USER_ID, it.result.id)
-                                    sharedPrf.setUser(it.result)
-                                    Log.e(TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
-                                    findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment)
-                                        viewmodel.response.removeObservers(viewLifecycleOwner)
-                                }else{
+                                    if (it.status == "1") {
+                                        Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT).show()
+                                        sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
+                                        sharedPrf.setStoredTag(SharedPrf.USER_ID, it.result.id)
+                                        sharedPrf.setStoredTag(SharedPrf.USER_TYPE, it.result.type)
+                                        sharedPrf.setUser(it.result)
+                                        Log.e(TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
+                                        if (it.result.type == "ADMIN") {
+                                            findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_adminHomeFragment)
+                                            viewmodel.response.removeObservers(viewLifecycleOwner)
+
+                                        } else {
+                                            findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment)
+                                            viewmodel.response.removeObservers(viewLifecycleOwner)
+                                        }
+                                    } else {
                                         Toast.makeText(
                                             context,
                                             it.message.toString(),
                                             Toast.LENGTH_LONG
                                         ).show()
 
-                                }}
+                                    }
+                                }
                             }
+
                             is NetworkResult.Error -> {
                                 GlobalUtility.hideProgressMessage()
                                 Log.e(TAG, "fetchLoginResponse: " + response.message)

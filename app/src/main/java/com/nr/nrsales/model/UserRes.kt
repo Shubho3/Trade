@@ -5,6 +5,7 @@ data class BasicRes(
     val result: String,
     val status: String
 )
+
 data class UserRes(
     val message: String,
     val result: User,
