@@ -34,7 +34,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), NavigationView.OnNavi
     private fun getProfile() {
         GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
         val map: HashMap<String, Any> = HashMap()
-        map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
+      //  map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
+        map["user_id"] ="7"
         viewmodel.fetchUserDashboard(map)
         viewmodel.userDashboardModel.observe(viewLifecycleOwner) { response ->
             when (response) {
