@@ -68,20 +68,17 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                             is NetworkResult.Success -> {
                                 GlobalUtility.hideProgressMessage()
                                 response.data?.let {
-                                    if (it.status == "1") {
+                                    if (it.status=="1") {
                                         Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT).show()
                                         sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
                                         sharedPrf.setStoredTag(SharedPrf.USER_ID, it.result.id)
                                         sharedPrf.setStoredTag(SharedPrf.USER_TYPE, it.result.type)
                                         sharedPrf.setUser(it.result)
                                         Log.e(TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
-                                        if (it.result.type == "ADMIN") {
-                                            findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_adminHomeFragment)
-                                            viewmodel.response.removeObservers(viewLifecycleOwner)
-
+                                        if (it.result.type == "PROVIDER") {
+                                            Navigation.findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_adminHomeFragment)
                                         } else {
-                                            findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment)
-                                            viewmodel.response.removeObservers(viewLifecycleOwner)
+                                            Navigation.findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment2)
                                         }
                                     } else {
                                         Toast.makeText(
@@ -93,7 +90,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                                     }
                                 }
                             }
-
                             is NetworkResult.Error -> {
                                 GlobalUtility.hideProgressMessage()
                                 Log.e(TAG, "fetchLoginResponse: " + response.message)
@@ -103,11 +99,20 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                                     Toast.LENGTH_LONG
                                 ).show()
                                 viewmodel.response.removeObservers(viewLifecycleOwner)
-
                             }
-
                             is NetworkResult.Loading -> {
                                 GlobalUtility.hideProgressMessage()
+                            }
+                            else ->{
+                                GlobalUtility.hideProgressMessage()
+                                Log.e(TAG, "fetchLoginResponse: " + response.message)
+                                Toast.makeText(
+                                    context,
+                                    "Your have entered wrong email & password",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                viewmodel.response.removeObservers(viewLifecycleOwner)
+
                             }
                         }
                     }

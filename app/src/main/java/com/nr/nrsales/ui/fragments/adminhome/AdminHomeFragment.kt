@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.util.Log
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.FragmentAdminHomeBinding
@@ -22,7 +23,7 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
     private val viewmodel by viewModels<ProfileViewModel>()
     private val sharedPrf: SharedPrf by lazy { SharedPrf(requireActivity()) }
     private fun getProfile() {
-        GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
+        //GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
         val map: HashMap<String, Any> = HashMap()
         map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
         viewmodel.fetchUserDashboard(map)
@@ -67,6 +68,21 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
 
     private fun init() {
         mBinding.exit.setOnClickListener { logout() }
+        mBinding.menu.setOnClickListener {
+            findNavController(mBinding.root).navigate(R.id.action_adminHomeFragment_to_notificationListFragment)
+        }
+        mBinding.userCard.setOnClickListener {
+            findNavController(mBinding.root).navigate(R.id.action_adminHomeFragment_to_usersListFragment)
+        }
+        mBinding.addFundCard.setOnClickListener {
+            findNavController(mBinding.root).navigate(R.id.action_adminHomeFragment_to_requestFundListFragment)
+        }
+        mBinding.withdrawalCard.setOnClickListener {
+            findNavController(mBinding.root).navigate(R.id.action_adminHomeFragment_to_withdrawalRequestFragment)
+        }
+        mBinding.settingsCard.setOnClickListener {
+            findNavController(mBinding.root).navigate(R.id.action_adminHomeFragment_to_requestFundListFragment)
+        }
 
     }
 

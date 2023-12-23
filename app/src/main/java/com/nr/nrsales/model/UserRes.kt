@@ -5,7 +5,11 @@ data class BasicRes(
     val result: String,
     val status: String
 )
-
+data class UserListRes(
+    val message: String,
+    val result: ArrayList<User>,
+    val status: String
+)
 data class UserRes(
     val message: String,
     val result: User,

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     kotlin("kapt")
+    id("com.google.gms.google-services")
 
 }
 
@@ -91,9 +92,16 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("com.github.PhilJay:MPAndroidChart-Realm:v3.0.3@aar")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     // pdf viewer
    // implementation("com.github.barteksc:android-pdf-viewer:2.8.2")
+    //  Firebase  library
+    implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
+  //  implementation("com.google.firebase:firebase-core-ktx:22.1.0")
+    implementation("com.google.firebase:firebase-messaging-ktx:23.3.0")
 
+    //work manager
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
 
 
 

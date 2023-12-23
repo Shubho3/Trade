@@ -1,9 +1,13 @@
 package com.nr.nrsales.ui.fragments.home
 
 import android.app.AlertDialog
+import android.content.ClipData
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
+import android.os.Build
 import android.os.Bundle
+import android.text.ClipboardManager
 import android.util.Log
 import android.view.MenuItem
 import androidx.databinding.ViewDataBinding
@@ -20,7 +24,6 @@ import com.nr.nrsales.utils.BaseFragment
 import com.nr.nrsales.utils.GlobalUtility
 import com.nr.nrsales.utils.NetworkResult
 import com.nr.nrsales.utils.SharedPrf
-import com.nr.nrsales.viewmodel.LoginViewModel
 import com.nr.nrsales.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,8 +37,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), NavigationView.OnNavi
     private fun getProfile() {
         GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
         val map: HashMap<String, Any> = HashMap()
-      //  map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
-        map["user_id"] ="7"
+        map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
         viewmodel.fetchUserDashboard(map)
         viewmodel.userDashboardModel.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -68,83 +70,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), NavigationView.OnNavi
         }
 
     }
-
+    private fun setClipboard(context: Context, text: String) {
+        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE)
+                as android.content.ClipboardManager
+        val clip = ClipData.newPlainText("Copied Text", text)
+        clipboard.setPrimaryClip(clip)
+        GlobalUtility.showToast("Copied")
+    }
     override fun onBindTo(binding: ViewDataBinding?) {
         mBinding = binding as FragmentHomeBinding
         mBinding.navView.setNavigationItemSelectedListener(this);
-
-        val candleStickChart = mBinding.mailLayout.candleStickChart
-        candleStickChart.isHighlightPerDragEnabled = true
-
-        candleStickChart.setDrawBorders(true)
-
-        context?.let { candleStickChart.setBorderColor(it.getColor(com.nr.nrsales.R.color.color_primary)) }
-
-        val yAxis = candleStickChart.axisLeft
-        val rightAxis = candleStickChart.axisRight
-        yAxis.setDrawGridLines(false)
-        rightAxis.setDrawGridLines(false)
-        candleStickChart.requestDisallowInterceptTouchEvent(true)
-
-        val xAxis = candleStickChart.xAxis
-
-        xAxis.setDrawGridLines(false) // disable x axis grid lines
-
-        xAxis.setDrawLabels(false)
-        rightAxis.textColor = Color.WHITE
-        yAxis.setDrawLabels(false)
-        xAxis.granularity = 1f
-        xAxis.isGranularityEnabled = true
-        xAxis.setAvoidFirstLastClipping(true)
-
-        val l = candleStickChart.legend
-        l.isEnabled = false
-        val yValsCandleStick = ArrayList<CandleEntry>()
-        yValsCandleStick.add(CandleEntry(0f, 225.0.toFloat(), 219.84.toFloat(), 224.94.toFloat(), 221.07.toFloat()))
-        yValsCandleStick.add(CandleEntry(1f, 228.35.toFloat(), 222.57.toFloat(), 223.52.toFloat(), 226.41.toFloat()))
-        yValsCandleStick.add(CandleEntry(2f, 226.84.toFloat(), 222.52.toFloat(), 225.75.toFloat(), 223.84.toFloat()))
-        yValsCandleStick.add(CandleEntry(3f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(4f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(0f, 225.0.toFloat(), 219.84.toFloat(), 224.94.toFloat(), 221.07.toFloat()))
-        yValsCandleStick.add(CandleEntry(1f, 228.35.toFloat(), 222.57.toFloat(), 223.52.toFloat(), 226.41.toFloat()))
-        yValsCandleStick.add(CandleEntry(2f, 226.84.toFloat(), 222.52.toFloat(), 225.75.toFloat(), 223.84.toFloat()))
-        yValsCandleStick.add(CandleEntry(3f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(4f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(0f, 225.0.toFloat(), 219.84.toFloat(), 224.94.toFloat(), 221.07.toFloat()))
-        yValsCandleStick.add(CandleEntry(1f, 228.35.toFloat(), 222.57.toFloat(), 223.52.toFloat(), 226.41.toFloat()))
-        yValsCandleStick.add(CandleEntry(2f, 226.84.toFloat(), 222.52.toFloat(), 225.75.toFloat(), 223.84.toFloat()))
-        yValsCandleStick.add(CandleEntry(3f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
-        yValsCandleStick.add(CandleEntry(4f, 232.95.toFloat(), 217.27.toFloat(), 222.15.toFloat(), 217.88.toFloat()))
-        val set1 = CandleDataSet(yValsCandleStick, "DataSet 1")
-        set1.color = Color.rgb(80, 80, 80)
-        set1.shadowColor = resources.getColor(R.color.color_primary)
-        set1.shadowWidth = 0.2f
-        set1.decreasingColor = resources.getColor(R.color.color_red)
-        set1.decreasingPaintStyle = Paint.Style.FILL
-        set1.increasingColor = resources.getColor(R.color.color_blue)
-        set1.increasingColor = resources.getColor(R.color.color_blue)
-        set1.increasingPaintStyle = Paint.Style.FILL
-        set1.neutralColor = Color.LTGRAY
-        set1.setDrawValues(false)
-
-
-// create a data object with the datasets
-
-
-// create a data object with the datasets
-        val data = CandleData(set1)
-
-
-// set data
-
-
-// set data
-        candleStickChart.data = data
-        candleStickChart.invalidate()
-
         init()
         getProfile()
-
     }
 
     private fun init() {
@@ -155,6 +92,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), NavigationView.OnNavi
         mBinding.mailLayout.addBtn.setOnClickListener {
             findNavController(it).navigate(R.id.action_homeFragment_to_getAQuoteFragment)
         }
+        mBinding.mailLayout.acNo.setOnClickListener {
+            setClipboard(requireActivity(), mBinding.mailLayout.acNo.text.toString())
+        }
+        mBinding.mailLayout.ifsc.setOnClickListener {
+            setClipboard(requireActivity(), mBinding.mailLayout.ifsc.text.toString())
+        }
+
 
     }
 

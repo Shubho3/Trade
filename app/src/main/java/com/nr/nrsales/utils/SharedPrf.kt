@@ -47,6 +47,7 @@ class SharedPrf @Inject constructor(@ApplicationContext context: Context) {
         const val LOGIN: String = "login"
         const val USER_ID: String = "user_id"
         const val USER_TYPE: String = "user_type"
+        const val FIREBASE_TOKEN: String = "firebase_token"
     }
 
 }

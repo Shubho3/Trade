@@ -16,6 +16,9 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
     suspend fun user_dashboard(Map: HashMap<String, Any>) = apiService.user_dashboard(Map)
     suspend fun getFund(Map: HashMap<String, Any>) = apiService.getFund(Map)
     suspend fun out_funds_list(Map: HashMap<String, Any>) = apiService.out_funds_list(Map)
+    suspend fun get_all_user(Map: HashMap<String, Any>) = apiService.get_all_user(Map)
+    suspend fun get_add_funds_list_admin(Map: HashMap<String, Any>) = apiService.get_add_funds_list_admin(Map)
+    suspend fun get_out_funds_list_admin(Map: HashMap<String, Any>) = apiService.get_out_funds_list_admin(Map)
 
     suspend fun downloadPDF(params: HashMap<String, Any>) = apiService.downloadFile("867bb48f-ade8-4688-954b-12668ea07977", params)
 

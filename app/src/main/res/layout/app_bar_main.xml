@@ -128,14 +128,6 @@
                         </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
-                    <com.github.mikephil.charting.charts.CandleStickChart
-                        android:id="@+id/candle_stick_chart"
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_200sdp"
-                        android:layout_marginRight="4dp"
-                        android:layout_marginEnd="4dp"
-                        />
                     <androidx.cardview.widget.CardView
                         android:visibility="visible"
                         android:id="@+id/tracking_card"
@@ -451,18 +443,22 @@
                                     android:layout_height="wrap_content"
                                     android:background="@null"
                                     android:padding="@dimen/_5sdp"
-                                    android:text=" Account No. "
+                                    android:text=" Account No.:-   Axis Bank "
                                     android:textColor="@color/texts"
                                     android:textSize="@dimen/_14sdp"
                                     android:textStyle="normal" />
 
                                 <TextView
+                                    android:id="@+id/ac_no"
+                                    android:drawableTint="@color/texts"
+                                    android:drawableRight="@drawable/baseline_content_copy"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@null"
                                     android:textAlignment="center"
-                                    android:padding="@dimen/_5sdp"
-                                    android:text="234567897867"
+                                    android:padding="@dimen/_8sdp"
+                                    android:drawablePadding="@dimen/_5sdp"
+                                    android:text="923020006899110"
                                     android:textStyle="bold"
                                     android:textColor="@color/texts"
                                     android:textColorHint="@color/color_edit_hint"
@@ -482,24 +478,27 @@
                                 android:orientation="vertical">
 
                                 <TextView
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@null"
                                     android:padding="@dimen/_5sdp"
-                                    android:text=" IFSC Code. "
+                                    android:text=" IFSC Code. :-Branch Dewas M. P."
                                     android:textColor="@color/texts"
                                     android:textSize="@dimen/_14sdp"
                                     android:textStyle="normal" />
 
                                 <TextView
+                                     android:id="@+id/ifsc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@null"
                                     android:textAlignment="center"
                                     android:padding="@dimen/_5sdp"
-                                    android:text="SFNFJ3567"
+                                    android:text="UTIB0000456"
                                     android:textStyle="bold"
-
+                                    android:drawableTint="@color/texts"
+                                    android:drawableRight="@drawable/baseline_content_copy"
                                     android:textColor="@color/texts"
                                     android:textColorHint="@color/color_edit_hint"
                                     android:textSize="@dimen/_12sdp" />

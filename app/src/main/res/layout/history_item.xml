@@ -11,9 +11,8 @@
         android:id="@+id/tracking_card"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_70sdp"
-        android:layout_margin="@dimen/_2sdp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_7sdp"
         app:cardElevation="@dimen/_2sdp"
         app:cardUseCompatPadding="true">
 
@@ -56,7 +55,7 @@
                     android:background="@null"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="@dimen/_3sdp"
-                    android:text='@{"ID :-  "+data.transation_id}'
+                    android:text='@{"Tr. ID :-  "+data.transation_id}'
                     android:textColor="@color/color_primary"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />

@@ -29,7 +29,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                 WindowCompat.setDecorFitsSystemWindows(window, true)
             }
             if (sharedPref.getStoredTag(SharedPrf.LOGIN) == "true") {
-                if (sharedPref.getStoredTag(SharedPrf.USER_TYPE) == "ADMIN") {
+                if (sharedPref.getStoredTag(SharedPrf.USER_TYPE) == "PROVIDER") {
                     Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_adminHomeFragment)
                 } else {
                     Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_homeFragment)

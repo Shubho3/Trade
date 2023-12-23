@@ -13,16 +13,8 @@ class Constants {
         const val out_funds = "out_funds"
         const val out_funds_list = "get_out_funds_list"
         const val user_dashboard = "user_dashboard"
-        const val GET_CUSTOMER_PROFILE_URL = "api/customers/"
-        const val UPDATE_CUSTOMER_PROFILE_URL = "api/customer/post"
-        const val GET_INVOICES_LIST_URL = "api/invoices/"
-        const val GET_INVOICE_ORDER_URL = "api/invoices"
-        const val GET_ORDER_LIST_URL = "api/orders"
-        const val GET_ORDER_URL = "api/orders/"
-
-
-
-
-
+        const val get_all_user = "get_all_user"
+        const val get_add_funds_list_admin = "get_add_funds_list_admin"
+        const val get_out_funds_list_admin = "get_out_funds_list_admin"
     }
 }

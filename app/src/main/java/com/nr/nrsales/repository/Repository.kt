@@ -5,8 +5,10 @@ import com.nr.nrsales.model.AddFundRes
 import com.nr.nrsales.model.BaseApiResponse
 import com.nr.nrsales.model.BasicRes
 import com.nr.nrsales.model.OutFundRes
+import com.nr.nrsales.model.OutFundResAdmin
 import com.nr.nrsales.model.RegisterResModel
 import com.nr.nrsales.model.UserDashboardModel
+import com.nr.nrsales.model.UserListRes
 import com.nr.nrsales.model.UserRes
 import com.nr.nrsales.utils.NetworkResult
 import dagger.hilt.android.scopes.ActivityRetainedScoped
@@ -69,11 +71,25 @@ class Repository @Inject constructor(
         return flow {
             emit(safeApiCall { remoteDataSource.out_funds_list(Map) })
         }.flowOn(Dispatchers.IO)
+    }   suspend fun get_out_funds_list_admin(Map: HashMap<String, Any>): Flow<NetworkResult<OutFundResAdmin>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.get_out_funds_list_admin(Map) })
+        }.flowOn(Dispatchers.IO)
     }
 
     suspend fun user_dashboard(Map: HashMap<String, Any>): Flow<NetworkResult<UserDashboardModel>> {
         return flow {
             emit(safeApiCall { remoteDataSource.user_dashboard(Map) })
+        }.flowOn(Dispatchers.IO)
+    }
+    suspend fun get_all_user(Map: HashMap<String, Any>): Flow<NetworkResult<UserListRes>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.get_all_user(Map) })
+        }.flowOn(Dispatchers.IO)
+    }
+    suspend fun get_add_funds_list_admin(Map: HashMap<String, Any>): Flow<NetworkResult<AddFundRes>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.get_add_funds_list_admin(Map) })
         }.flowOn(Dispatchers.IO)
     }
 }

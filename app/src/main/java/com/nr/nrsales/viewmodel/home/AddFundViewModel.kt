@@ -36,6 +36,12 @@ class AddFundViewModel
             _listResponse.value = values
         }
     }
+    fun fetchget_add_funds_list_admin(params: HashMap<String, Any>) = viewModelScope.launch {
+        repository.get_add_funds_list_admin(params).collect { values ->
+            Log.e("TAG", "fetchGetUserResponse: $values")
+            _listResponse.value = values
+        }
+    }
 
 
 }

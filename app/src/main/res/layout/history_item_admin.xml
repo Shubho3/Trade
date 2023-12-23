@@ -4,7 +4,7 @@
     <data>
         <variable
             name="data"
-            type="com.nr.nrsales.model.OutFundRes.Result" />
+            type="com.nr.nrsales.model.AddFundRes.Result" />
     </data>
     <androidx.cardview.widget.CardView
         android:visibility="visible"
@@ -25,10 +25,9 @@
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_70sdp"
                 android:layout_marginEnd="@dimen/_2sdp"
-                android:background="@color/red"
                 android:contentDescription="@string/app_name"
                 android:padding="12dp"
-                app:srcCompat="@drawable/baseline_account_balance" />
+                app:imageUrl="@{ data.payment_receipt }" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +43,7 @@
                     android:background="@null"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="@dimen/_1sdp"
-                    android:text='@{" ₹ "+data.amount}'
+                    android:text='@{" ₹ "+data.amount_id}'
                     android:textColor="@color/green"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
@@ -55,7 +54,7 @@
                     android:background="@null"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="@dimen/_3sdp"
-                    android:text='@{"Date :-  "+data.date_time}'
+                    android:text='@{"Tr. ID :-  "+data.transation_id}'
                     android:textColor="@color/color_primary"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />

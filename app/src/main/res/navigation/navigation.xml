@@ -37,7 +37,7 @@
             android:id="@+id/action_LoginFragment_to_signupFragment"
             app:destination="@id/registerFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
+            android:id="@+id/action_loginFragment_to_homeFragment2"
             app:destination="@id/homeFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation" />
@@ -130,7 +130,41 @@
             app:destination="@id/splashFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_requestFundListFragment"
+            app:destination="@id/requestFundListFragment" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_withdrawalRequestFragment"
+            app:destination="@id/withdrawalRequestFragment" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_usersListFragment"
+            app:destination="@id/usersListFragment" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_notificationListFragment"
+            app:destination="@id/notificationListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/requestFundListFragment"
+        android:name="com.nr.nrsales.ui.fragments.adminhome.RequestFundListFragment"
+        android:label="RequestFundListFragment"
+        tools:layout="@layout/fragment_request_fund_list"/>
+
+    <fragment
+        android:id="@+id/withdrawalRequestFragment"
+        android:name="com.nr.nrsales.ui.fragments.adminhome.WithdrawalRequestFragment"
+        android:label="WithdrawalRequestFragment"
+        tools:layout="@layout/fragment_withdrawal_requests"/>
+    <fragment
+        android:id="@+id/usersListFragment"
+        android:name="com.nr.nrsales.ui.fragments.adminhome.UsersListFragment"
+        android:label="UsersListFragment"
+        tools:layout="@layout/fragment_users_list"/>
+    <fragment
+        android:id="@+id/notificationListFragment"
+        android:name="com.nr.nrsales.ui.fragments.adminhome.NotificationListFragment"
+        android:label="NotificationListFragment"
+        tools:layout="@layout/fragment_notification_list"/>
+
 
 
 </navigation>
