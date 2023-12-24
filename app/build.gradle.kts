@@ -12,7 +12,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.nr.nrsales"
+        applicationId = "com.investor"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -110,4 +110,3 @@ dependencies {
 kapt {
     correctErrorTypes = true
 }
-

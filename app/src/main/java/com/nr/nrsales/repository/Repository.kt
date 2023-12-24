@@ -4,6 +4,7 @@ import com.nr.nrsales.apis.RemoteDataSource
 import com.nr.nrsales.model.AddFundRes
 import com.nr.nrsales.model.BaseApiResponse
 import com.nr.nrsales.model.BasicRes
+import com.nr.nrsales.model.NotificationRes
 import com.nr.nrsales.model.OutFundRes
 import com.nr.nrsales.model.OutFundResAdmin
 import com.nr.nrsales.model.RegisterResModel
@@ -71,7 +72,9 @@ class Repository @Inject constructor(
         return flow {
             emit(safeApiCall { remoteDataSource.out_funds_list(Map) })
         }.flowOn(Dispatchers.IO)
-    }   suspend fun get_out_funds_list_admin(Map: HashMap<String, Any>): Flow<NetworkResult<OutFundResAdmin>> {
+    }
+
+    suspend fun get_out_funds_list_admin(Map: HashMap<String, Any>): Flow<NetworkResult<OutFundResAdmin>> {
         return flow {
             emit(safeApiCall { remoteDataSource.get_out_funds_list_admin(Map) })
         }.flowOn(Dispatchers.IO)
@@ -82,15 +85,31 @@ class Repository @Inject constructor(
             emit(safeApiCall { remoteDataSource.user_dashboard(Map) })
         }.flowOn(Dispatchers.IO)
     }
+
     suspend fun get_all_user(Map: HashMap<String, Any>): Flow<NetworkResult<UserListRes>> {
         return flow {
             emit(safeApiCall { remoteDataSource.get_all_user(Map) })
         }.flowOn(Dispatchers.IO)
     }
+
     suspend fun get_add_funds_list_admin(Map: HashMap<String, Any>): Flow<NetworkResult<AddFundRes>> {
         return flow {
             emit(safeApiCall { remoteDataSource.get_add_funds_list_admin(Map) })
         }.flowOn(Dispatchers.IO)
     }
+    suspend fun out_funt_accept_reject(Map: HashMap<String, Any>): Flow<NetworkResult<BasicRes>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.out_funt_accept_reject(Map) })
+        }.flowOn(Dispatchers.IO)
+    }
+    suspend fun add_fund_accept_reject(Map: HashMap<String, Any>): Flow<NetworkResult<BasicRes>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.add_fund_accept_reject(Map) })
+        }.flowOn(Dispatchers.IO)
+    }
+    suspend fun get_notification(Map: HashMap<String, Any>): Flow<NetworkResult<NotificationRes>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.get_notification(Map) })
+        }.flowOn(Dispatchers.IO)
+    }
 }
-

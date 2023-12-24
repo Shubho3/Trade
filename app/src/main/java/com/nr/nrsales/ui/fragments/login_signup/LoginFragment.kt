@@ -12,6 +12,7 @@ import androidx.navigation.Navigation.findNavController
 import com.nr.nrsales.MainApplication
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.FragmentLoginBinding
+import com.nr.nrsales.pushnotification.MyFirebaseMessagingService.Companion.getFirebaseToken
 import com.nr.nrsales.utils.BaseFragment
 import com.nr.nrsales.utils.GlobalUtility
 import com.nr.nrsales.utils.NetworkResult
@@ -35,6 +36,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
 
     private fun init() {
+        getFirebaseToken(requireActivity())
         mBinding.signUpBtn.setOnClickListener {
             Navigation.findNavController(mBinding.root)
                 .navigate(R.id.action_LoginFragment_to_signupFragment)
@@ -61,24 +63,41 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 if (!MainApplication.hasInternetConnection(requireContext())) {
                     GlobalUtility.showNoNetworkMessage(requireActivity())
                 } else {
-                    GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
-                    fetchLoginResponse(email, pass)
+                    GlobalUtility.showProgressMessage(
+                        requireActivity(),
+                        requireActivity().getString(R.string.loading)
+                    )
+                    val map: HashMap<String, Any> = HashMap()
+                    map["email"] = email
+                    map["password"] = pass
+                    map["register_id"] = sharedPrf.getStoredTag(SharedPrf.FIREBASE_TOKEN)
+                    viewmodel.fetchLoginResponse(map)
+
                     viewmodel.response.observe(viewLifecycleOwner) { response ->
                         when (response) {
                             is NetworkResult.Success -> {
                                 GlobalUtility.hideProgressMessage()
                                 response.data?.let {
-                                    if (it.status=="1") {
-                                        Toast.makeText(context, "Login Successfully", Toast.LENGTH_SHORT).show()
+                                    if (it.status == "1") {
+                                        Toast.makeText(
+                                            context,
+                                            "Login Successfully",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                         sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
                                         sharedPrf.setStoredTag(SharedPrf.USER_ID, it.result.id)
                                         sharedPrf.setStoredTag(SharedPrf.USER_TYPE, it.result.type)
                                         sharedPrf.setUser(it.result)
-                                        Log.e(TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
+                                        Log.e(
+                                            TAG,
+                                            "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID)
+                                        )
                                         if (it.result.type == "PROVIDER") {
-                                            Navigation.findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_adminHomeFragment)
+                                            Navigation.findNavController(mBinding.root)
+                                                .navigate(R.id.action_loginFragment_to_adminHomeFragment)
                                         } else {
-                                            Navigation.findNavController(mBinding.root).navigate(R.id.action_loginFragment_to_homeFragment2)
+                                            Navigation.findNavController(mBinding.root)
+                                                .navigate(R.id.action_loginFragment_to_homeFragment2)
                                         }
                                     } else {
                                         Toast.makeText(
@@ -90,6 +109,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                                     }
                                 }
                             }
+
                             is NetworkResult.Error -> {
                                 GlobalUtility.hideProgressMessage()
                                 Log.e(TAG, "fetchLoginResponse: " + response.message)
@@ -100,10 +120,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                                 ).show()
                                 viewmodel.response.removeObservers(viewLifecycleOwner)
                             }
+
                             is NetworkResult.Loading -> {
                                 GlobalUtility.hideProgressMessage()
                             }
-                            else ->{
+
+                            else -> {
                                 GlobalUtility.hideProgressMessage()
                                 Log.e(TAG, "fetchLoginResponse: " + response.message)
                                 Toast.makeText(
@@ -121,13 +143,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
             }
         }
-    }
-
-    private fun fetchLoginResponse(email: String, pass: String) {
-        val map: HashMap<String, Any> = HashMap()
-        map["email"] = email
-        map["password"] = pass
-        viewmodel.fetchLoginResponse(map)
     }
 
     companion object {

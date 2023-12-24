@@ -4,10 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -25,6 +22,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.bumptech.glide.Glide
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.FragmentAddFundBinding
 import com.nr.nrsales.databinding.FragmentRequestFundListBinding
@@ -38,28 +36,27 @@ import com.nr.nrsales.utils.ManagePermissions
 import com.nr.nrsales.utils.NetworkResult
 import com.nr.nrsales.utils.SharedPrf
 import com.nr.nrsales.utils.Validation
+import com.nr.nrsales.utils.customui.TouchImageView
 import com.nr.nrsales.viewmodel.home.AddFundViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import java.io.File
-import java.io.IOException
 
 
 @AndroidEntryPoint
-class RequestFundListFragment : BaseFragment(R.layout.fragment_request_fund_list) {
+class RequestFundListFragment : BaseFragment(R.layout.fragment_request_fund_list),
+    FundAdapterAdmin.OnFundClickListener {
     lateinit var mBinding: FragmentRequestFundListBinding
     private lateinit var context: Context
     private val viewmodel by viewModels<AddFundViewModel>()
     private val sharedPrf: SharedPrf by lazy { SharedPrf(context) }
-     private var funds: ArrayList<AddFundRes.Result> = ArrayList()
+    private var funds: ArrayList<AddFundRes.Result> = ArrayList()
     private lateinit var adapter: FundAdapterAdmin
 
     private fun GetFund() {
-        GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
+        GlobalUtility.showProgressMessage(
+            requireActivity(), requireActivity().getString(R.string.loading)
+        )
         val map: HashMap<String, Any> = HashMap()
-      //  map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
+        //  map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
         map[" "] = " "
         viewmodel.fetchget_add_funds_list_admin(map)
         viewmodel.listResponse.observe(viewLifecycleOwner) { response ->
@@ -95,9 +92,9 @@ class RequestFundListFragment : BaseFragment(R.layout.fragment_request_fund_list
         mBinding = binding as FragmentRequestFundListBinding
         context = requireActivity()
         init()
-            adapter = FundAdapterAdmin(requireActivity(), funds)
-        mBinding.historyRecycleView.layoutManager= LinearLayoutManager(requireActivity())
-        mBinding.historyRecycleView.adapter=adapter
+        adapter = FundAdapterAdmin(requireActivity(), funds, this)
+        mBinding.historyRecycleView.layoutManager = LinearLayoutManager(requireActivity())
+        mBinding.historyRecycleView.adapter = adapter
         GetFund()
     }
 
@@ -117,5 +114,62 @@ class RequestFundListFragment : BaseFragment(R.layout.fragment_request_fund_list
         }
     }
 
+    override fun onItemClick(model: AddFundRes.Result, int: Int) {
+        val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.show_image_dialog)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val accept = dialog.findViewById<View>(R.id.accept) as Button
+        val reject = dialog.findViewById<View>(R.id.reject) as Button
+        val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
+        val trans = dialog.findViewById<View>(R.id.trans) as TouchImageView
+        Glide.with(requireActivity()).load(model.payment_receipt).into(trans)
+        reject.setOnClickListener {
+            accept_reject(model.id, "2");
+            dialog.dismiss()
+        }
+        accept.setOnClickListener {
+            accept_reject(model.id, "1");
+            dialog.dismiss()
+        }
+        cont_find.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+    private fun accept_reject(fund_id: String, status: String) {
+        GlobalUtility.showProgressMessage(
+            requireActivity(), requireActivity().getString(R.string.loading)
+        )
+        val map: HashMap<String, Any> = HashMap()
+        //  map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
+        map["id"] = fund_id
+        map["status"] = status
+        viewmodel.add_fund_accept_reject(map)
+        viewmodel.addFundResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    GlobalUtility.hideProgressMessage()
+                    response.data?.let {
+                        GetFund()
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    GlobalUtility.hideProgressMessage()
+                    Log.e(LoginFragment.TAG, "fetchLoginResponse: " + response.message)
+
+                }
+
+                is NetworkResult.Loading -> {
+                    GlobalUtility.hideProgressMessage()
+                }
+            }
+        }
+
+
+    }
 
 }

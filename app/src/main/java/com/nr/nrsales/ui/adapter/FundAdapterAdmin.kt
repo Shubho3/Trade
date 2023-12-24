@@ -29,6 +29,7 @@ import com.nr.nrsales.utils.customui.ZoomableImageView
 
 class FundAdapterAdmin  (
     private val mContext: Context, private var arrayList: ArrayList<AddFundRes.Result>
+    , private val listener: OnFundClickListener
 ) : RecyclerView.Adapter<FundAdapterAdmin.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding: HistoryItemAdminBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext)
@@ -39,27 +40,18 @@ class FundAdapterAdmin  (
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = arrayList[position]
         holder.binding.data=data
+        if (data.status=="0"){
+            holder.binding.status.setTextColor(mContext.getColor(R.color.color_primary))
+            holder.binding.status.setText("Pending")}
+        else    if (data.status=="1"){
+            holder.binding.status.setTextColor(mContext.getColor(R.color.green))
+            holder.binding.status.setText("Accepted")}
+        else if (data.status == "2") {
+            holder.binding.status.setTextColor(mContext.getColor(R.color.red))
+            holder.binding.status.setText("Rejected")
+        }
         holder.binding.root.setOnClickListener {
-            val dialog = Dialog(mContext, R.style.DialogSlideAnim)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setCancelable(true)
-            dialog.setContentView(R.layout.show_image_dialog)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            val camera = dialog.findViewById<View>(R.id.camera) as Button
-            val gallary = dialog.findViewById<View>(R.id.gallary) as Button
-            val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
-            val trans = dialog.findViewById<View>(R.id.trans) as TouchImageView
-          Glide.with(mContext).load(data.payment_receipt).into(trans)
-            gallary.setOnClickListener {
-                dialog.dismiss()
-            }
-            camera.setOnClickListener {
-                dialog.dismiss()
-
-            }
-            cont_find.setOnClickListener {
-                dialog.dismiss() }
-            dialog.show()
+          if (data.status=="0")  listener.onItemClick(data,1)
         }
         }
 
@@ -69,5 +61,8 @@ class FundAdapterAdmin  (
 
     class MyViewHolder(var binding: HistoryItemAdminBinding) :
         RecyclerView.ViewHolder(binding.root) {}
+    interface OnFundClickListener {
+        fun onItemClick(model: AddFundRes.Result, int: Int)
+    }
 
 }

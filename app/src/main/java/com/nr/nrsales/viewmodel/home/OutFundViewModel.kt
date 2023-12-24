@@ -27,6 +27,8 @@ class OutFundViewModel
     val listResponse: LiveData<NetworkResult<OutFundRes>> = _listResponse
     private val _listResponseadmin: MutableLiveData<NetworkResult<OutFundResAdmin>> = MutableLiveData()
     val listResponseadmin: LiveData<NetworkResult<OutFundResAdmin>> = _listResponseadmin
+     private val _outlistResponseadmin: MutableLiveData<NetworkResult<BasicRes>> = MutableLiveData()
+    val outlistResponseadmin: LiveData<NetworkResult<BasicRes>> = _outlistResponseadmin
     fun fetchAddFunds(body: RequestBody) = viewModelScope.launch {
         repository.outFunds(body).collect { values ->
             _response.value = values
@@ -44,6 +46,13 @@ class OutFundViewModel
         repository.get_out_funds_list_admin(params).collect { values ->
             Log.e("TAG", "fetchGetUserResponse: $values")
             _listResponseadmin.value = values
+        }
+    }
+
+    fun out_funt_accept_reject(params: HashMap<String, Any>) = viewModelScope.launch {
+        repository.out_funt_accept_reject(params).collect { values ->
+            Log.e("TAG", "fetchGetUserResponse: $values")
+            _outlistResponseadmin.value = values
         }
     }
 

@@ -18,7 +18,7 @@ import com.nr.nrsales.pushnotification.Constants.ONETIME_WORK_DESCRIPTION
 import com.nr.nrsales.pushnotification.Constants.ONETIME_WORK_TITLE
 object Constants {
     const val CHANNEL_ID_PERIOD_WORK = "PERIODIC_APP_UPDATES"
-    const val CHANNEL_ID_ONE_TIME_WORK = "INSTANT_APP_UPDATES"
+    const val CHANNEL_ID_ONE_TIME_WORK = "1"
     const val ONETIME_WORK_DESCRIPTION = "ONETIME_WORK_DESCRIPTION"
     const val ONETIME_WORK_TITLE = "ONETIME_WORK_TITLE"
     const val LAST_PERIODIC_TIME = "LAST_PERIODIC_TIME"
@@ -57,7 +57,7 @@ class OnetimeBackgroundNotification(private val context: Context, private val wo
         with(NotificationManagerCompat.from(context)) {
             if (ActivityCompat.checkSelfPermission(applicationContext
                     , Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-               return
+                return
             }
             notify(2, notification.build())
         }

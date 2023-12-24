@@ -1,36 +1,45 @@
 {
   "project_info": {
-    "project_number": "520666872976",
-    "project_id": "nibeb-f9c4a",
-    "storage_bucket": "nibeb-f9c4a.appspot.com"
+    "project_number": "839817867335",
+    "project_id": "tensor-62d67",
+    "storage_bucket": "tensor-62d67.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:520666872976:android:891cb2c6c3909cf992ec15",
+        "mobilesdk_app_id": "1:839817867335:android:9ac72220cd0731a9614162",
         "android_client_info": {
-          "package_name": "com.nr.nrsales"
+          "package_name": "com.investor"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "520666872976-pv79n0m8goid35cvrjbt7qh50q8eisne.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBfu2XxcGdnxYSCd5Y2m5eXuTxgfYkhPBc"
+          "current_key": "AIzaSyA6VVr4_hKSQaJFjGtAtoI9onJHDX4PXZk"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "520666872976-pv79n0m8goid35cvrjbt7qh50q8eisne.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839817867335:android:cf74d6dbdfe13025614162",
+        "android_client_info": {
+          "package_name": "com.tensor.example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6VVr4_hKSQaJFjGtAtoI9onJHDX4PXZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

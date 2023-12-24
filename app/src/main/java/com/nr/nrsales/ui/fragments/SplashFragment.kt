@@ -23,11 +23,11 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         sharedPref = SharedPrf(requireContext())
         fullScreen()
         Handler(Looper.getMainLooper()).postDelayed({
-            val window = requireActivity().window
+          /*  val window = requireActivity().window
             if (window != null) {
                 window.statusBarColor = requireActivity().getColor(R.color.white)
                 WindowCompat.setDecorFitsSystemWindows(window, true)
-            }
+            }*/
             if (sharedPref.getStoredTag(SharedPrf.LOGIN) == "true") {
                 if (sharedPref.getStoredTag(SharedPrf.USER_TYPE) == "PROVIDER") {
                     Navigation.findNavController(mBinding.root).navigate(R.id.action_splashFragment_to_adminHomeFragment)

@@ -31,6 +31,7 @@ import com.nr.nrsales.databinding.FragmentNotificationListBinding
 import com.nr.nrsales.databinding.FragmentRequestFundListBinding
 import com.nr.nrsales.databinding.FragmentUsersListBinding
 import com.nr.nrsales.model.AddFundRes
+import com.nr.nrsales.model.NotificationRes
 import com.nr.nrsales.ui.adapter.FundAdapter
 import com.nr.nrsales.ui.adapter.NotificationsAdapter
 import com.nr.nrsales.ui.fragments.login_signup.LoginFragment
@@ -55,7 +56,7 @@ class SettingFragment : BaseFragment(R.layout.fragment_notification_list) {
     private lateinit var context: Context
     private val viewmodel by viewModels<AddFundViewModel>()
     private val sharedPrf: SharedPrf by lazy { SharedPrf(context) }
-  private var funds: ArrayList<AddFundRes.Result> = ArrayList()
+  private var funds: ArrayList<NotificationRes.Result> = ArrayList()
     private lateinit var adapter: NotificationsAdapter
 
     private fun GetFund() {
@@ -70,7 +71,7 @@ class SettingFragment : BaseFragment(R.layout.fragment_notification_list) {
                     response.data?.let {
                         if (it.status == "1") {
                             funds.clear()
-                            funds.addAll(it.result)
+                          //  funds.addAll(it.result)
                             adapter.notifyDataSetChanged()
                         } else {
 

@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.NotificationItemBinding
 import com.nr.nrsales.model.AddFundRes
+import com.nr.nrsales.model.NotificationRes
 
 class NotificationsAdapter(
-    private val mContext: Context, private var arrayList: ArrayList<AddFundRes.Result>
+    private val mContext: Context, private var arrayList: ArrayList<NotificationRes.Result>
 ) : RecyclerView.Adapter<NotificationsAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding: NotificationItemBinding = DataBindingUtil.inflate(

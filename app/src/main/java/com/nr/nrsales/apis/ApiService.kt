@@ -2,6 +2,7 @@ package com.nr.nrsales.apis
 
 import com.nr.nrsales.model.AddFundRes
 import com.nr.nrsales.model.BasicRes
+import com.nr.nrsales.model.NotificationRes
 import com.nr.nrsales.model.OutFundRes
 import com.nr.nrsales.model.OutFundResAdmin
 import com.nr.nrsales.model.RegisterResModel
@@ -49,8 +50,14 @@ interface ApiService {
     suspend fun get_all_user(@QueryMap map: HashMap<String, Any>): Response<UserListRes>
     @GET(Constants.get_add_funds_list_admin)
     suspend fun get_add_funds_list_admin(@QueryMap map: HashMap<String, Any>): Response<AddFundRes>
- @GET(Constants.get_add_funds_list_admin)
+ @GET(Constants.get_out_funds_list_admin)
     suspend fun get_out_funds_list_admin(@QueryMap map: HashMap<String, Any>): Response<OutFundResAdmin>
+ @GET(Constants.add_fund_accept_reject)
+    suspend fun add_fund_accept_reject(@QueryMap map: HashMap<String, Any>): Response<BasicRes>
+    @GET(Constants.out_funt_accept_reject)
+    suspend fun out_funt_accept_reject(@QueryMap map: HashMap<String, Any>): Response<BasicRes>
+ @GET(Constants.get_notification)
+    suspend fun get_notification(@QueryMap map: HashMap<String, Any>): Response<NotificationRes>
 
     @GET("api/order/report/")
     fun downloadFile(

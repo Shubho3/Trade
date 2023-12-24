@@ -38,26 +38,46 @@
                 android:layout_toRightOf="@id/image_quote4"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="@dimen/_1sdp"
-                    android:text='@{" ₹ "+data.amount_id}'
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_alignParentStart="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:padding="@dimen/_1sdp"
+                        android:text='@{" ₹ "+data.amount}'
+                        android:textColor="@color/green"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_marginEnd="@dimen/_2sdp"
+
+                        android:id="@+id/status"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:padding="@dimen/_1sdp"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="@dimen/_3sdp"
-                    android:text='@{"Tr. ID :-  "+data.transation_id}'
+                    android:text='@{"AC. Pass :-  "+data.acount_pass}'
                     android:textColor="@color/color_primary"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

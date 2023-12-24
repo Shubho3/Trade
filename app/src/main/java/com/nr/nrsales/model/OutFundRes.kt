@@ -15,10 +15,10 @@ data class OutFundResAdmin(
 )
 {
 data class Result(
-    val amount_id: String,
+    val amount: String,
     val date_time: String,
     val id: String,
-    val payment_receipt: String,
-    val transation_id: String,
+    val status: String,
+    val acount_pass: String,
     val user_id: String
 )}

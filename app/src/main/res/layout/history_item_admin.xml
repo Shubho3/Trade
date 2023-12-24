@@ -36,8 +36,12 @@
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_toRightOf="@id/image_quote4"
                 android:orientation="vertical">
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
+                    android:layout_alignParentStart="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -47,6 +51,20 @@
                     android:textColor="@color/green"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:padding="@dimen/_1sdp"
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+
 
                 <TextView
                     android:layout_width="wrap_content"

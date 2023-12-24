@@ -237,10 +237,11 @@
 
                     </androidx.cardview.widget.CardView>
                     <androidx.cardview.widget.CardView
+
                         android:id="@+id/settings_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         app:cardBackgroundColor="@color/white"
                         app:cardElevation="@dimen/_2sdp"
                         app:cardUseCompatPadding="true">
