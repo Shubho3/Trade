@@ -278,6 +278,93 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:background="@null"
+                            android:padding="@dimen/_3sdp"
+                            android:text="Bank Name"
+                            android:textColor="@color/texts"
+                            android:textColorHint="@color/color_edit_hint"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edt_bank"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edit_background"
+                            android:inputType="text"
+                            android:padding="@dimen/_8sdp"
+                            android:textColor="@color/color_edit_hint"
+                            android:textColorHint="@color/color_edit_hint"
+                            android:textSize="@dimen/_12sdp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:background="@null"
+                            android:padding="@dimen/_3sdp"
+                            android:text="Bank Account No."
+                            android:textColor="@color/texts"
+                            android:textColorHint="@color/color_edit_hint"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edt_bank_ac_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edit_background"
+                            android:inputType="number"
+                            android:padding="@dimen/_8sdp"
+                            android:textColor="@color/color_edit_hint"
+                            android:textColorHint="@color/color_edit_hint"
+                            android:textSize="@dimen/_12sdp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:background="@null"
+                            android:padding="@dimen/_3sdp"
+                            android:text="IFSC Code"
+                            android:textColor="@color/texts"
+                            android:textColorHint="@color/color_edit_hint"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edt_bank_ifsc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edit_background"
+                            android:inputType="text"
+                            android:padding="@dimen/_8sdp"
+                            android:textColor="@color/color_edit_hint"
+                            android:textColorHint="@color/color_edit_hint"
+                            android:textSize="@dimen/_12sdp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:weightSum="2"
                         >

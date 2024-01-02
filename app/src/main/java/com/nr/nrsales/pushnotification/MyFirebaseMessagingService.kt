@@ -89,7 +89,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         data.putString(ONETIME_WORK_TITLE,title)
         onetimeWork.setInputData(data.build())
         WorkManager.getInstance(this).enqueue(onetimeWork.build())
-
         val pushNotification = Intent(Config.PUSH_NOTIFICATION)
         pushNotification.putExtra("message", desc)
         LocalBroadcastManager.getInstance(context).sendBroadcast(pushNotification)

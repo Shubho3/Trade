@@ -1,6 +1,8 @@
 package com.nr.nrsales.ui.fragments.adminhome
 
+import android.Manifest
 import android.app.AlertDialog
+import android.os.Build
 import android.util.Log
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
@@ -11,6 +13,7 @@ import com.nr.nrsales.databinding.FragmentAdminHomeBinding
 import com.nr.nrsales.ui.fragments.login_signup.LoginFragment
 import com.nr.nrsales.utils.BaseFragment
 import com.nr.nrsales.utils.GlobalUtility
+import com.nr.nrsales.utils.ManagePermissions
 import com.nr.nrsales.utils.NetworkResult
 import com.nr.nrsales.utils.SharedPrf
 import com.nr.nrsales.viewmodel.ProfileViewModel
@@ -22,6 +25,11 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
     private lateinit var mBinding: FragmentAdminHomeBinding
     private val viewmodel by viewModels<ProfileViewModel>()
     private val sharedPrf: SharedPrf by lazy { SharedPrf(requireActivity()) }
+    private val PermissionsRequestCode = 123
+    private lateinit var managePermissions: ManagePermissions
+    private lateinit var list: List<String>
+
+
     private fun getProfile() {
         //GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
         val map: HashMap<String, Any> = HashMap()
@@ -63,7 +71,15 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
         mBinding = binding as FragmentAdminHomeBinding
         init()
         getProfile()
-
+        if (Build.VERSION.SDK_INT >= 33) {
+            list = listOf(
+                Manifest.permission.POST_NOTIFICATIONS
+            )
+        }
+        managePermissions = ManagePermissions(
+            requireActivity(), list, PermissionsRequestCode
+        )
+        managePermissions.checkPermissions()
     }
 
     private fun init() {

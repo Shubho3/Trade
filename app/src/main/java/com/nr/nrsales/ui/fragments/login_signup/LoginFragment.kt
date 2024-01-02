@@ -72,8 +72,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                     map["password"] = pass
                     map["register_id"] = sharedPrf.getStoredTag(SharedPrf.FIREBASE_TOKEN)
                     viewmodel.fetchLoginResponse(map)
-
-                    viewmodel.response.observe(viewLifecycleOwner) { response ->
+                    viewmodel._response.observe(this@LoginFragment) { response ->
                         when (response) {
                             is NetworkResult.Success -> {
                                 GlobalUtility.hideProgressMessage()
@@ -108,6 +107,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
                                     }
                                 }
+                                viewmodel._response.value=null
+
                             }
 
                             is NetworkResult.Error -> {
@@ -118,23 +119,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                                     "Your have entered wrong email & password",
                                     Toast.LENGTH_LONG
                                 ).show()
-                                viewmodel.response.removeObservers(viewLifecycleOwner)
+                                viewmodel._response.value=null
                             }
 
                             is NetworkResult.Loading -> {
                                 GlobalUtility.hideProgressMessage()
-                            }
-
-                            else -> {
-                                GlobalUtility.hideProgressMessage()
-                                Log.e(TAG, "fetchLoginResponse: " + response.message)
-                                Toast.makeText(
-                                    context,
-                                    "Your have entered wrong email & password",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                viewmodel.response.removeObservers(viewLifecycleOwner)
-
                             }
                         }
                     }

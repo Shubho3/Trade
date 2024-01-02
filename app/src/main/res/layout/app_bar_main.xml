@@ -422,10 +422,11 @@
                                 android:id="@+id/image_quote31"
                                 android:layout_width="@dimen/_170sdp"
                                 android:layout_height="@dimen/_180sdp"
-                                android:layout_margin="@dimen/_2sdp"
+                                android:scaleType="centerCrop"
+                                android:paddingTop="2dp"
+                                android:paddingBottom="2dp"
                                 android:background="@color/color_primary"
-                                android:contentDescription="@string/app_name"
-                                app:srcCompat="@drawable/qr" />
+                                android:src="@drawable/qr" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"

@@ -47,6 +47,9 @@ data class User(
     val type: String,
     val user_name: String,
     val wallet_balance: String,
+    val bank_name: String,
+    val bank_account_no: String,
+    val bank_ifsc: String,
     val withdrawals: String
 )
 

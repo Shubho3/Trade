@@ -22,9 +22,7 @@ class LoginViewModel @Inject constructor
     private val repository: Repository,
     application: Application
 ) : AndroidViewModel(application) {
-    private val _response: MutableLiveData<NetworkResult<UserRes>> = MutableLiveData()
-    val response: LiveData<NetworkResult<UserRes>> = _response
-
+    val _response: MutableLiveData<NetworkResult<UserRes>> = MutableLiveData()
     fun fetchLoginResponse(params: HashMap<String, Any>) = viewModelScope.launch {
         repository.getLogin(params).collect { values ->
             _response.value = values } }

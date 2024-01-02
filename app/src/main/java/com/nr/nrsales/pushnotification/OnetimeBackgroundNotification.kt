@@ -16,6 +16,8 @@ import com.nr.nrsales.MainActivity
 import com.nr.nrsales.R
 import com.nr.nrsales.pushnotification.Constants.ONETIME_WORK_DESCRIPTION
 import com.nr.nrsales.pushnotification.Constants.ONETIME_WORK_TITLE
+import com.nr.nrsales.ui.LaunchingActivity
+
 object Constants {
     const val CHANNEL_ID_PERIOD_WORK = "PERIODIC_APP_UPDATES"
     const val CHANNEL_ID_ONE_TIME_WORK = "1"
@@ -31,7 +33,8 @@ class OnetimeBackgroundNotification(private val context: Context, private val wo
 
 
     private fun showNotification() {
-        val intent = Intent(context, MainActivity::class.java).apply {
+
+        val intent = Intent(context, LaunchingActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent = TaskStackBuilder.create(context).run {

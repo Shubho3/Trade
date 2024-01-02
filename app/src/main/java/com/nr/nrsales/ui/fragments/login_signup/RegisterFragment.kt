@@ -559,6 +559,12 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                 return@setOnClickListener
             } else if (!Validation.getNormalValidCheck(mBinding.edtPass2)) {
                 return@setOnClickListener
+            } else if (!Validation.getNormalValidCheck(mBinding.edtBank)) {
+                return@setOnClickListener
+            } else if (!Validation.getNormalValidCheck(mBinding.edtBankAcNo)) {
+                return@setOnClickListener
+            } else if (!Validation.getNormalValidCheck(mBinding.edtBankIfsc)) {
+                return@setOnClickListener
             } else if (!Validation.getStringEmptyCheck(aadhar_front, "Please Pick Aadhar Front Picture")) {
                 return@setOnClickListener
             } else if (!Validation.getStringEmptyCheck(aadhar_back, "Please Pick Aadhar Back Picture")) {
@@ -578,6 +584,9 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                     .addFormDataPart("mobile", mBinding.edtPhone.text.toString())
                     .addFormDataPart("email", mBinding.edtEmail.text.toString())
                     .addFormDataPart("password", mBinding.edtPass.text.toString())
+                    .addFormDataPart("bank_name", mBinding.edtBank.text.toString())
+                    .addFormDataPart("bank_account_no", mBinding.edtBankAcNo.text.toString())
+                    .addFormDataPart("bank_ifsc", mBinding.edtBankIfsc.text.toString())
                     .build()
                 viewmodel.fetchRegisterResponse(bodyx.build())
             }
