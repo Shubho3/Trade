@@ -4,9 +4,9 @@ import android.Manifest
 import android.app.AlertDialog
 import android.os.Build
 import android.util.Log
+import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.FragmentAdminHomeBinding
@@ -41,13 +41,17 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
                     GlobalUtility.hideProgressMessage()
                     response.data?.let {
                         if (it.status == "1") {
+                            if (it.result[0].notification_count > 0) {
+                                mBinding.tvCount.text = " ${it.result[0].notification_count} "
+                                mBinding.tvCount.visibility = View.VISIBLE
+                            } else mBinding.tvCount.visibility = View.GONE
                             // mBinding.mailLayout.data = it.result[0]
                             //   mBinding.aadharFront.load(it.result.aadhar_front) { crossfade(true) }
                             //   mBinding.aadharBack.load(it.result.aadhar_back) { crossfade(true) }
                             //    mBinding.panFront.load(it.result.pan_front) { crossfade(true) }
                             //    mBinding.panBack.load(it.result.pan_back) { crossfade(true) }
                         } else {
-
+                            mBinding.tvCount.visibility = View.GONE
 
                         }
                     }
@@ -70,7 +74,6 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
     override fun onBindTo(binding: ViewDataBinding?) {
         mBinding = binding as FragmentAdminHomeBinding
         init()
-        getProfile()
         if (Build.VERSION.SDK_INT >= 33) {
             list = listOf(
                 Manifest.permission.POST_NOTIFICATIONS
@@ -80,6 +83,11 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
             requireActivity(), list, PermissionsRequestCode
         )
         managePermissions.checkPermissions()
+    }
+
+    override fun onResume() {
+        getProfile()
+        super.onResume()
     }
 
     private fun init() {

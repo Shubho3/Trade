@@ -5,6 +5,7 @@ import com.nr.nrsales.model.BasicRes
 import com.nr.nrsales.model.NotificationRes
 import com.nr.nrsales.model.OutFundRes
 import com.nr.nrsales.model.OutFundResAdmin
+import com.nr.nrsales.model.PositionRes
 import com.nr.nrsales.model.RegisterResModel
 import com.nr.nrsales.model.UserDashboardModel
 import com.nr.nrsales.model.UserListRes
@@ -56,6 +57,11 @@ interface ApiService {
     suspend fun add_fund_accept_reject(@QueryMap map: HashMap<String, Any>): Response<BasicRes>
     @GET(Constants.out_funt_accept_reject)
     suspend fun out_funt_accept_reject(@QueryMap map: HashMap<String, Any>): Response<BasicRes>
+    @GET(Constants.position)
+    suspend fun position(@QueryMap map: HashMap<String, Any>): Response<BasicRes>
+
+    @GET(Constants.position_list)
+    suspend fun position_list(@QueryMap map: HashMap<String, Any>): Response<PositionRes>
  @GET(Constants.get_notification)
     suspend fun get_notification(@QueryMap map: HashMap<String, Any>): Response<NotificationRes>
 

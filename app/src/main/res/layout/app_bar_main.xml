@@ -65,6 +65,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:padding="@dimen/_3sdp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:text="Welcome,"
+                        android:textStyle="italic"
+                        android:textColor="@color/texts"
+                        android:textColorHint="@color/color_edit_hint"
+                        android:textSize="@dimen/_15sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:padding="@dimen/_3sdp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text='@{data.first_name}'
+                        android:textStyle="italic"
+                        android:textColor="@color/texts"
+                        android:textColorHint="@color/color_edit_hint"
+                        android:textSize="@dimen/_18sdp" />
+
+                </LinearLayout>
 
                     <androidx.cardview.widget.CardView
                         android:visibility="gone"
@@ -490,6 +518,7 @@
                                     android:textStyle="normal" />
 
                                 <TextView
+                                    android:layout_marginBottom="@dimen/_10sdp"
                                      android:id="@+id/ifsc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -507,6 +536,7 @@
 
                             </LinearLayout>
                             <LinearLayout
+                                android:visibility="gone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"

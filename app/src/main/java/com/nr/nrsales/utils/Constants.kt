@@ -18,6 +18,8 @@ class Constants {
         const val get_out_funds_list_admin = "get_out_funds_list_admin"
         const val add_fund_accept_reject = "add_fund_accept_reject"
         const val out_funt_accept_reject = "out_funt_accept_reject"
+        const val position = "position"
+        const val position_list = "position_list"
         const val get_notification = "get_notification"
     }
 }

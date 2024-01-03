@@ -7,6 +7,7 @@ import com.nr.nrsales.model.BasicRes
 import com.nr.nrsales.model.NotificationRes
 import com.nr.nrsales.model.OutFundRes
 import com.nr.nrsales.model.OutFundResAdmin
+import com.nr.nrsales.model.PositionRes
 import com.nr.nrsales.model.RegisterResModel
 import com.nr.nrsales.model.UserDashboardModel
 import com.nr.nrsales.model.UserListRes
@@ -102,6 +103,11 @@ class Repository @Inject constructor(
             emit(safeApiCall { remoteDataSource.out_funt_accept_reject(Map) })
         }.flowOn(Dispatchers.IO)
     }
+    suspend fun position(Map: HashMap<String, Any>): Flow<NetworkResult<BasicRes>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.position(Map) })
+        }.flowOn(Dispatchers.IO)
+    }
     suspend fun add_fund_accept_reject(Map: HashMap<String, Any>): Flow<NetworkResult<BasicRes>> {
         return flow {
             emit(safeApiCall { remoteDataSource.add_fund_accept_reject(Map) })
@@ -110,6 +116,11 @@ class Repository @Inject constructor(
     suspend fun get_notification(Map: HashMap<String, Any>): Flow<NetworkResult<NotificationRes>> {
         return flow {
             emit(safeApiCall { remoteDataSource.get_notification(Map) })
+        }.flowOn(Dispatchers.IO)
+    }
+    suspend fun position_list(Map: HashMap<String, Any>): Flow<NetworkResult<PositionRes>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.position_list(Map) })
         }.flowOn(Dispatchers.IO)
     }
 }

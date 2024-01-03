@@ -391,7 +391,6 @@
                                 android:id="@+id/aadhar_front"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
-                                android:background="@drawable/edit_background"
                                 android:inputType="textPassword"
                                 android:padding="@dimen/_5sdp"
                                 android:layout_margin="@dimen/_5sdp"
@@ -425,7 +424,6 @@
                                  android:id="@+id/aadhar_back"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
-                                android:background="@drawable/edit_background"
                                 android:inputType="textPassword"
                                 android:padding="@dimen/_8sdp"
                                 android:scaleType="fitXY"
@@ -466,7 +464,6 @@
                                 android:id="@+id/pan_front"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
-                                android:background="@drawable/edit_background"
                                 android:inputType="textPassword"
                                 android:padding="@dimen/_8sdp"
                                 android:scaleType="fitXY"
@@ -499,10 +496,51 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
-                                android:background="@drawable/edit_background"
                                 android:inputType="textPassword"
                                 android:padding="@dimen/_8sdp"
                                 android:id="@+id/pan_back"
+                                android:scaleType="fitXY"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:src="@drawable/baseline_add_a_photo"
+                                android:textColor="@color/color_edit_hint"
+                                android:textColorHint="@color/color_edit_hint"
+                                android:textSize="@dimen/_12sdp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        >
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:background="@null"
+                                android:padding="@dimen/_3sdp"
+                                android:text="Passbook Front Page"
+                                android:textColor="@color/texts"
+                                android:textColorHint="@color/color_edit_hint"
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_100sdp"
+                                android:inputType="textPassword"
+                                android:padding="@dimen/_8sdp"
+                                android:id="@+id/passbook_front_page"
                                 android:scaleType="fitXY"
                                 android:layout_margin="@dimen/_5sdp"
                                 android:src="@drawable/baseline_add_a_photo"

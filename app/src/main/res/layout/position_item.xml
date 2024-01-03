@@ -6,13 +6,13 @@
 
         <variable
             name="data"
-            type="com.nr.nrsales.model.User" />
+            type="com.nr.nrsales.model.Position" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/tracking_card"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_110sdp"
+        android:layout_height="@dimen/_70sdp"
         android:visibility="visible"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_1sdp"
@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/_3sdp"
                 android:layout_weight=".02"
-                android:background="@color/green"
+                android:background="@color/red"
                 android:contentDescription="@string/app_name"
                 android:padding="12dp" />
 
@@ -68,7 +68,7 @@
                         android:background="@null"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="@dimen/_4sdp"
-                        android:text='@{"Name :- "+data.user_name}'
+                        android:text='@{"Name :- "+data.share_name}'
                         android:textColor="@color/texts"
                         android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
@@ -79,7 +79,7 @@
                         android:background="@null"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="@dimen/_3sdp"
-                        android:text='@{"Email :- "+data.email}'
+                        android:text='@{"Position :- "+data.share_position}'
                         android:textColor="@color/texts"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="normal" />
@@ -89,24 +89,11 @@
                         android:background="@null"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="@dimen/_3sdp"
-                        android:text='@{"pass :- "+data.password}'
+                        android:text='@{" ₹ "+data.share_amount}'
                         android:textColor="@color/texts"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="normal" />
 
-                    <TextView
-                        android:id="@+id/cont_find"
-                        android:layout_width="150dp"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="120dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="120dp"
-                        android:background="@drawable/border_rounded"
-                        android:gravity="center"
-                        android:text=" Add Position"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold" />
                 </LinearLayout>
 
 

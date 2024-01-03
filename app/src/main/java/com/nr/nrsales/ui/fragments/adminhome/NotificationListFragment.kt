@@ -62,8 +62,8 @@ class NotificationListFragment : BaseFragment(R.layout.fragment_notification_lis
     private fun GetFund() {
         GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
         val map: HashMap<String, Any> = HashMap()
-       // map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
-        map["user_id"] = "7"
+       map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
+       // map["user_id"] = "7"
         viewmodel.get_notification(map)
         viewmodel.notilistResponse.observe(viewLifecycleOwner) { response ->
             when (response) {

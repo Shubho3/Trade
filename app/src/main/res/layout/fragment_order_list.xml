@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,10 +17,9 @@
             android:id="@+id/bottom"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_220sdp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="15dp"
-
             app:cardElevation="3dp"
             app:cardUseCompatPadding="true">
 
@@ -27,167 +27,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:background="@null"
-                    android:padding="@dimen/_3sdp"
-                    android:text=" Note :-  Add Transaction Related Details To pull Add Funds"
-                    android:textAlignment="center"
-                    android:textColor="@color/texts"
-                    android:textColorHint="@color/color_edit_hint"
-                    android:textSize="@dimen/_14sdp"
-                    android:visibility="gone" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_2sdp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:background="@null"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/_4sdp"
-                        android:text="Position Details"
-                        android:textColor="@color/texts"
-                        android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold" />
-
-
-                    <EditText
-                        android:id="@+id/edt_trans_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:background="@drawable/edit_gray_bg"
-                        android:hint="@string/enter_here"
-                        android:inputType="text"
-                        android:padding="@dimen/_10sdp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/color_edit_hint"
-                        android:textSize="@dimen/_12sdp" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_2sdp">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:background="@null"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        android:text="Amount ID"
-                        android:textColor="@color/texts"
-                        android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold" />
-
-
-                    <EditText
-                        android:id="@+id/edt_amount"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:background="@drawable/edit_gray_bg"
-                        android:digits="0123456789."
-                        android:hint="@string/enter_here"
-                        android:inputType="numberDecimal"
-                        android:padding="@dimen/_10sdp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/color_edit_hint"
-                        android:textSize="@dimen/_12sdp" />
-
-
-                </LinearLayout>
-
-                <androidx.cardview.widget.CardView
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/gray"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="3dp"
-                    app:cardUseCompatPadding="true">
-
-                    <LinearLayout
-                        android:id="@+id/rec_lay"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight=".7"
-                            android:padding="@dimen/_2sdp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@null"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/_5sdp"
-                                android:text="Upload Payment Receipt"
-                                android:textColor="@color/texts"
-                                android:textSize="@dimen/_14sdp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.29"
-                            android:background="@drawable/edit_gray_bg_two"
-                            android:padding="@dimen/_4sdp">
-
-                            <ImageView
-                                android:id="@+id/img_receipt"
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_marginStart="@dimen/_30sdp"
-                                android:inputType="textPassword"
-                                android:padding="@dimen/_2sdp"
-                                android:src="@drawable/baseline_add_a_photo"
-                                android:textColor="@color/color_edit_hint"
-                                android:textColorHint="@color/color_edit_hint" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-
-                <Button
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_minus5sdp"
-                    android:backgroundTint="@color/color_blue"
-                    android:padding="@dimen/_12sdp"
-                    android:text="@string/submit"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_7sdp"
+                    android:text=" Position's "
+                    android:visibility="visible"
                     android:textStyle="bold"
-                    app:cornerRadius="@dimen/_7sdp" />
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textSize="@dimen/_14sdp"
+                    />
+                <TextView
+                    android:id="@+id/no_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_7sdp"
+                    android:text="No Position Found"
+                    android:visibility="gone"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textSize="@dimen/_14sdp"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/history_recycle_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="5" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

@@ -51,6 +51,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
     private var aadhar_back: String = ""
     private var pan_front: String = ""
     private var pan_back: String = ""
+    private var passbookFrontPage: String = ""
     private val REQUEST_CODE = 123
     private lateinit var managePermissions: ManagePermissions
     private lateinit var list: List<String>
@@ -156,6 +157,81 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
             }
         }
     }
+    private var galleryResultLauncherpassbookFrontPage= registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            if (Build.VERSION.SDK_INT >= 33) {
+                val selectedImage = data!!.data
+                try {
+                    assert(selectedImage != null)
+                    if (selectedImage != null) {
+                        requireActivity().contentResolver.openInputStream(selectedImage).use { stream ->
+                            val bitmap = BitmapFactory.decodeStream(stream)
+                            val tempfile: File = GlobalUtility.persistImage(bitmap, requireActivity())
+                            passbookFrontPage = tempfile.absolutePath
+                            Log.e("ImagePath", "onActivityResult: $passbookFrontPage")
+                            mBinding.passbookFrontPage.setImageBitmap(bitmap)
+                        }
+                    }
+                } catch (e: IOException) {
+                    e.localizedMessage?.let { GlobalUtility.showToast(it, requireActivity()) }
+                }
+            } else {
+                val selectedImage = data!!.data
+                val ImagePath: String = getPath(selectedImage, requireActivity())
+                Log.e("TAG", ":ImagePathImagePathImagePath -- " + ImagePath)
+                // Decode image size
+                val o = BitmapFactory.Options()
+                o.inJustDecodeBounds = true
+                BitmapFactory.decodeFile(ImagePath, o)
+                val REQUIRED_SIZE = 1024
+                var width_tmp = o.outWidth
+                var height_tmp = o.outHeight
+                var scale = 1
+                while (true) {
+                    if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE) break
+                    width_tmp /= 2
+                    height_tmp /= 2
+                    scale *= 2
+                }
+                val o2 = BitmapFactory.Options()
+                o2.inSampleSize = scale
+                val bitmap = BitmapFactory.decodeFile(ImagePath, o2)
+                passbookFrontPage = "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
+                Log.e("ImagePath", "onActivityResult: $passbookFrontPage")
+                mBinding.passbookFrontPage.setImageBitmap(bitmap)
+            }
+        }
+    }
+    private var cameraResultLauncherpassbookFrontPage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val photo = data!!.extras!!["data"] as Bitmap?
+            val cameraPath: String = "" + photo?.let { GlobalUtility.saveToInternalStorage(it, requireActivity()) }
+            Log.e("PATH Camera", "" + cameraPath)
+            // Decode image size
+            val o = BitmapFactory.Options()
+            o.inJustDecodeBounds = true
+            BitmapFactory.decodeFile(cameraPath, o)
+            val REQUIRED_SIZE = 1024
+            var width_tmp = o.outWidth
+            var height_tmp = o.outHeight
+            var scale = 1
+            while (true) {
+                if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE) break
+                width_tmp /= 2
+                height_tmp /= 2
+                scale *= 2
+            }
+            val o2 = BitmapFactory.Options()
+            o2.inSampleSize = scale
+            val bitmap = BitmapFactory.decodeFile(cameraPath, o2)
+            passbookFrontPage = "" + GlobalUtility.saveToInternalStorage(bitmap, requireActivity())
+            Log.e("ImagePath", "onActivityResult: $passbookFrontPage")
+            mBinding.passbookFrontPage.setImageBitmap(bitmap)
+        }
+    }
+
     private var cameraResultLauncher3 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
@@ -396,6 +472,41 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
     }
 
     private fun init() {
+        mBinding.passbookFrontPage.setOnClickListener {
+            val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.select_img_lay)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val camera = dialog.findViewById<View>(R.id.camera) as Button
+            val gallary = dialog.findViewById<View>(R.id.gallary) as Button
+            val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
+            gallary.setOnClickListener {
+                dialog.dismiss()
+                val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                if (hasStoragePermission(requireActivity())) {
+                    galleryResultLauncherpassbookFrontPage.launch(i)
+                } else {
+                    managePermissions.checkPermissions()
+                }
+            }
+            camera.setOnClickListener {
+                dialog.dismiss()
+                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (ContextCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.CAMERA
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    cameraResultLauncherpassbookFrontPage.launch(cameraIntent)
+                } else {
+                    managePermissions.checkPermissions()
+
+                }
+            }
+            cont_find.setOnClickListener { dialog.dismiss() }
+            dialog.show()
+        }
         mBinding.aadharFront.setOnClickListener {
             val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -565,13 +676,15 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                 return@setOnClickListener
             } else if (!Validation.getNormalValidCheck(mBinding.edtBankIfsc)) {
                 return@setOnClickListener
-            } else if (!Validation.getStringEmptyCheck(aadhar_front, "Please Pick Aadhar Front Picture")) {
+            } else if (!Validation.getStringEmptyCheck(aadhar_front, "Please Pick Aadhaar Front Picture")) {
                 return@setOnClickListener
-            } else if (!Validation.getStringEmptyCheck(aadhar_back, "Please Pick Aadhar Back Picture")) {
+            } else if (!Validation.getStringEmptyCheck(aadhar_back, "Please Pick Aadhaar Back Picture")) {
                 return@setOnClickListener
             } else if (!Validation.getStringEmptyCheck(pan_front, "Please Pick PAN Front Picture")) {
                 return@setOnClickListener
             } else if (!Validation.getStringEmptyCheck(pan_back, "Please Pick PAN Back Picture")) {
+                return@setOnClickListener
+            } else  if (!Validation.getStringEmptyCheck(passbookFrontPage, "Please Pick Passbook Front Page Picture")) {
                 return@setOnClickListener
             } else {
                 GlobalUtility.showProgressMessage(requireActivity(), "Uploading Data...")
@@ -581,6 +694,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                     .addPart(MultipartBody.Part.createFormData("aadhar_back", "aadhar_back.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(aadhar_back))))
                     .addPart(MultipartBody.Part.createFormData("pan_front", "pan_front.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_front))))
                     .addPart(MultipartBody.Part.createFormData("pan_back", "pan_back.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(pan_back))))
+                    .addPart(MultipartBody.Part.createFormData("passbook_photo", "passbookFrontPage.png", RequestBody.create("image/*".toMediaTypeOrNull(), File(passbookFrontPage))))
                     .addFormDataPart("mobile", mBinding.edtPhone.text.toString())
                     .addFormDataPart("email", mBinding.edtEmail.text.toString())
                     .addFormDataPart("password", mBinding.edtPass.text.toString())

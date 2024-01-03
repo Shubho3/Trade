@@ -28,8 +28,11 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 
     suspend fun out_funt_accept_reject(Map: HashMap<String, Any>) =
         apiService.out_funt_accept_reject(Map)
+    suspend fun position(Map: HashMap<String, Any>) =
+        apiService.position(Map)
 
     suspend fun get_notification(Map: HashMap<String, Any>) = apiService.get_notification(Map)
+    suspend fun position_list(Map: HashMap<String, Any>) = apiService.position_list(Map)
 
     suspend fun downloadPDF(params: HashMap<String, Any>) =
         apiService.downloadFile("867bb48f-ade8-4688-954b-12668ea07977", params)

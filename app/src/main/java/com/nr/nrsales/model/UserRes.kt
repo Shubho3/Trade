@@ -50,7 +50,22 @@ data class User(
     val bank_name: String,
     val bank_account_no: String,
     val bank_ifsc: String,
-    val withdrawals: String
+    val withdrawals: String,
+    val passbook_photo: String
+)
+data class PositionRes(
+    val message: String,
+    val result: List<Position>,
+    val status: String
+)
+
+data class Position(
+    val created_at: String,
+    val id: String,
+    val share_amount: String,
+    val share_name: String,
+    val share_position: String,
+    val user_id: String
 )
 
 

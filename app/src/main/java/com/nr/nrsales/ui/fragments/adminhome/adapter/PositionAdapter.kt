@@ -8,26 +8,28 @@ import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nr.nrsales.R
+import com.nr.nrsales.databinding.PositionItemBinding
 import com.nr.nrsales.databinding.UserItemBinding
 import com.nr.nrsales.model.AddFundRes
+import com.nr.nrsales.model.Position
 import com.nr.nrsales.model.User
 
-class UsersAdapter(
+class PositionAdapter(
     private val mContext: Context,
     private val click: UsersAdapterClickListener
-) : RecyclerView.Adapter<UsersAdapter.MyViewHolder>(), Filterable {
-    var arrayListFiltered: ArrayList<User> = ArrayList()
-    var arrayList: ArrayList<User> = ArrayList()
+) : RecyclerView.Adapter<PositionAdapter.MyViewHolder>(), Filterable {
+    var arrayListFiltered: ArrayList<Position> = ArrayList()
+    var arrayList: ArrayList<Position> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding: UserItemBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(mContext), R.layout.user_item, parent, false
+        val binding: PositionItemBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(mContext), R.layout.position_item, parent, false
         )
         return MyViewHolder(binding)
     }
 
-    fun addData(list: List<User>) {
-        arrayList = list as ArrayList<User>
+    fun addData(list: List<Position>) {
+        arrayList = list as ArrayList<Position>
         arrayListFiltered = arrayList
         notifyDataSetChanged()
     }
@@ -35,27 +37,25 @@ class UsersAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = arrayListFiltered[position]
         holder.binding.data = data
-        holder.binding.contFind.setOnClickListener {
-            click.onItemClick(data,position)
-        }
+
     }
 
     override fun getItemCount(): Int {
         return arrayListFiltered.size
     }
 
-    class MyViewHolder(var binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {}
+    class MyViewHolder(var binding: PositionItemBinding) : RecyclerView.ViewHolder(binding.root) {}
     interface UsersAdapterClickListener {
-        fun onItemClick(model: User, int: Int)
+        fun onItemClick(model: Position, int: Int)
     }
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString = constraint?.toString() ?: ""
                 if (charString.isEmpty()) arrayListFiltered = arrayList else {
-                    val filteredList = ArrayList<User>()
+                    val filteredList = ArrayList<Position>()
                     arrayList.filter {
-                            (it.id.contains(constraint!!)) or (it.first_name.contains(constraint))
+                            (it.id.contains(constraint!!)) or (it.share_name.contains(constraint))
                         }.forEach { filteredList.add(it) }
                     arrayListFiltered = filteredList
 
@@ -66,7 +66,7 @@ class UsersAdapter(
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
 
                 arrayListFiltered = if (results?.values == null) ArrayList()
-                else results.values as ArrayList<User>
+                else results.values as ArrayList<Position>
                 notifyDataSetChanged()
             }
         }
