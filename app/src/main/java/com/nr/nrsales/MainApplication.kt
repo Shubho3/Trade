@@ -26,7 +26,6 @@ class MainApplication : Application() {
         mInstance = this
         appContext= applicationContext
         createNotificationChannel()
-
         hasInternetConnection(this)
         super.onCreate()
     }

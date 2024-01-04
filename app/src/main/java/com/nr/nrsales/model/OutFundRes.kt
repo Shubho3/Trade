@@ -20,5 +20,7 @@ data class Result(
     val id: String,
     val status: String,
     val acount_pass: String,
-    val user_id: String
+    val user_id: String,
+    val email: String,
+    val user_name: String
 )}

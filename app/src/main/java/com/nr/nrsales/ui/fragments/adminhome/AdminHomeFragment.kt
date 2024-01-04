@@ -2,9 +2,14 @@ package com.nr.nrsales.ui.fragments.adminhome
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat.registerReceiver
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation.findNavController
@@ -18,6 +23,8 @@ import com.nr.nrsales.utils.NetworkResult
 import com.nr.nrsales.utils.SharedPrf
 import com.nr.nrsales.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Timer
+import java.util.TimerTask
 
 
 @AndroidEntryPoint
@@ -28,47 +35,16 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
     private val PermissionsRequestCode = 123
     private lateinit var managePermissions: ManagePermissions
     private lateinit var list: List<String>
-
-
+    private val updateReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Log.e("TAG", "onReceManagePermissionsManagePermissionsManagePermissionsive: ", )
+            getProfile()
+        }
+    }
     private fun getProfile() {
-        //GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
         val map: HashMap<String, Any> = HashMap()
         map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
         viewmodel.fetchUserDashboard(map)
-        viewmodel.userDashboardModel.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    GlobalUtility.hideProgressMessage()
-                    response.data?.let {
-                        if (it.status == "1") {
-                            if (it.result[0].notification_count > 0) {
-                                mBinding.tvCount.text = " ${it.result[0].notification_count} "
-                                mBinding.tvCount.visibility = View.VISIBLE
-                            } else mBinding.tvCount.visibility = View.GONE
-                            // mBinding.mailLayout.data = it.result[0]
-                            //   mBinding.aadharFront.load(it.result.aadhar_front) { crossfade(true) }
-                            //   mBinding.aadharBack.load(it.result.aadhar_back) { crossfade(true) }
-                            //    mBinding.panFront.load(it.result.pan_front) { crossfade(true) }
-                            //    mBinding.panBack.load(it.result.pan_back) { crossfade(true) }
-                        } else {
-                            mBinding.tvCount.visibility = View.GONE
-
-                        }
-                    }
-                }
-
-                is NetworkResult.Error -> {
-                    GlobalUtility.hideProgressMessage()
-                    Log.e(LoginFragment.TAG, "fetchLoginResponse: " + response.message)
-
-                }
-
-                is NetworkResult.Loading -> {
-                    GlobalUtility.hideProgressMessage()
-                }
-            }
-        }
-
     }
 
     override fun onBindTo(binding: ViewDataBinding?) {
@@ -78,17 +54,33 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
             list = listOf(
                 Manifest.permission.POST_NOTIFICATIONS
             )
+            managePermissions = ManagePermissions(
+                requireActivity(), list, PermissionsRequestCode
+            )
+            managePermissions.checkPermissions()
         }
-        managePermissions = ManagePermissions(
-            requireActivity(), list, PermissionsRequestCode
-        )
-        managePermissions.checkPermissions()
+
+
+        // Register the receiver
+        val filter = IntentFilter("com.example.UPDATE_UI_ACTION")
+        requireActivity().registerReceiver(updateReceiver, filter)
+
+
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        requireActivity().unregisterReceiver(updateReceiver)
+    }
+    override fun onResume() {
+
+        super.onResume()
+
+getProfile()
+
+
+
     }
 
-    override fun onResume() {
-        getProfile()
-        super.onResume()
-    }
 
     private fun init() {
         mBinding.exit.setOnClickListener { logout() }
@@ -106,6 +98,28 @@ class AdminHomeFragment : BaseFragment(R.layout.fragment_admin_home) {
         }
         mBinding.settingsCard.setOnClickListener {
             findNavController(mBinding.root).navigate(R.id.action_adminHomeFragment_to_requestFundListFragment)
+        }
+        viewmodel.userDashboardModel.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    response.data?.let {
+                        Log.e("TAG", "init: $it")
+                        if (it.status == "1") {
+                            if (it.result[0].notification_count > 0) {
+                                mBinding.tvCount.text = " ${it.result[0].notification_count} "
+                                mBinding.tvCount.visibility = View.VISIBLE
+                            } else mBinding.tvCount.visibility = View.GONE
+                        } else {
+                            mBinding.tvCount.visibility = View.GONE
+                        }
+                    }
+                }
+                is NetworkResult.Error -> {
+                    Log.e(LoginFragment.TAG, "fetchLoginResponse: " + response.message)
+                }
+                is NetworkResult.Loading -> {
+                }
+            }
         }
 
     }

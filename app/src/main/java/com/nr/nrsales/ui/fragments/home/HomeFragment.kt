@@ -26,6 +26,8 @@ import com.nr.nrsales.utils.NetworkResult
 import com.nr.nrsales.utils.SharedPrf
 import com.nr.nrsales.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Timer
+import java.util.TimerTask
 
 
 @AndroidEntryPoint
@@ -35,6 +37,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), NavigationView.OnNavi
     private val sharedPrf: SharedPrf  by lazy { SharedPrf(requireActivity()) }
 
     private fun getProfile() {
+
+
+
         GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
         val map: HashMap<String, Any> = HashMap()
         map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)

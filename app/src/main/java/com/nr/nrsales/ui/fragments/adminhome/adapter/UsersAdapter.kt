@@ -11,6 +11,7 @@ import com.nr.nrsales.R
 import com.nr.nrsales.databinding.UserItemBinding
 import com.nr.nrsales.model.AddFundRes
 import com.nr.nrsales.model.User
+import java.util.Locale
 
 class UsersAdapter(
     private val mContext: Context,
@@ -55,7 +56,7 @@ class UsersAdapter(
                 if (charString.isEmpty()) arrayListFiltered = arrayList else {
                     val filteredList = ArrayList<User>()
                     arrayList.filter {
-                            (it.id.contains(constraint!!)) or (it.first_name.contains(constraint))
+                            (it.first_name.contains(constraint!!))
                         }.forEach { filteredList.add(it) }
                     arrayListFiltered = filteredList
 

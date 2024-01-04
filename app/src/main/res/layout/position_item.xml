@@ -12,7 +12,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/tracking_card"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"
+        android:layout_height="wrap_content"
         android:visibility="visible"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_1sdp"
@@ -62,16 +62,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                    <TextView
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="@dimen/_4sdp"
-                        android:text='@{"Name :- "+data.share_name}'
-                        android:textColor="@color/texts"
-                        android:textSize="@dimen/_13sdp"
-                        android:textStyle="bold" />
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:padding="@dimen/_4sdp"
+                            android:text='@{data.share_name}'
+                            android:textColor="@color/texts"
+                            android:textSize="@dimen/_13sdp"
+                            android:textStyle="bold" />
+                        <TextView
+                             android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:padding="@dimen/_3sdp"
+                            android:text='@{" ₹ "+data.share_amount}'
+                            android:textColor="@color/texts"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+
 
                     <TextView
                         android:layout_width="match_parent"
@@ -83,16 +101,7 @@
                         android:textColor="@color/texts"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="normal" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="@dimen/_3sdp"
-                        android:text='@{" ₹ "+data.share_amount}'
-                        android:textColor="@color/texts"
-                        android:textSize="@dimen/_10sdp"
-                        android:textStyle="normal" />
+
 
                 </LinearLayout>
 
