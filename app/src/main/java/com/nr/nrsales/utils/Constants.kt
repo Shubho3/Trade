@@ -21,5 +21,6 @@ class Constants {
         const val position = "position"
         const val position_list = "position_list"
         const val get_notification = "get_notification"
+        const val update_user_status = "update_user_status"
     }
 }

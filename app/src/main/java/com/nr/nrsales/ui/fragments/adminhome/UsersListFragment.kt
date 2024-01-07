@@ -35,7 +35,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class UsersListFragment : BaseFragment(R.layout.fragment_users_list), SearchView.OnQueryTextListener, UsersAdapter.UsersAdapterClickListener {
+class UsersListFragment : BaseFragment(R.layout.fragment_users_list),
+    SearchView.OnQueryTextListener, UsersAdapter.UsersAdapterClickListener {
     lateinit var mBinding: FragmentUsersListBinding
     private lateinit var context: Context
     private val viewmodel by viewModels<UserViewModel>()
@@ -44,7 +45,10 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list), SearchView
     private lateinit var adapter: UsersAdapter
 
     private fun GetFund() {
-        GlobalUtility.showProgressMessage(requireActivity(), requireActivity().getString(R.string.loading))
+        GlobalUtility.showProgressMessage(
+            requireActivity(),
+            requireActivity().getString(R.string.loading)
+        )
         val map: HashMap<String, Any> = HashMap()
         map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
         viewmodel.fetchget_all_user(map)
@@ -85,7 +89,7 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list), SearchView
         mBinding = binding as FragmentUsersListBinding
         context = requireActivity()
         init()
-        adapter = UsersAdapter(requireActivity(),this)
+        adapter = UsersAdapter(requireActivity(), this)
         mBinding.historyRecycleView.layoutManager = LinearLayoutManager(requireActivity())
         mBinding.historyRecycleView.adapter = adapter
         GetFund()
@@ -118,17 +122,18 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list), SearchView
     }
 
     override fun onItemClick(model: User, int: Int) {
-        val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.add_position_dialog)
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val accept = dialog.findViewById<View>(R.id.accept) as Button
-        val edtAmount = dialog.findViewById<View>(R.id.edt_amount) as EditText
-        val edtShareName = dialog.findViewById<View>(R.id.edt_share_name) as EditText
-        val edtSharePosition = dialog.findViewById<View>(R.id.edt_share_position) as EditText
-        val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
-        accept.setOnClickListener {
+        if (int == 0) {
+            val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(true)
+            dialog.setContentView(R.layout.add_position_dialog)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val accept = dialog.findViewById<View>(R.id.accept) as Button
+            val edtAmount = dialog.findViewById<View>(R.id.edt_amount) as EditText
+            val edtShareName = dialog.findViewById<View>(R.id.edt_share_name) as EditText
+            val edtSharePosition = dialog.findViewById<View>(R.id.edt_share_position) as EditText
+            val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
+            accept.setOnClickListener {
                 if (!Validation.getNormalValidCheck(edtShareName)) {
                     return@setOnClickListener
                 } else if (!Validation.getNormalValidCheck(edtSharePosition)) {
@@ -138,7 +143,7 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list), SearchView
                 } else {
                     GlobalUtility.showProgressMessage(requireActivity(), "Uploading Data...")
                     val map: HashMap<String, Any> = HashMap()
-                    map["user_id"] = sharedPrf.getStoredTag(SharedPrf.USER_ID)
+                    map["user_id"] = model.id
                     map["share_amount"] = edtAmount.text.toString()
                     map["share_name"] = edtShareName.text.toString()
                     map["share_position"] = edtSharePosition.text.toString()
@@ -149,7 +154,11 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list), SearchView
                         is NetworkResult.Success -> {
                             GlobalUtility.hideProgressMessage()
                             response.data?.let {
-                                Toast.makeText(context, "Position Added Successfully", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Position Added Successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
 
@@ -169,12 +178,63 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list), SearchView
                     }
                 }
 
-            dialog.dismiss()
+                dialog.dismiss()
+            }
+            cont_find.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        } else {
+            val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
+            dialog.setCancelable(true)
+            dialog.setContentView(R.layout.change_status_dialog)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val accept = dialog.findViewById<View>(R.id.accept) as Button
+            val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
+            accept.setOnClickListener {
+                GlobalUtility.showProgressMessage(requireActivity(), "Uploading Data...")
+                val map: HashMap<String, Any> = HashMap()
+                map["user_id"] = model.id
+                if (model.status == "1") map["status"] = 0
+                else map["status"] = 1
+                viewmodel.update_user_status(map)
+                viewmodel.update_user_status.observe(this) { response ->
+                    when (response) {
+                        is NetworkResult.Success -> {
+                            GlobalUtility.hideProgressMessage()
+                            response.data?.let {
+                                Toast.makeText(
+                                    context,
+                                    "Status Updated Successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                GetFund()
+                            }
+
+                        }
+
+                        is NetworkResult.Error -> {
+                            GlobalUtility.hideProgressMessage()
+                            Log.e(LoginFragment.TAG, "fetchLoginResponse: " + response.message)
+                        }
+
+                        is NetworkResult.Loading -> {
+                            GlobalUtility.hideProgressMessage()
+                        }
+
+                        else -> {
+                            GlobalUtility.hideProgressMessage()
+
+                        }
+                    }
+                }
+                dialog.dismiss()
+            }
+            cont_find.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
         }
-        cont_find.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.show()
     }
 
 

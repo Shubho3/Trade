@@ -1,55 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<WebView
-    android:id="@+id/webView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_above="@+id/bottom"
-    >
 
-</WebView>
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom"
+            android:layout_alignParentTop="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </WebView>
+
         <LinearLayout
             android:id="@+id/bottom"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
- android:background="@color/white"
-            app:cardUseCompatPadding="true">
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="@dimen/_250sdp"
+            app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:padding="@dimen/_7sdp"
                     android:text=" Position's "
-                    android:visibility="visible"
-                    android:textStyle="bold"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:gravity="center"
                     android:textSize="@dimen/_14sdp"
-                    />
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
                 <TextView
                     android:id="@+id/no_data"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:padding="@dimen/_7sdp"
                     android:text="No Position Found"
-                    android:visibility="gone"
-                    android:textStyle="bold"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:gravity="center"
                     android:textSize="@dimen/_14sdp"
-                    />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/history_recycle_view"
                     android:layout_width="match_parent"
@@ -61,5 +73,5 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

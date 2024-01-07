@@ -30,6 +30,8 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
         apiService.out_funt_accept_reject(Map)
     suspend fun position(Map: HashMap<String, Any>) =
         apiService.position(Map)
+    suspend fun update_user_status(Map: HashMap<String, Any>) =
+        apiService.update_user_status(Map)
 
     suspend fun get_notification(Map: HashMap<String, Any>) = apiService.get_notification(Map)
     suspend fun position_list(Map: HashMap<String, Any>) = apiService.position_list(Map)

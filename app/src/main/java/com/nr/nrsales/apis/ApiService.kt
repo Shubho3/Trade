@@ -45,25 +45,35 @@ interface ApiService {
 
     @GET(Constants.out_funds_list)
     suspend fun out_funds_list(@QueryMap map: HashMap<String, Any>): Response<OutFundRes>
+
     @GET(Constants.user_dashboard)
     suspend fun user_dashboard(@QueryMap map: HashMap<String, Any>): Response<UserDashboardModel>
+
     @GET(Constants.get_all_user)
     suspend fun get_all_user(@QueryMap map: HashMap<String, Any>): Response<UserListRes>
+
     @GET(Constants.get_add_funds_list_admin)
     suspend fun get_add_funds_list_admin(@QueryMap map: HashMap<String, Any>): Response<AddFundRes>
- @GET(Constants.get_out_funds_list_admin)
+
+    @GET(Constants.get_out_funds_list_admin)
     suspend fun get_out_funds_list_admin(@QueryMap map: HashMap<String, Any>): Response<OutFundResAdmin>
- @GET(Constants.add_fund_accept_reject)
+
+    @GET(Constants.add_fund_accept_reject)
     suspend fun add_fund_accept_reject(@QueryMap map: HashMap<String, Any>): Response<BasicRes>
+
     @GET(Constants.out_funt_accept_reject)
     suspend fun out_funt_accept_reject(@QueryMap map: HashMap<String, Any>): Response<BasicRes>
+
     @GET(Constants.position)
     suspend fun position(@QueryMap map: HashMap<String, Any>): Response<BasicRes>
 
     @GET(Constants.position_list)
     suspend fun position_list(@QueryMap map: HashMap<String, Any>): Response<PositionRes>
- @GET(Constants.get_notification)
+
+    @GET(Constants.get_notification)
     suspend fun get_notification(@QueryMap map: HashMap<String, Any>): Response<NotificationRes>
+ @GET(Constants.update_user_status)
+    suspend fun update_user_status(@QueryMap map: HashMap<String, Any>): Response<BasicRes>
 
     @GET("api/order/report/")
     fun downloadFile(

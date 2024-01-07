@@ -6,12 +6,11 @@ data class UserDashboardModel(
     val status: String
 ){
     data class Result(
-        val total_deposit: String,
-        val total_earns: String,
-        val wallet_balance: String,
-        val withdrawals: String,
-        val first_name: String,
-        val notification_count: Int
+        val total_deposit: String="0.0",
+        val total_earns: String="0.0",
+        val wallet_balance: String="0.0",
+        val withdrawals: String="0.0",
+        val first_name: String="",
+        val notification_count: Int=0
     )
 }
-

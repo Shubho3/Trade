@@ -36,8 +36,13 @@ class UsersAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = arrayListFiltered[position]
         holder.binding.data = data
+        if (data.status == "1") holder.binding.changeStatus.text = "Active"
+        else holder.binding.changeStatus.text = "InActive"
+        holder.binding.changeStatus.setOnClickListener {
+            click.onItemClick(data, 1)
+        }
         holder.binding.contFind.setOnClickListener {
-            click.onItemClick(data,position)
+            click.onItemClick(data, 0)
         }
     }
 
@@ -49,6 +54,7 @@ class UsersAdapter(
     interface UsersAdapterClickListener {
         fun onItemClick(model: User, int: Int)
     }
+
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
@@ -56,8 +62,8 @@ class UsersAdapter(
                 if (charString.isEmpty()) arrayListFiltered = arrayList else {
                     val filteredList = ArrayList<User>()
                     arrayList.filter {
-                            (it.first_name.contains(constraint!!))
-                        }.forEach { filteredList.add(it) }
+                        (it.first_name.contains(constraint!!))
+                    }.forEach { filteredList.add(it) }
                     arrayListFiltered = filteredList
 
                 }

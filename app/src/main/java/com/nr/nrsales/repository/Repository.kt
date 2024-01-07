@@ -108,6 +108,11 @@ class Repository @Inject constructor(
             emit(safeApiCall { remoteDataSource.position(Map) })
         }.flowOn(Dispatchers.IO)
     }
+    suspend fun update_user_status(Map: HashMap<String, Any>): Flow<NetworkResult<BasicRes>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.update_user_status(Map) })
+        }.flowOn(Dispatchers.IO)
+    }
     suspend fun add_fund_accept_reject(Map: HashMap<String, Any>): Flow<NetworkResult<BasicRes>> {
         return flow {
             emit(safeApiCall { remoteDataSource.add_fund_accept_reject(Map) })
