@@ -457,7 +457,7 @@
                                 android:src="@drawable/qr" />
 
                             <LinearLayout
-                                android:visibility="gone"
+                                android:visibility="visible"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
@@ -469,17 +469,20 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/ac_no"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@null"
+                                    android:drawableTint="@color/texts"
+                                    android:drawableRight="@drawable/baseline_content_copy"
                                     android:padding="@dimen/_5sdp"
-                                    android:text=" Account No.:-   Axis Bank "
+                                    android:text=" Upi ID :-   6269919028@axl "
                                     android:textColor="@color/texts"
-                                    android:textSize="@dimen/_14sdp"
+                                    android:textSize="@dimen/_16sdp"
                                     android:textStyle="normal" />
 
                                 <TextView
-                                    android:id="@+id/ac_no"
+                                    android:visibility="gone"
                                     android:drawableTint="@color/texts"
                                     android:drawableRight="@drawable/baseline_content_copy"
                                     android:layout_width="match_parent"
