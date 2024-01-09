@@ -113,7 +113,7 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list),
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        adapter.filter.filter(query)
+        //adapter.filter.filter(query)
         return false
     }
 
@@ -124,10 +124,11 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list),
 
     override fun onItemClick(model: User, int: Int) {
         if(int ==11){
-            val b = Bundle()
-            b.putParcelable("data",model)
-            Navigation.findNavController(mBinding.root).navigate(R.id.action_usersListFragment_to_viewProfileFragmentx,b)
-        }
+        //    val b = Bundle()
+       //     b.putParcelable("data",model)
+           sharedPrf.setUser2(model)
+            Navigation.findNavController(mBinding.root).navigate(R.id.action_usersListFragment_to_viewProfileFragmentx)
+        }else
         if (int == 0) {
             val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

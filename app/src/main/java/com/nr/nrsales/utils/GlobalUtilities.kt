@@ -61,7 +61,7 @@ class GlobalUtility {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     os = Files.newOutputStream(imageFile.toPath())
                 }
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, os!!)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, os!!)
                 os.flush()
                 os.close()
             } catch (e: java.lang.Exception) {
@@ -101,7 +101,7 @@ class GlobalUtility {
             var fos: FileOutputStream? = null
             try {
                 fos = FileOutputStream(mypath)
-                bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                bitmapImage.compress(Bitmap.CompressFormat.JPEG, 50, fos)
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             } finally {
@@ -124,7 +124,7 @@ class GlobalUtility {
             var fos: FileOutputStream? = null
             try {
                 fos = FileOutputStream(mypath)
-                bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                bitmapImage.compress(Bitmap.CompressFormat.JPEG, 50, fos)
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             } finally {

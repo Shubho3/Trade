@@ -1,27 +1,25 @@
 package com.nr.nrsales.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 
 data class BasicRes(
     val message: String,
     val result: String,
     val status: String
 )
-@Parcelize
+ 
 data class UserListRes(
     val message: String,
     val result: ArrayList<User>,
     val status: String
-): Parcelable
-@Parcelize
+) 
+ 
 data class UserRes(
     val message: String,
     val result: User,
     val status: String
-): Parcelable
+) 
 
-@Parcelize
+ 
 data class User(
     val aadhar_back: String,
     val aadhar_front: String,
@@ -58,7 +56,7 @@ data class User(
     val bank_ifsc: String,
     val withdrawals: String,
     val passbook_photo: String
-): Parcelable
+) 
 data class PositionRes(
     val message: String,
     val result: List<Position>,
@@ -73,6 +71,3 @@ data class Position(
     val share_position: String,
     val user_id: String
 )
-
-
-    

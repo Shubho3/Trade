@@ -520,7 +520,6 @@
 
                             <ImageView
                                 app:imageUrl="@{User.passbook_photo}"
-
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
                                 android:inputType="textPassword"

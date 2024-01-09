@@ -21,6 +21,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
@@ -55,6 +56,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
     private val REQUEST_CODE = 123
     private lateinit var managePermissions: ManagePermissions
     private lateinit var list: List<String>
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindTo(binding: ViewDataBinding?) {
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mBinding = binding as FragmentRegisterBinding
@@ -471,6 +473,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun init() {
         mBinding.passbookFrontPage.setOnClickListener {
             val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
@@ -704,7 +707,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                     .build()
                 viewmodel.fetchRegisterResponse(bodyx.build())
             }
-            viewmodel._response.observe(this) { response ->
+            viewmodel.updateUser.observe(this) { response ->
                 when (response) {
                     is NetworkResult.Success -> {
                         GlobalUtility.hideProgressMessage()
@@ -720,6 +723,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                     }
 
                     is NetworkResult.Error -> {
+                        viewmodel.updateUser.value=null
                         GlobalUtility.hideProgressMessage()
                         Log.e(LoginFragment.TAG, "fetchLoginResponse: " + response.message)
                         Toast.makeText(

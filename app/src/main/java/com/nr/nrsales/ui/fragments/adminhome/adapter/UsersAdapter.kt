@@ -65,7 +65,7 @@ class UsersAdapter(
                 if (charString.isEmpty()) arrayListFiltered = arrayList else {
                     val filteredList = ArrayList<User>()
                     arrayList.filter {
-                        (it.first_name.contains(constraint!!))
+                        (it.user_name.contains(constraint!!))
                     }.forEach { filteredList.add(it) }
                     arrayListFiltered = filteredList
 

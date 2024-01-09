@@ -38,6 +38,22 @@ class SharedPrf @Inject constructor(@ApplicationContext context: Context) {
         val json = gson.toJson(query)
         prefs.edit().putString(USER, json).apply()
     }
+    fun getUser2(): User? {
+        return try {
+            val gson = Gson()
+            val json: String? = prefs.getString("USERx", "")
+            val obj: User = gson.fromJson(json, User::class.java)
+            obj
+        } catch (e: Exception) {
+           return null
+        }
+    }
+
+    fun setUser2(query: User) {
+        val gson = Gson()
+        val json = gson.toJson(query)
+        prefs.edit().putString("USERx", json).apply()
+    }
 
     fun clearAll() {
         prefs.edit().clear().apply()
