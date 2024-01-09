@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nr.nrsales.R
 import com.nr.nrsales.databinding.AddPositionDialogBinding
@@ -122,6 +123,11 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list),
     }
 
     override fun onItemClick(model: User, int: Int) {
+        if(int ==11){
+            val b = Bundle()
+            b.putParcelable("data",model)
+            Navigation.findNavController(mBinding.root).navigate(R.id.action_usersListFragment_to_viewProfileFragmentx,b)
+        }
         if (int == 0) {
             val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -184,7 +190,8 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list),
                 dialog.dismiss()
             }
             dialog.show()
-        } else {
+        }
+        else {
             val dialog = Dialog(requireActivity(), R.style.DialogSlideAnim)
             dialog.setCancelable(true)
             dialog.setContentView(R.layout.change_status_dialog)
@@ -235,6 +242,7 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list),
             }
             dialog.show()
         }
+
     }
 
 

@@ -158,12 +158,21 @@
         android:id="@+id/usersListFragment"
         android:name="com.nr.nrsales.ui.fragments.adminhome.UsersListFragment"
         android:label="UsersListFragment"
-        tools:layout="@layout/fragment_users_list"/>
+        tools:layout="@layout/fragment_users_list">
+        <action
+            android:id="@+id/action_usersListFragment_to_viewProfileFragmentx"
+            app:destination="@id/viewProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationListFragment"
         android:name="com.nr.nrsales.ui.fragments.adminhome.NotificationListFragment"
         android:label="NotificationListFragment"
         tools:layout="@layout/fragment_notification_list"/>
+    <fragment
+        android:id="@+id/viewProfileFragment"
+        android:name="com.nr.nrsales.ui.fragments.home.ViewProfileFragment"
+        android:label="ViewProfileFragment"
+        tools:layout="@layout/fragment_view_profile"/>
 
 
 

@@ -12,7 +12,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/tracking_card"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_110sdp"
+        android:layout_height="wrap_content"
         android:visibility="visible"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_1sdp"
@@ -99,9 +99,9 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/_2sdp"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:weightSum="2"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:weightSum="3"
                         >
                         <TextView
                             android:layout_weight="1"
@@ -120,11 +120,24 @@
                             android:layout_weight="1"
                             android:id="@+id/cont_find"
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:padding="@dimen/_5sdp"
+                            android:background="@drawable/border_rounded"
+                            android:gravity="center"
+                            android:text=" Add Position"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_weight="1"
+                            android:id="@+id/view_details"
+                            android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:layout_margin="5dp"
                             android:background="@drawable/border_rounded"
                             android:gravity="center"
-                            android:text=" Add Position"
+                            android:text="View Details"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_14sdp"
                             android:textStyle="bold" />

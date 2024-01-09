@@ -44,6 +44,9 @@ class UsersAdapter(
         holder.binding.contFind.setOnClickListener {
             click.onItemClick(data, 0)
         }
+        holder.binding.viewDetails.setOnClickListener {
+            click.onItemClick(data, 11)
+        }
     }
 
     override fun getItemCount(): Int {
