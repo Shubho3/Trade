@@ -114,11 +114,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                             is NetworkResult.Error -> {
                                 GlobalUtility.hideProgressMessage()
                                 Log.e(TAG, "fetchLoginResponse: " + response.message)
-                                Toast.makeText(
-                                    context,
-                                    "Your have entered wrong email & password",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                Toast.makeText(context, response.data?.message.toString(), Toast.LENGTH_LONG).show()
                                 viewmodel._response.value=null
                             }
 

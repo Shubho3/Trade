@@ -713,12 +713,13 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
                         GlobalUtility.hideProgressMessage()
                         response.data?.let {
                             Toast.makeText(context, "User Created Successfully", Toast.LENGTH_SHORT).show()
-                            sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
-                            sharedPrf.setStoredTag(SharedPrf.USER_ID, it.result.id)
-                            sharedPrf.setUser(it.result)
-                            Log.e(LoginFragment.TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
+                           // sharedPrf.setStoredTag(SharedPrf.LOGIN, "true")
+                           // sharedPrf.setStoredTag(SharedPrf.USER_ID, it.result.id)
+                           // sharedPrf.setUser(it.result)
+                            //Log.e(LoginFragment.TAG, "init: " + sharedPrf.getStoredTag(SharedPrf.USER_ID))
+                            onBackPressed()
                             // GlobalUtility.showSuccessMessage(requireActivity(),sharedPrf.getStoredTag(SharedPrf.USER_ID).toString(),"msgggg")
-                            findNavController(mBinding.root).navigate(R.id.action_registerFragment_to_homeFragment)
+                          //  findNavController(mBinding.root).navigate(R.id.action_registerFragment_to_homeFragment)
                         }
                     }
 
