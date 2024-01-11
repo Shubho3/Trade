@@ -73,7 +73,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
 
                             android:text="@{User.user_name}"
                             android:id="@+id/edt_name"
@@ -106,7 +106,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:text="@{User.mobile}"
                             android:id="@+id/edt_phone"
                             android:layout_width="match_parent"
@@ -140,7 +140,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/edt_fax"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:text="@{User.email}"
                             android:id="@+id/edt_email"
                             android:layout_width="match_parent"
@@ -205,13 +205,13 @@
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:text="@{User.password}"
                             android:id="@+id/edt_pass"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edit_background"
-                            android:inputType="textPassword"
+                            android:inputType="text"
                             android:padding="@dimen/_8sdp"
                             android:textColor="@color/color_edit_hint"
                             android:textColorHint="@color/color_edit_hint"
@@ -235,7 +235,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/edt_bank"
                             android:text="@{User.bank_name}"
                             android:layout_width="match_parent"
@@ -265,7 +265,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:text="@{User.bank_account_no}"
                             android:id="@+id/edt_bank_ac_no"
                             android:layout_width="match_parent"
@@ -295,7 +295,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:text="@{User.bank_ifsc}"
                             android:id="@+id/edt_bank_ifsc"
                             android:layout_width="match_parent"
@@ -326,7 +326,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/edt_pass_2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -519,7 +519,7 @@
                                 android:textStyle="bold" />
 
                             <ImageView
-                                app:imageUrl="@{User.passbook_photo}"
+                                app:imageUrl='@{"https://hippoejen.com/unlock/uploads/images/"+User.passbook_photo}'
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
                                 android:inputType="textPassword"

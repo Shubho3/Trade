@@ -139,6 +139,8 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list),
             val edtAmount = dialog.findViewById<View>(R.id.edt_amount) as EditText
             val edtShareName = dialog.findViewById<View>(R.id.edt_share_name) as EditText
             val edtSharePosition = dialog.findViewById<View>(R.id.edt_share_position) as EditText
+            val edtProfit = dialog.findViewById<View>(R.id.edt_profit) as EditText
+            val edtLoss = dialog.findViewById<View>(R.id.edt_loss) as EditText
             val cont_find = dialog.findViewById<View>(R.id.cont_find) as TextView
             accept.setOnClickListener {
                 if (!Validation.getNormalValidCheck(edtShareName)) {
@@ -147,6 +149,10 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list),
                     return@setOnClickListener
                 } else if (!Validation.getNormalValidCheck(edtAmount)) {
                     return@setOnClickListener
+                } else  if (!Validation.getNormalValidCheck(edtProfit)) {
+                    return@setOnClickListener
+                } else  if (!Validation.getNormalValidCheck(edtLoss)) {
+                    return@setOnClickListener
                 } else {
                     GlobalUtility.showProgressMessage(requireActivity(), "Uploading Data...")
                     val map: HashMap<String, Any> = HashMap()
@@ -154,6 +160,8 @@ class UsersListFragment : BaseFragment(R.layout.fragment_users_list),
                     map["share_amount"] = edtAmount.text.toString()
                     map["share_name"] = edtShareName.text.toString()
                     map["share_position"] = edtSharePosition.text.toString()
+                    map["profit"] = edtProfit.text.toString()
+                    map["loss"] = edtLoss.text.toString()
                     viewmodel.fetch_add_position(map)
                 }
                 viewmodel.response.observe(this) { response ->

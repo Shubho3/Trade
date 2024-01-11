@@ -69,5 +69,7 @@ data class Position(
     val share_amount: String,
     val share_name: String,
     val share_position: String,
-    val user_id: String
+    val user_id: String,
+    val profit: String,
+    val loss: String
 )

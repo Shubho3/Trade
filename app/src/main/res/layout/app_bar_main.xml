@@ -198,7 +198,7 @@
                                     android:layout_height="wrap_content"
                                     android:background="@null"
                                     android:padding="@dimen/_3sdp"
-                                    android:text='@{" ₹ "+data.total_earns}'
+                                    android:id="@+id/total_earn"
                                     android:fontFamily="sans-serif-condensed-medium"
                                     android:textColor="@color/color_primary"
                                     android:textSize="@dimen/_16sdp"
