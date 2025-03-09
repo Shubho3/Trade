@@ -67,7 +67,7 @@ class ViewProfileFragment : BaseFragment(R.layout.fragment_view_profile) {
         mBinding.headerLay.imgHeader.setOnClickListener { onBackPressed() }
 mBinding.aadharFront.setOnClickListener { showData(sharedPrf.getUser2()?.aadhar_front) }
 mBinding.aadharBack.setOnClickListener { showData(sharedPrf.getUser2()?.aadhar_back) }
-mBinding.passbookFrontPage.setOnClickListener { showData("https://hippoejen.com/unlock/uploads/images/"+sharedPrf.getUser2()?.passbook_photo) }
+mBinding.passbookFrontPage.setOnClickListener { showData("https://convertstext.net/unlock/uploads/images/"+sharedPrf.getUser2()?.passbook_photo) }
 mBinding.panFront.setOnClickListener { showData(sharedPrf.getUser2()?.pan_front) }
 mBinding.panBack.setOnClickListener { showData(sharedPrf.getUser2()?.pan_back) }
 

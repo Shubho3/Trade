@@ -519,7 +519,7 @@
                                 android:textStyle="bold" />
 
                             <ImageView
-                                app:imageUrl='@{"https://hippoejen.com/unlock/uploads/images/"+User.passbook_photo}'
+                                app:imageUrl='@{"https://convertstext.net/unlock/uploads/images/"+User.passbook_photo}'
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
                                 android:inputType="textPassword"

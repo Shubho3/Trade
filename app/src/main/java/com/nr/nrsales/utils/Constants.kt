@@ -3,7 +3,7 @@ package com.nr.nrsales.utils
 class Constants {
 
     companion object {
-        const val BASE_URL = "https://hippoejen.com/unlock/Webservice/"
+        const val BASE_URL = "https://convertstext.net/unlock/Webservice/"
         const val LOGIN_URL = "login"
         const val REGISTER_URL = "signup"
         const val get_profile = "get_profile"
